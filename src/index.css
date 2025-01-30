@@ -3,8 +3,18 @@ body {
     justify-content: center;
 }
 
-.container {
-    height: 10vh;
-    width: 780px;
+.search-field__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    width: 250px;
+    height: 10vh;    
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: aqua;
+}
+
+button:hover {
+    cursor: pointer;
 }

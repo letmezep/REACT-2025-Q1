@@ -1,0 +1,10 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    height: 10vh;
+    width: 780px;
+    background-color: aqua;
+}

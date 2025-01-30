@@ -2,8 +2,22 @@ import { Component, ReactNode } from 'react';
 
 class SearchField extends Component {
   render(): ReactNode {
-    const onClickSearch = () => {
+    let inputTerm: string = '';
+
+    const savedTerm: string =
+      localStorage.getItem('searchTerm') || 'fallback term';
+
+    const clickSearchButton = () => {
       console.log('Button is pressed');
+      console.log('clickSearchButton:', savedTerm);
+      if (inputTerm != '') {
+        localStorage.setItem('searchTerm', inputTerm);
+      }
+    };
+
+    const clickInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('Input:', event?.target.value);
+      inputTerm = event?.target.value;
     };
 
     return (
@@ -13,12 +27,13 @@ class SearchField extends Component {
           <input
             className="search-field__input"
             type="text"
-            placeholder="Search input"
+            placeholder={savedTerm}
+            onChange={clickInputSearch}
           />
           <button
             className="search-field__button"
             type="button"
-            onClick={onClickSearch}
+            onClick={clickSearchButton}
           >
             Search
           </button>

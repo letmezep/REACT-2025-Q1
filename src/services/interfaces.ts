@@ -20,3 +20,9 @@ export interface Character {
 export interface Data {
   results: Character[];
 }
+
+export interface State {
+  data: Data | null;
+  loading: boolean;
+  error: null;
+}

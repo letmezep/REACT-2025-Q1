@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import { Character, Data } from '../../services/interfaces';
+import { Character, State } from '../../services/interfaces';
 import { fetchData } from '../../services/api/fetchData';
 
 export default class ResultList extends Component {
-  state: { data: Data | null; loading: boolean; error: null } = {
+  state: State = {
     data: null,
     loading: true,
     error: null,

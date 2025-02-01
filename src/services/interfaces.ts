@@ -26,7 +26,6 @@ export interface Data {
 export interface State {
   data: Data | null;
   loading: boolean;
-  error: string | null;
   searchTerm: string | null;
 }
 

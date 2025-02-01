@@ -2,10 +2,11 @@ import { Component } from 'react';
 import SearchField from '../components/SearchField/SearchField';
 import ResultList from '../components/ResultList/ResultList';
 import ErrorButton from '../components/ErrorButton/ErrorButton';
+import { localStorageItem } from '../services/constant';
 
 class MainPage extends Component {
   state = {
-    searchTerm: localStorage.getItem('searchTerm') || '',
+    searchTerm: localStorageItem,
   };
 
   handleSearchChange = (searchTerm: string) => {
@@ -16,7 +17,6 @@ class MainPage extends Component {
       <>
         <ErrorButton />
         <SearchField onSearchChange={this.handleSearchChange} />
-
         <ResultList searchTerm={this.state.searchTerm} />
       </>
     );

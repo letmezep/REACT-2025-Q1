@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Character, State } from '../../services/interfaces';
 import { fetchData } from '../../services/api/fetchData';
 import { getFilteredData } from '../../services/filterData';
+import { localStorageItem } from '../../services/constant';
 
 export default class ResultList extends Component<
   { searchTerm: string },
@@ -10,8 +11,7 @@ export default class ResultList extends Component<
   state: State = {
     data: null,
     loading: true,
-    error: null,
-    searchTerm: localStorage.getItem('searchTerm') || '',
+    searchTerm: localStorageItem,
   };
 
   async componentDidMount(): Promise<void> {
@@ -19,7 +19,7 @@ export default class ResultList extends Component<
     if (data) {
       this.setState({ data, loading: false });
     } else {
-      this.setState({ error: 'failed to load FETCHDATA', loading: false });
+      this.setState({ loading: false });
     }
   }
 
@@ -30,10 +30,10 @@ export default class ResultList extends Component<
   }
 
   render() {
-    const { data, loading, error, searchTerm } = this.state;
+    const { data, loading, searchTerm } = this.state;
     const filteredData = getFilteredData(data, searchTerm);
 
-    if (loading)
+    if (loading || !data)
       return (
         <div className="loader-container">
           <div className="loader"></div>
@@ -42,10 +42,6 @@ export default class ResultList extends Component<
           </p>
         </div>
       );
-    if (error) return <p>{error}</p>;
-    if (!data) {
-      return <p>Now is Loading...</p>;
-    }
 
     return (
       <>

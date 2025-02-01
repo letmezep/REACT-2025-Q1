@@ -1,9 +1,10 @@
 import { ChangeEvent, Component, ReactNode } from 'react';
 import { SearchFieldProps } from '../../services/interfaces';
+import { localStorageItem } from '../../services/constant';
 
 class SearchField extends Component<SearchFieldProps> {
   state = {
-    searchTerm: localStorage.getItem('searchTerm') || '',
+    searchTerm: localStorageItem,
   };
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +17,7 @@ class SearchField extends Component<SearchFieldProps> {
     localStorage.setItem('searchTerm', searchTerm);
   };
   render(): ReactNode {
-    const savedTerm: string = localStorage.getItem('searchTerm') || '';
+    const savedTerm: string = localStorageItem;
 
     return (
       <>

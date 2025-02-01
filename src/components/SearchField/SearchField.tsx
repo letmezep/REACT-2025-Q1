@@ -8,7 +8,6 @@ class SearchField extends Component<SearchFieldProps> {
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchTerm: event.target.value });
-    console.log('Input:', event?.target.value);
   };
 
   handleSearch = () => {
@@ -21,7 +20,6 @@ class SearchField extends Component<SearchFieldProps> {
 
     return (
       <>
-        <div>SearchField Component Is Here</div>
         <div className="search-field__container">
           <input
             className="search-field__input"

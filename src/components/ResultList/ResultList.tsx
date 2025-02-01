@@ -33,7 +33,15 @@ export default class ResultList extends Component<
     const { data, loading, error, searchTerm } = this.state;
     const filteredData = getFilteredData(data, searchTerm);
 
-    if (loading) return <p>Now is Loading...</p>;
+    if (loading)
+      return (
+        <div className="loader-container">
+          <div className="loader"></div>
+          <p>
+            <span className="logo-name">STARWARS</span> is now loading...
+          </p>
+        </div>
+      );
     if (error) return <p>{error}</p>;
     if (!data) {
       return <p>Now is Loading...</p>;
@@ -43,7 +51,7 @@ export default class ResultList extends Component<
       <>
         {filteredData.map((item: Character, index: number) => (
           <div className="list-item" key={index}>
-            <h4>{item.name}</h4>
+            <div className="list-item__name">{item.name}</div>
             <p>
               Height: {item.height} Mass: {item.mass} Hair Color:{' '}
               {item.hair_color}

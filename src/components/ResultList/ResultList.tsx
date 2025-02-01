@@ -23,7 +23,6 @@ export default class ResultList extends Component {
   render() {
     const { data, loading, error, searchTerm } = this.state;
     const filteredData = getFilteredData(data, searchTerm);
-    // const filteredData = this.getFilteredData();
 
     if (loading) return <p>Now is Loading...</p>;
     if (error) return <p>{error}</p>;

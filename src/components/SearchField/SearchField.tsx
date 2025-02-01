@@ -26,7 +26,7 @@ class SearchField extends Component {
           <input
             className="search-field__input"
             type="text"
-            placeholder={savedTerm}
+            placeholder={savedTerm || 'Input search term'}
             onChange={clickInputSearch}
           />
           <button

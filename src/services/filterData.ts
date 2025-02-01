@@ -4,8 +4,6 @@ export function getFilteredData(
   data: Data | null,
   searchTerm: string | null
 ): Character[] {
-  // const { data, searchTerm } = this.state;
-
   if (!data) return [];
   if (!searchTerm) return data?.results;
 

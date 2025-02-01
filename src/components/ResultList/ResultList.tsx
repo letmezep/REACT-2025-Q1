@@ -3,7 +3,10 @@ import { Character, State } from '../../services/interfaces';
 import { fetchData } from '../../services/api/fetchData';
 import { getFilteredData } from '../../services/filterData';
 
-export default class ResultList extends Component {
+export default class ResultList extends Component<
+  { searchTerm: string },
+  State
+> {
   state: State = {
     data: null,
     loading: true,
@@ -17,6 +20,12 @@ export default class ResultList extends Component {
       this.setState({ data, loading: false });
     } else {
       this.setState({ error: 'failed to load FETCHDATA', loading: false });
+    }
+  }
+
+  componentDidUpdate(prevProps: Readonly<{ searchTerm: string }>): void {
+    if (prevProps.searchTerm !== this.props.searchTerm) {
+      this.setState({ searchTerm: this.props.searchTerm });
     }
   }
 
@@ -41,15 +50,6 @@ export default class ResultList extends Component {
             </p>
           </div>
         ))}
-        {/* {data.results.map((item: Character, index: number) => (
-          <div className="list-item" key={index}>
-            <h4>{item.name}</h4>
-            <p>
-              Height: {item.height} Mass: {item.mass} Hair Color:{' '}
-              {item.hair_color}
-            </p>
-          </div>
-        ))} */}
       </>
     );
   }

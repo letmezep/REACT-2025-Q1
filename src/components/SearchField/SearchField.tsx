@@ -3,17 +3,18 @@ import { SearchFieldProps } from '../../services/interfaces';
 
 class SearchField extends Component<SearchFieldProps> {
   state = {
-    inputTerm: this.props.searchTerm,
+    searchTerm: localStorage.getItem('searchTerm') || '',
   };
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ inputTerm: event.target.value });
+    this.setState({ searchTerm: event.target.value });
     console.log('Input:', event?.target.value);
   };
 
   handleSearch = () => {
-    console.log('Search:', this.state.inputTerm);
-    localStorage.setItem('searchTerm', this.state.inputTerm);
+    const { searchTerm } = this.state;
+    this.props.onSearchChange(searchTerm);
+    localStorage.setItem('searchTerm', searchTerm);
   };
   render(): ReactNode {
     const savedTerm: string = localStorage.getItem('searchTerm') || '';
@@ -25,8 +26,8 @@ class SearchField extends Component<SearchFieldProps> {
           <input
             className="search-field__input"
             type="text"
-            onChange={this.handleInputChange}
             placeholder={savedTerm || 'Input search term'}
+            onChange={this.handleInputChange}
           />
           <button
             className="search-field__button"

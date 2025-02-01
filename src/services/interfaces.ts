@@ -24,11 +24,10 @@ export interface Data {
 export interface State {
   data: Data | null;
   loading: boolean;
-  error: null;
+  error: string | null;
   searchTerm: string | null;
 }
 
 export interface SearchFieldProps {
-  searchTerm: string;
   onSearchChange: (value: string) => void;
 }

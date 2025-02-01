@@ -18,14 +18,6 @@ class SearchField extends Component<SearchFieldProps> {
   render(): ReactNode {
     const savedTerm: string = localStorage.getItem('searchTerm') || '';
 
-    // const clickSearchButton = () => {
-    //   console.log('Button is pressed');
-    //   console.log('clickSearchButton:', savedTerm);
-    //   if (inputTerm != '') {
-    //     localStorage.setItem('searchTerm', inputTerm);
-    //   }
-    // };
-
     return (
       <>
         <div>SearchField Component Is Here</div>
@@ -35,13 +27,11 @@ class SearchField extends Component<SearchFieldProps> {
             type="text"
             onChange={this.handleInputChange}
             placeholder={savedTerm || 'Input search term'}
-            // onChange={clickInputSearch}
           />
           <button
             className="search-field__button"
             type="button"
             onClick={this.handleSearch}
-            // onClick={clickSearchButton}
           >
             Search
           </button>

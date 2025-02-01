@@ -25,4 +25,5 @@ export interface State {
   data: Data | null;
   loading: boolean;
   error: null;
+  searchTerm: string | null;
 }

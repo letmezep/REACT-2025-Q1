@@ -7,6 +7,7 @@ export default class ResultList extends Component {
     data: null,
     loading: true,
     error: null,
+    searchTerm: localStorage.getItem('searchTerm') || '',
   };
 
   async componentDidMount(): Promise<void> {
@@ -18,8 +19,20 @@ export default class ResultList extends Component {
     }
   }
 
+  getFilteredData() {
+    const { data, searchTerm } = this.state;
+
+    if (!data) return [];
+    if (!searchTerm) return data?.results;
+
+    return data.results.filter((item: Character) =>
+      item.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
+  }
+
   render() {
     const { data, loading, error } = this.state;
+    const filteredData = this.getFilteredData();
 
     if (loading) return <p>Now is Loading...</p>;
     if (error) return <p>{error}</p>;
@@ -29,7 +42,7 @@ export default class ResultList extends Component {
 
     return (
       <>
-        {data.results.map((item: Character, index: number) => (
+        {filteredData.map((item: Character, index: number) => (
           <div className="list-item" key={index}>
             <h4>{item.name}</h4>
             <p>
@@ -38,6 +51,15 @@ export default class ResultList extends Component {
             </p>
           </div>
         ))}
+        {/* {data.results.map((item: Character, index: number) => (
+          <div className="list-item" key={index}>
+            <h4>{item.name}</h4>
+            <p>
+              Height: {item.height} Mass: {item.mass} Hair Color:{' '}
+              {item.hair_color}
+            </p>
+          </div>
+        ))} */}
       </>
     );
   }

@@ -1,14 +1,10 @@
 import { Component, ReactNode } from 'react';
-import getListFromApi from '../../services/api/getApiList';
-
-const result = await getListFromApi();
 
 class SearchField extends Component {
   render(): ReactNode {
     let inputTerm: string = '';
 
-    const savedTerm: string =
-      localStorage.getItem('searchTerm') || 'fallback term';
+    const savedTerm: string = localStorage.getItem('searchTerm') || '';
 
     const clickSearchButton = () => {
       console.log('Button is pressed');
@@ -16,7 +12,6 @@ class SearchField extends Component {
       if (inputTerm != '') {
         localStorage.setItem('searchTerm', inputTerm);
       }
-      console.log('result', result);
     };
 
     const clickInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

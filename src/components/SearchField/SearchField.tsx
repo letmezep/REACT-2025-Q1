@@ -1,6 +1,7 @@
 import { ChangeEvent, Component, ReactNode } from 'react';
 import { SearchFieldProps } from '../../services/interfaces';
 import { localStorageItem } from '../../services/constant';
+import './SearchField.css';
 
 class SearchField extends Component<SearchFieldProps> {
   state = {

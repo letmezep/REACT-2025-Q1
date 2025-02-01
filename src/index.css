@@ -1,3 +1,14 @@
+:root {
+    --red-color: #ff666680;
+    --light-grey-color: #b4b4b4;
+    --dark-grey-color: #8080808f;
+    --black-color: #000000;
+    --yellow-color: #fcff35;
+    --blue-color: #3bd1ff;
+    --dark-green-color: #0d4629;
+    --light-green-color: #41d88c;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,65 +17,8 @@ body {
     letter-spacing: 1px;
 }
 
-.search-field__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 20px;
-    max-width: 500px;
-    height: 10vh;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: #8080808f;
-}
-
-.search-field__input,
-.search-field__button {
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: 900;
-    letter-spacing: 1px;
-}
-
-.search-field__input {
-    color: #3bd1ff;
-}
-
-.search-field__input:focus {
-    border-color: #3bd1ff;
-    outline: none;
-    box-shadow: 5px 2px 15px #3bd1ff;
-}
-
-.search-field__button {
-    color: #ff6666;
-    background-color: darkgrey;
-}
-
-.search-field__button:active {
-    border-color: #ff6666;
-    outline: none;
-    box-shadow: 5px 2px 15px rgb(255, 102, 102);
-}
-
 button:hover {
     cursor: pointer;
-}
-
-.list-item {
-    padding: 10px 20px;
-    margin: 5px 0;
-    background: linear-gradient(135deg, #0d4629, #41d88c);
-}
-
-.list-item__name {
-    font-weight: 900;
-    color: #b4b4b4;
-}
-
-.logo-name {
-    font-weight: 900;
-    color: #fcff35;
 }
 
 .loader-container {
@@ -74,17 +28,17 @@ button:hover {
     justify-content: center;
     height: 30vh;
     width: 480px;
-    color: #b4b4b4;
-    background-color: black;
-    border: 4px solid #fcff35;
+    color: var(--light-grey-color);
+    background-color: var(--black-color);
+    border: 4px solid var(--yellow-color);
 }
 
 .loader {
-    border: 4px solid rgba(255, 102, 102, 0.5);
+    border: 4px solid var(--red-color);
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border-left-color: #3bd1ff;
+    border-left-color: var(--blue-color);
     animation: spin 1s linear infinite;
 }
 
@@ -98,10 +52,15 @@ button:hover {
     width: 100%;
     padding: 20px 20px;
     border: none; 
-    color: #fcff35;
+    color: var(--yellow-color);
     font-size: large;
     font-weight: 600;
     letter-spacing: 1px;
-    background-color: #000000;
+    background-color: var(--black-color);
     border-radius: 5px;
+}
+
+.logo-name {
+    font-weight: 900;
+    color: var(--yellow-color);
 }

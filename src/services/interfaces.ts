@@ -27,3 +27,8 @@ export interface State {
   error: null;
   searchTerm: string | null;
 }
+
+export interface SearchFieldProps {
+  searchTerm: string;
+  onSearchChange: (value: string) => void;
+}

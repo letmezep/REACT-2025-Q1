@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Character, State } from '../../services/interfaces';
 import { fetchData } from '../../services/api/fetchData';
+import { getFilteredData } from '../../services/filterData';
 
 export default class ResultList extends Component {
   state: State = {
@@ -19,20 +20,10 @@ export default class ResultList extends Component {
     }
   }
 
-  getFilteredData() {
-    const { data, searchTerm } = this.state;
-
-    if (!data) return [];
-    if (!searchTerm) return data?.results;
-
-    return data.results.filter((item: Character) =>
-      item.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-    );
-  }
-
   render() {
-    const { data, loading, error } = this.state;
-    const filteredData = this.getFilteredData();
+    const { data, loading, error, searchTerm } = this.state;
+    const filteredData = getFilteredData(data, searchTerm);
+    // const filteredData = this.getFilteredData();
 
     if (loading) return <p>Now is Loading...</p>;
     if (error) return <p>{error}</p>;

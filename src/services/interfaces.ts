@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface Character {
   name: string;
   height: string;
@@ -30,4 +32,12 @@ export interface State {
 
 export interface SearchFieldProps {
   onSearchChange: (value: string) => void;
+}
+
+export interface ErrorBoundaryProps {
+  children: ReactNode;
+}
+
+export interface ErrorBoundaryState {
+  hasError: boolean;
 }

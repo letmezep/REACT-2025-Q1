@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import SearchField from '../components/SearchField/SearchField';
 import ResultList from '../components/ResultList/ResultList';
+import ErrorButton from '../components/ErrorButton/ErrorButton';
 
 class MainPage extends Component {
   state = {
@@ -13,7 +14,9 @@ class MainPage extends Component {
   render() {
     return (
       <>
+        <ErrorButton />
         <SearchField onSearchChange={this.handleSearchChange} />
+
         <ResultList searchTerm={this.state.searchTerm} />
       </>
     );

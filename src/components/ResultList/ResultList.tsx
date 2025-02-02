@@ -3,7 +3,8 @@ import { Character, State } from '../../services/interfaces';
 import { fetchData } from '../../services/api/fetchData';
 import { getFilteredData } from '../../services/filterData';
 import { localStorageItem } from '../../services/constant';
-import './ResultList.css';
+import '../../styles/ResultList.css';
+import '../../styles/variables.css';
 
 export default class ResultList extends Component<
   { searchTerm: string },

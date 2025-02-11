@@ -1,4 +1,4 @@
-import { urlApi } from '../constant';
+import { urlApi } from '../../constants';
 
 export default async function getListFromApi() {
   const response = await fetch(urlApi, {

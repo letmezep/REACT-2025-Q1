@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Character, State } from '../../services/interfaces';
 import { fetchData } from '../../services/api/fetchData';
 import { getFilteredData } from '../../services/filterData';
-import { localStorageItem } from '../../services/constant';
+import { localStorageItem } from '../../constants';
 import '../../styles/ResultList.css';
 import '../../styles/variables.css';
 

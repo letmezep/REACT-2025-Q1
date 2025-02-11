@@ -2,7 +2,7 @@ import { Component } from 'react';
 import SearchField from '../components/SearchField/SearchField';
 import ResultList from '../components/ResultList/ResultList';
 import ErrorButton from '../components/ErrorButton/ErrorButton';
-import { localStorageItem } from '../services/constant';
+import { localStorageItem } from '../constants';
 
 class MainPage extends Component {
   state = {

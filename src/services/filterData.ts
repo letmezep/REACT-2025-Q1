@@ -1,4 +1,4 @@
-import { Character, Data } from './interfaces';
+import { Character, Data } from '../types.ts/interfaces';
 
 export function getFilteredData(
   data: Data | null,

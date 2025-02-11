@@ -1,5 +1,5 @@
 import { ChangeEvent, Component, ReactNode } from 'react';
-import { SearchFieldProps } from '../../services/interfaces';
+import { SearchFieldProps } from '../../types.ts/interfaces';
 import { localStorageItem } from '../../constants';
 import '../../styles/SearchField.css';
 import '../../styles/variables.css';

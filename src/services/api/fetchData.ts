@@ -1,5 +1,5 @@
 import getListFromApi from './getApiList';
-import { Data } from '../interfaces';
+import { Data } from '../../types.ts/interfaces';
 
 export const fetchData = async (): Promise<Data | null> => {
   try {

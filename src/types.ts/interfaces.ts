@@ -1,4 +1,9 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ChangeEvent, ReactNode } from 'react';
+
+export interface BaseButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'error';
+}
 
 export interface Character {
   name: string;
@@ -23,6 +28,14 @@ export interface Data {
   results: Character[];
 }
 
+export interface ErrorBoundaryProps {
+  children: ReactNode;
+}
+
+export interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
 export interface State {
   data: Data | null;
   loading: boolean;
@@ -33,14 +46,6 @@ export interface SearchFieldProps {
   searchTerm: string;
   onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onSearch: () => void;
-}
-
-export interface ErrorBoundaryProps {
-  children: ReactNode;
-}
-
-export interface ErrorBoundaryState {
-  hasError: boolean;
 }
 
 export interface SearchBarProps {

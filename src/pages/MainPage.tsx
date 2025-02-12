@@ -1,26 +1,23 @@
-import { Component } from 'react';
-import SearchField from '../components/layout/Header';
 import ResultList from '../components/layout/CardList';
+import Header from '../components/layout/Header';
 import ErrorButton from '../components/ui/ErrorButton';
 import { localStorageItem } from '../constants';
+import React, { useState } from 'react';
 
-class MainPage extends Component {
-  state = {
-    searchTerm: localStorageItem,
-  };
+const MainPage: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState(localStorageItem);
 
-  handleSearchChange = (searchTerm: string) => {
-    this.setState({ searchTerm });
-  };
-  render() {
-    return (
-      <>
-        <ErrorButton />
-        <SearchField onSearchChange={this.handleSearchChange} />
-        <ResultList searchTerm={this.state.searchTerm} />
-      </>
-    );
+  function handleSearchChange(searchTerm: string) {
+    setSearchTerm(searchTerm);
   }
-}
+
+  return (
+    <>
+      <ErrorButton />
+      <Header onSearchChange={handleSearchChange} />
+      <ResultList searchTerm={searchTerm} />
+    </>
+  );
+};
 
 export default MainPage;

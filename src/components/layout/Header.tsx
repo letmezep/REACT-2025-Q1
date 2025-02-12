@@ -4,7 +4,7 @@ import { localStorageItem } from '../../constants';
 import '../../styles/SearchField.css';
 import '../../styles/variables.css';
 
-class SearchField extends Component<SearchFieldProps> {
+class Header extends Component<SearchFieldProps> {
   state = {
     searchTerm: localStorageItem,
   };
@@ -43,4 +43,4 @@ class SearchField extends Component<SearchFieldProps> {
   }
 }
 
-export default SearchField;
+export default Header;

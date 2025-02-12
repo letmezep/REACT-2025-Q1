@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import SearchField from '../components/SearchField/SearchField';
-import ResultList from '../components/ResultList/ResultList';
-import ErrorButton from '../components/ErrorButton/ErrorButton';
+import SearchField from '../components/layout/Header';
+import ResultList from '../components/layout/CardList';
+import ErrorButton from '../components/ui/ErrorButton';
 import { localStorageItem } from '../constants';
 
 class MainPage extends Component {

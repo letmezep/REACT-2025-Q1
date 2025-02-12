@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 
 export interface Character {
   name: string;
@@ -30,7 +30,9 @@ export interface State {
 }
 
 export interface SearchFieldProps {
-  onSearchChange: (value: string) => void;
+  searchTerm: string;
+  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSearch: () => void;
 }
 
 export interface ErrorBoundaryProps {
@@ -39,4 +41,10 @@ export interface ErrorBoundaryProps {
 
 export interface ErrorBoundaryState {
   hasError: boolean;
+}
+
+export interface SearchBarProps {
+  searchTerm: string;
+  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSearch: () => void;
 }

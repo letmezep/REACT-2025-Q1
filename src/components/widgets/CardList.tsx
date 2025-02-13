@@ -5,6 +5,9 @@ import { Character, Data } from '../../types.ts/interfaces';
 import { localStorageItem } from '../../constants';
 import { fetchData } from '../../services/api/fetchData';
 
+import '../../styles/card-list.css';
+import '../../styles/variables.css';
+
 const CardList: React.FC = () => {
   const [data, setData] = useState<Data | null>(null);
   const [filterData, setFilterData] = useState<Character[] | null>(null);

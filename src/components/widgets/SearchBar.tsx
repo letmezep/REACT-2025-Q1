@@ -19,7 +19,8 @@ const SearchBar = () => {
         <input
           className="search-field__input"
           type="text"
-          placeholder={searchTerm || 'Input search term'}
+          placeholder={'Input search term'}
+          value={searchTerm}
           onChange={handleInputChange}
         />
         <button

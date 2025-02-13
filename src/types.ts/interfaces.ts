@@ -14,6 +14,10 @@ export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
   variant?: 'primary' | 'secondary' | 'error';
 }
 
+export interface CardProps {
+  item: Character;
+}
+
 export interface Character {
   name: string;
   height: string;
@@ -45,10 +49,10 @@ export interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-export interface State {
-  data: Data | null;
-  loading: boolean;
-  searchTerm: string | null;
+export interface SearchBarProps {
+  searchTerm: string;
+  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSearch: () => void;
 }
 
 export interface SearchFieldProps {
@@ -57,8 +61,8 @@ export interface SearchFieldProps {
   onSearch: () => void;
 }
 
-export interface SearchBarProps {
-  searchTerm: string;
-  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSearch: () => void;
+export interface State {
+  data: Data | null;
+  loading: boolean;
+  searchTerm: string | null;
 }

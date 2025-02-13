@@ -57,12 +57,6 @@ export interface HeaderProps {
   onSearchChange: (term: string) => void;
 }
 
-// export interface SearchBarProps {
-//   searchTerm: string;
-//   onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
-//   onSearch: () => void;
-// }
-
 export interface SearchBarProps {
   onSearchChange: (term: string) => void;
 }

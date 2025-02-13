@@ -1,26 +1,20 @@
-// import { useState } from 'react';
-// import ResultList from '../components/layout/CardList';
+import { useState } from 'react';
 import Header from '../components/layout/Header';
-import ErrorButton from '../components/common/ErrorButton';
 import CardList from '../components/widgets/CardList';
-// import Card from '../components/widgets/Card';
-// import { localStorageItem } from '../constants';
-// import React, { useEffect, useState } from 'react';
+import { localStorageItem } from '../constants';
 
 const MainPage: React.FC = () => {
-  // const [searchTerm, setSearchTerm] = useState(localStorageItem)
+  const [searchTerm, setSearchTerm] = useState(localStorageItem);
 
-  // function handleSearchChange(searchTerm: string) {
-  //   setSearchTerm(searchTerm);
-  // }
+  const handleSearchUpdate = (newSearchTerm: string) => {
+    setSearchTerm(newSearchTerm);
+    localStorage.setItem('searchTerm', newSearchTerm);
+  };
 
   return (
     <>
-      <ErrorButton />
-      <Header />
-      <CardList />
-      {/* <Card /> */}
-      {/* <ResultList searchTerm={searchTerm} /> */}
+      <Header onSearchChange={handleSearchUpdate} />
+      <CardList searchTerm={searchTerm} />
     </>
   );
 };

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
+import { CardListProps } from '../../types.ts/interfaces';
 import { getFilteredData } from '../../services/filterData';
 import { Character, Data } from '../../types.ts/interfaces';
-import { localStorageItem } from '../../constants';
 import { fetchData } from '../../services/api/fetchData';
 
 import '../../styles/card-list.css';
 import '../../styles/variables.css';
 
-const CardList: React.FC = () => {
+const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
   const [data, setData] = useState<Data | null>(null);
   const [filterData, setFilterData] = useState<Character[] | null>(null);
-  const searchTerm = localStorageItem;
 
   useEffect(() => {
     const loadData = async () => {
@@ -23,8 +22,9 @@ const CardList: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const filteredData = getFilteredData(data, searchTerm);
-    setFilterData(filteredData);
+    if (data) {
+      setFilterData(getFilteredData(data, searchTerm));
+    }
   }, [data, searchTerm]);
 
   return (

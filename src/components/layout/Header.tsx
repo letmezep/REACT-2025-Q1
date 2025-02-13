@@ -1,9 +1,17 @@
 import SearchBar from '../widgets/SearchBar';
-import '../../styles/SearchField.css';
-import '../../styles/variables.css';
+import ErrorButton from '../common/ErrorButton';
+import { HeaderProps } from '../../types.ts/interfaces';
 
-const Header: React.FC = () => {
-  return <SearchBar />;
+import '../../styles/search-bar.css';
+import '../../styles/variables.css';
+// eslint-disable-next-line react/prop-types
+const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
+  return (
+    <>
+      <ErrorButton />
+      <SearchBar onSearchChange={onSearchChange} />
+    </>
+  );
 };
 
 export default Header;

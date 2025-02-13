@@ -18,6 +18,10 @@ export interface CardProps {
   item: Character;
 }
 
+export interface CardListProps {
+  searchTerm: string;
+}
+
 export interface Character {
   name: string;
   height: string;
@@ -49,10 +53,18 @@ export interface ErrorBoundaryState {
   hasError: boolean;
 }
 
+export interface HeaderProps {
+  onSearchChange: (term: string) => void;
+}
+
+// export interface SearchBarProps {
+//   searchTerm: string;
+//   onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+//   onSearch: () => void;
+// }
+
 export interface SearchBarProps {
-  searchTerm: string;
-  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSearch: () => void;
+  onSearchChange: (term: string) => void;
 }
 
 export interface SearchFieldProps {

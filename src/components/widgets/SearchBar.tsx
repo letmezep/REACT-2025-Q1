@@ -3,8 +3,9 @@ import { localStorageItem } from '../../constants';
 import { useState } from 'react';
 import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
+import { SearchBarProps } from '../../types.ts/interfaces';
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   const [searchTerm, setSearchTerm] = useState(localStorageItem);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -12,7 +13,7 @@ const SearchBar: React.FC = () => {
   }
 
   function handleSearch() {
-    localStorage.setItem('searchTerm', searchTerm);
+    onSearchChange(searchTerm);
   }
 
   return (

@@ -30,8 +30,6 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
   useEffect(() => {
     if (data) {
       setFilterData(getFilteredData(data, searchTerm));
-    } else {
-      setLoading(false);
     }
   }, [data, searchTerm]);
 

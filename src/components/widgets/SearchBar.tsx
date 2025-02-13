@@ -1,12 +1,11 @@
 import React, { ChangeEvent } from 'react';
-import { localStorageItem } from '../../constants';
-import { useState } from 'react';
 import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
 import { SearchBarProps } from '../../types.ts/interfaces';
+import { useSearchQuery } from '../../hooks/useSearchQuery';
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
-  const [searchTerm, setSearchTerm] = useState(localStorageItem);
+  const { searchTerm, setSearchTerm } = useSearchQuery();
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);

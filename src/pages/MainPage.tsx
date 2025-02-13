@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import Header from '../components/layout/Header';
 import CardList from '../components/widgets/CardList';
-import { localStorageItem } from '../constants';
+import { useSearchQuery } from '../hooks/useSearchQuery';
 
 const MainPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState(localStorageItem);
+  const { searchTerm, setSearchTerm } = useSearchQuery();
 
   const handleSearchUpdate = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);

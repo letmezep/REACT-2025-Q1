@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import { localStorageItem } from '../../constants';
 import { useState } from 'react';
+import BaseButton from '../ui/BaseButton';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState(localStorageItem);
@@ -23,13 +24,13 @@ const SearchBar = () => {
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <button
+        <BaseButton
           className="search-field__button"
-          type="button"
+          variant="primary"
           onClick={handleSearch}
         >
           Search
-        </button>
+        </BaseButton>
       </div>
     </>
   );

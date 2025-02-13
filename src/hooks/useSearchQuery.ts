@@ -6,7 +6,7 @@ export const useSearchQuery = () => {
 
   useEffect(() => {
     localStorage.setItem('searchTerm', searchTerm);
-  }, []);
+  }, [searchTerm]);
 
   return { searchTerm, setSearchTerm };
 };

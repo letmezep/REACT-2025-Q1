@@ -1,7 +1,16 @@
-import { ButtonHTMLAttributes, ChangeEvent, ReactNode } from 'react';
+import {
+  ButtonHTMLAttributes,
+  ChangeEvent,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react';
 
 export interface BaseButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'error';
+}
+
+export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
   variant?: 'primary' | 'secondary' | 'error';
 }
 

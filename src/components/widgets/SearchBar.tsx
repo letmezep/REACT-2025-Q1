@@ -1,10 +1,10 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { localStorageItem } from '../../constants';
 import { useState } from 'react';
 import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState(localStorageItem);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -18,13 +18,6 @@ const SearchBar = () => {
   return (
     <>
       <div className="search-field__container">
-        {/* <input
-          className="search-field__input"
-          type="text"
-          placeholder={'Input search term'}
-          value={searchTerm}
-          onChange={handleInputChange}
-        /> */}
         <BaseInput
           className="search-field__input"
           type="text"

@@ -1,3 +1,4 @@
+import Details from '../components/layout/Details';
 import Header from '../components/layout/Header';
 import CardList from '../components/widgets/CardList';
 import { useSearchQuery } from '../hooks/useSearchQuery';
@@ -14,6 +15,7 @@ const MainPage: React.FC = () => {
     <>
       <Header onSearchChange={handleSearchUpdate} />
       <CardList searchTerm={searchTerm} />
+      <Details />
     </>
   );
 };

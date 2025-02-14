@@ -1,4 +1,4 @@
-import Details from '../components/layout/Details';
+import { Outlet } from 'react-router';
 import Header from '../components/layout/Header';
 import CardList from '../components/widgets/CardList';
 import { useSearchQuery } from '../hooks/useSearchQuery';
@@ -13,9 +13,16 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <Header onSearchChange={handleSearchUpdate} />
-      <CardList searchTerm={searchTerm} />
-      <Details />
+      <div className="main-page__wrapper">
+        <div className="left-panel">
+          <Header onSearchChange={handleSearchUpdate} />
+          <CardList searchTerm={searchTerm} />
+        </div>
+
+        <div className="right-panel">
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 };

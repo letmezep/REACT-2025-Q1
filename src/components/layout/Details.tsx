@@ -1,11 +1,17 @@
 import { Character } from '../../types.ts/interfaces';
 import { fetchCharacter } from '../../services/api/fetchCharacter';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import BaseButton from '../ui/BaseButton';
 
 const Details = () => {
+  const navigate = useNavigate();
   const [character, setCharacter] = useState<Character | null>(null);
   const { id } = useParams<{ id?: string }>();
+
+  const handleClick = () => {
+    navigate(`/`);
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -34,21 +40,18 @@ const Details = () => {
   return (
     <>
       <div className="details-panel">
+        <BaseButton className="details__close-button" onClick={handleClick}>
+          {' '}
+          Close X
+        </BaseButton>
+
         <h2>character details</h2>
+
         <div className="name">name: {character?.name}</div>
+        <div className="height">height: {character?.height}</div>
+        <div className="mass">mass: {character?.mass}</div>
         <div className="skin_color">skin color: {character?.skin_color}</div>
-
-        {/* {character ? (
-          <>
-            <div className='name'>name: {character?.name}</div>
-            <div className='skin_color'>skin color: {character?.skin_color}</div>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
-
-        <div>fallback name: {character?.name}</div>
-        <div>{character?.skin_color}</div> */}
+        <div className="birth_year">birth year: {character?.birth_year}</div>
       </div>
     </>
   );

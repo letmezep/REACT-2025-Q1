@@ -9,16 +9,25 @@ import { fetchData } from '../../services/api/fetchData';
 import '../../styles/card-list.css';
 import '../../styles/variables.css';
 import BaseButton from '../ui/BaseButton';
+import { useSearchParams } from 'react-router';
+import { urlPage } from '../../constants';
 
 const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
   const [data, setData] = useState<Data | null>(null);
   const [filterData, setFilterData] = useState<Character[] | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = Number(searchParams.get('page')) || 1;
+
+  const changePage = (newPage: number) => {
+    setSearchParams({ page: newPage.toString() });
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetchData();
+        const response = await fetchData(`${urlPage}${page}`);
         setData(response);
       } finally {
         setLoading(false);
@@ -26,7 +35,7 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
     };
 
     loadData();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     if (data) {
@@ -48,9 +57,21 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
         )}
       </div>
       <div className="card-list__pagination">
-        <BaseButton>previous</BaseButton>
-        <div className="pagination__page-number">Page</div>
-        <BaseButton>next</BaseButton>
+        <BaseButton
+          onClick={() => {
+            changePage(page - 1);
+          }}
+        >
+          previous
+        </BaseButton>
+        <div className="pagination__page-number">{page}</div>
+        <BaseButton
+          onClick={() => {
+            changePage(page + 1);
+          }}
+        >
+          next
+        </BaseButton>
       </div>
     </>
   );

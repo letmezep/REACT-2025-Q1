@@ -21,6 +21,10 @@ body {
 
 .left-panel {
   width: 300px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .right-panel {

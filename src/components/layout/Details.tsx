@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import BaseButton from '../ui/BaseButton';
 
+import '../../styles/details.css';
+
 const Details = () => {
   const navigate = useNavigate();
   const [character, setCharacter] = useState<Character | null>(null);
@@ -41,17 +43,19 @@ const Details = () => {
     <>
       <div className="details-panel">
         <BaseButton className="details__close-button" onClick={handleClick}>
-          {' '}
           Close X
         </BaseButton>
 
-        <h2>character details</h2>
+        <h2 className="details__name">{character?.name}</h2>
 
-        <div className="name">name: {character?.name}</div>
-        <div className="height">height: {character?.height}</div>
-        <div className="mass">mass: {character?.mass}</div>
-        <div className="skin_color">skin color: {character?.skin_color}</div>
-        <div className="birth_year">birth year: {character?.birth_year}</div>
+        <div className="details__height">height: {character?.height}</div>
+        <div className="details__mass">mass: {character?.mass}</div>
+        <div className="details__skin_color">
+          skin color: {character?.skin_color}
+        </div>
+        <div className="details__birth_year">
+          birth year: {character?.birth_year}
+        </div>
       </div>
     </>
   );

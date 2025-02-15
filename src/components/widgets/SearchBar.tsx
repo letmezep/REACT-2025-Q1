@@ -3,6 +3,7 @@ import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
 import { SearchBarProps } from '../../types.ts/interfaces';
 import { useSearchQuery } from '../../hooks/useSearchQuery';
+import ErrorButton from '../common/ErrorButton';
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   const { searchTerm, setSearchTerm } = useSearchQuery();
@@ -33,6 +34,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
         >
           Search
         </BaseButton>
+        <ErrorButton />
       </div>
     </>
   );

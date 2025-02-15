@@ -1,7 +1,7 @@
 import { Character } from '../../types.ts/interfaces';
 import { fetchCharacter } from '../../services/api/fetchCharacter';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { imgLink } from '../../constants';
 import BaseButton from '../ui/BaseButton';
 
@@ -12,8 +12,11 @@ const Details = () => {
   const [character, setCharacter] = useState<Character | null>(null);
   const { id } = useParams<{ id?: string }>();
 
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get('page')) || 1;
+
   const handleClick = () => {
-    navigate(`/`);
+    navigate(`/?page=${page}`);
   };
 
   useEffect(() => {

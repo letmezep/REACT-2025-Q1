@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import Loader from '../ui/Loader';
-import { CardListProps } from '../../types.ts/interfaces';
 import { getFilteredData } from '../../services/filterData';
-import { Character, Data } from '../../types.ts/interfaces';
+import { CardListProps, Character, Data } from '../../types.ts/interfaces';
 import { fetchData } from '../../services/api/fetchData';
 
 import '../../styles/card-list.css';

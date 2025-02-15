@@ -1,19 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { CardProps } from '../../types.ts/interfaces';
+import { useNavigate, useSearchParams } from 'react-router';
 
 import '../../styles/card-list.css';
 import '../../styles/variables.css';
 
 const Card: React.FC<CardProps> = ({ item }: CardProps) => {
   const thisID = item.url.split('/').filter(Boolean).pop();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const handleClick = () => {
+    navigate(`/details/${thisID}?page=${searchParams.get('page') || 1}`);
+  };
 
   return (
-    <Link to={`/details/${thisID}`} className="list-item">
+    <div className="list-item" onClick={handleClick}>
       <div className="list-item__description-container">
         <div className="list-item__name">{item.name}</div>
       </div>
-    </Link>
+    </div>
   );
 };
 

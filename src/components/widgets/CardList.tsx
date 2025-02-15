@@ -8,6 +8,7 @@ import { fetchData } from '../../services/api/fetchData';
 
 import '../../styles/card-list.css';
 import '../../styles/variables.css';
+import BaseButton from '../ui/BaseButton';
 
 const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
   const [data, setData] = useState<Data | null>(null);
@@ -45,6 +46,11 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
         ) : (
           <p>No characters found</p>
         )}
+      </div>
+      <div className="card-list__pagination">
+        <BaseButton>previous</BaseButton>
+        <div className="pagination__page-number">Page</div>
+        <BaseButton>next</BaseButton>
       </div>
     </>
   );

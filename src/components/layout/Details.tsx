@@ -2,6 +2,7 @@ import { Character } from '../../types.ts/interfaces';
 import { fetchCharacter } from '../../services/api/fetchCharacter';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { imgLink } from '../../constants';
 import BaseButton from '../ui/BaseButton';
 
 import '../../styles/details.css';
@@ -47,6 +48,12 @@ const Details = () => {
         </BaseButton>
 
         <h2 className="details__name">{character?.name}</h2>
+
+        <img
+          className="details__image"
+          src={`${imgLink}${id}.jpg`}
+          alt="character image"
+        />
 
         <div className="details__height">height: {character?.height}</div>
         <div className="details__mass">mass: {character?.mass}</div>

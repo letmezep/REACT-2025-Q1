@@ -3,11 +3,11 @@ import { HeaderProps } from '../../types.ts/interfaces';
 
 import '../../styles/search-bar.css';
 import '../../styles/variables.css';
-// eslint-disable-next-line react/prop-types
-const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
+
+const Header: React.FC<HeaderProps> = () => {
   return (
     <>
-      <SearchBar onSearchChange={onSearchChange} />
+      <SearchBar />
     </>
   );
 };

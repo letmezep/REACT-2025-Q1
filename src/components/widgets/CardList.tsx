@@ -16,6 +16,8 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
   const [data, setData] = useState<Data | null>(null);
   const [filterData, setFilterData] = useState<Character[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [prevPage, setPrevPage] = useState<string | null>(null);
+  const [nextPage, setNextPage] = useState<string | null>(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
@@ -29,6 +31,10 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
       try {
         const response = await fetchData(`${urlPage}${page}`);
         setData(response);
+        if (response) {
+          setPrevPage(response.previous ?? null);
+          setNextPage(response.next ?? null);
+        }
       } finally {
         setLoading(false);
       }
@@ -61,6 +67,7 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
           onClick={() => {
             changePage(page - 1);
           }}
+          disabled={!prevPage}
         >
           previous
         </BaseButton>
@@ -69,6 +76,7 @@ const CardList: React.FC<CardListProps> = ({ searchTerm }) => {
           onClick={() => {
             changePage(page + 1);
           }}
+          disabled={!nextPage}
         >
           next
         </BaseButton>

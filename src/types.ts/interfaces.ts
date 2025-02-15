@@ -42,6 +42,8 @@ export interface Character {
 }
 
 export interface Data {
+  previous: string | null;
+  next: string | null;
   results: Character[];
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardProps } from '../../types.ts/interfaces';
 import { useNavigate, useSearchParams } from 'react-router';
+import { CardProps } from '../../types.ts/interfaces';
 
 import '../../styles/card-list.css';
 import '../../styles/variables.css';

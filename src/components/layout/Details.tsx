@@ -1,9 +1,9 @@
-import { Character } from '../../types.ts/interfaces';
-import { fetchCharacter } from '../../services/api/fetchCharacter';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
-import { imgLink } from '../../constants';
+import { fetchCharacter } from '../../services/api/fetchCharacter';
 import BaseButton from '../ui/BaseButton';
+import { imgLink } from '../../constants';
+import { Character } from '../../types.ts/interfaces';
 
 import '../../styles/details.css';
 

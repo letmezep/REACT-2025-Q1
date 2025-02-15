@@ -8,7 +8,7 @@ const MainPage: React.FC = () => {
 
   const handleSearchUpdate = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
-    localStorage.setItem('searchTerm', newSearchTerm);
+    localStorage.setItem('searchTerm', searchTerm);
   };
 
   return (
@@ -16,7 +16,7 @@ const MainPage: React.FC = () => {
       <div className="main-page__wrapper">
         <div className="left-panel">
           <Header onSearchChange={handleSearchUpdate} />
-          <CardList searchTerm={searchTerm} />
+          <CardList />
         </div>
 
         <div className="right-panel">

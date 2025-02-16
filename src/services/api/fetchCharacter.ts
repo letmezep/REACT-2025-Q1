@@ -1,5 +1,5 @@
 import { urlApi } from '../../constants';
-import { Character } from '../../types.ts/interfaces';
+import { Character } from '../../types/interfaces';
 import getListFromApi from './getListFromApi';
 
 export const fetchCharacter = async (id: string): Promise<Character | null> => {

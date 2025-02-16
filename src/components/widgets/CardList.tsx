@@ -5,7 +5,7 @@ import Loader from '../ui/Loader';
 import BaseButton from '../ui/BaseButton';
 import { getFilteredData } from '../../services/filterData';
 import { fetchData } from '../../services/api/fetchData';
-import { Character, Data } from '../../types.ts/interfaces';
+import { Character, Data } from '../../types/interfaces';
 import { itemsPerPage, urlPage } from '../../constants';
 
 import '../../styles/card-list.css';

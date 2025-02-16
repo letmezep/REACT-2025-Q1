@@ -2,7 +2,7 @@ import { Component, ErrorInfo } from 'react';
 import {
   ErrorBoundaryProps,
   ErrorBoundaryState,
-} from '../../types.ts/interfaces';
+} from '../../types/interfaces';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = {

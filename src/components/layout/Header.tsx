@@ -1,5 +1,5 @@
 import SearchBar from '../widgets/SearchBar';
-import { HeaderProps } from '../../types.ts/interfaces';
+import { HeaderProps } from '../../types/interfaces';
 
 import '../../styles/search-bar.css';
 import '../../styles/variables.css';

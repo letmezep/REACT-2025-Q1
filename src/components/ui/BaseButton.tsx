@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BaseButtonProps } from '../../types.ts/interfaces';
+import { BaseButtonProps } from '../../types/interfaces';
 
 const BaseButton: FC<BaseButtonProps> = ({
   variant = 'primary',

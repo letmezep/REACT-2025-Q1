@@ -3,7 +3,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { fetchCharacter } from '../../services/api/fetchCharacter';
 import BaseButton from '../ui/BaseButton';
 import { imgLink } from '../../constants';
-import { Character } from '../../types.ts/interfaces';
+import { Character } from '../../types/interfaces';
 
 import '../../styles/details.css';
 
@@ -26,10 +26,9 @@ const Details = () => {
       try {
         const res: Character | null = await fetchCharacter(id);
         if (!res) {
-          console.error(`Character with id ${id} not found`);
+          // console.error(`Character with id=${id} not found`);
           return;
         }
-        console.log('Fetched character:', res);
         setCharacter(res);
       } catch (error) {
         console.log(error);

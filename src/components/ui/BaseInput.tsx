@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BaseInputProps } from '../../types.ts/interfaces';
+import { BaseInputProps } from '../../types/interfaces';
 
 const BaseInput: FC<BaseInputProps> = ({
   variant = 'primary',

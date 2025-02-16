@@ -1,0 +1,17 @@
+export const mockData = [
+  { url: '1', name: 'Character 1' },
+  { url: '2', name: 'Character 2' },
+  { url: '3', name: 'Character 3' },
+  { url: '4', name: 'Character 4' },
+  { url: '5', name: 'Character 5' },
+  { url: '6', name: 'Character 6' },
+  { url: '7', name: 'Character 7' },
+  { url: '8', name: 'Character 8' },
+  { url: '9', name: 'Character 9' },
+  { url: '10', name: 'Character 10' },
+  { url: '11', name: 'Character 11' },
+  { url: '12', name: 'Character 12' },
+  { url: '13', name: 'Character 13' },
+  { url: '14', name: 'Character 14' },
+  { url: '15', name: 'Character 15' },
+];

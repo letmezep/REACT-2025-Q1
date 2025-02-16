@@ -1,19 +1,24 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
 
 const SearchBar: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState(
-    searchParams.get('search') || ''
-  );
+  const [inputValue, setInputValue] = useState('');
+  useEffect(() => {
+    const savedSearch = localStorage.getItem('search');
+    if (savedSearch) {
+      setInputValue(savedSearch); 
+    }
+  }, []);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
   }
 
   function handleSearch() {
+    localStorage.setItem('search', inputValue);
     setSearchParams({ search: inputValue, page: '1' });
   }
 

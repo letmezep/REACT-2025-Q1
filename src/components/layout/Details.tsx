@@ -26,7 +26,6 @@ const Details = () => {
       try {
         const res: Character | null = await fetchCharacter(id);
         if (!res) {
-          // console.error(`Character with id=${id} not found`);
           return;
         }
         setCharacter(res);

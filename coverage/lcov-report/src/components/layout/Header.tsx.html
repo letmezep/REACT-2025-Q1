@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Code coverage report for src/services/api/fetchCharacter.ts</title>
+    <title>Code coverage report for src/components/layout/Header.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
       <div class="pad1">
         <h1>
           <a href="../../../index.html">All files</a> /
-          <a href="index.html">src/services/api</a> fetchCharacter.ts
+          <a href="index.html">src/components/layout</a> Header.tsx
         </h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
             <span class="strong">0% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">0/10</span>
+            <span class="fraction">0/6</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -37,13 +37,13 @@
           <div class="fl pad1y space-right2">
             <span class="strong">0% </span>
             <span class="quiet">Functions</span>
-            <span class="fraction">0/2</span>
+            <span class="fraction">0/1</span>
           </div>
 
           <div class="fl pad1y space-right2">
             <span class="strong">0% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">0/8</span>
+            <span class="fraction">0/6</span>
           </div>
         </div>
         <p class="quiet">
@@ -72,32 +72,38 @@
 <a name='L11'></a><a href='#L11'>11</a>
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { urlApi } from '../../constants';</span>
-import { Character } from '../../types.ts/interfaces';
-<span class="cstat-no" title="statement not covered" >import getListFromApi from './getListFromApi';</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import SearchBar from '../widgets/SearchBar';</span>
+import { HeaderProps } from '../../types.ts/interfaces';
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >fetchCharacter = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >a</span>sync (i</span>d: string): Promise&lt;Character | null&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span></span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const response: Character = <span class="cstat-no" title="statement not covered" >await getListFromApi(`${urlApi}${id}`);</span>
-<span class="cstat-no" title="statement not covered" >    return response;</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    console.error('Error fetch', error);</span>
-<span class="cstat-no" title="statement not covered" >    return null;</span>
-  }
+<span class="cstat-no" title="statement not covered" >import '../../styles/search-bar.css';</span>
+<span class="cstat-no" title="statement not covered" >import '../../styles/variables.css';</span>
+&nbsp;
+const Header: React.FC&lt;HeaderProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;&gt;
+      &lt;SearchBar /&gt;
+    &lt;/&gt;
+  );
 };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export default Header;</span>
 &nbsp;</pre></td></tr></table></pre>
 
       <div class="push"></div>
@@ -112,7 +118,7 @@ export const <span class="cstat-no" title="statement not covered" >fetchCharacte
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2025-02-16T07:10:58.032Z
+      at 2025-02-16T07:12:10.106Z
     </div>
     <script src="../../../prettify.js"></script>
     <script>

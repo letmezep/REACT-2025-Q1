@@ -11,7 +11,8 @@ module.exports = {
   },
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{tsx}',
+    // 'src/**/*.{ts, tsx}',
+    '**/*.tsx',
     '!vite.config.ts',
     '!vite-env.d.ts',
     '!**/node_modules/**',

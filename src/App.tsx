@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router';
 import NotFound from './pages/NotFound';
 import Details from './components/layout/Details';
 import ThemeChangeButton from './components/ui/ThemeChangeButton';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider } from './context/ThemeProvider';
 
 const App: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { useParams } from 'react-router';
 import '@testing-library/jest-dom';
 import Details from '../components/layout/Details';
@@ -52,9 +52,7 @@ describe('Details component', () => {
   test('clicking close button hides the component', async () => {
     const mockNavigate = jest.fn();
     (fetchCharacter as jest.Mock).mockResolvedValueOnce(mockCharacter);
-    jest
-      .spyOn(require('react-router'), 'useNavigate')
-      .mockReturnValue(mockNavigate);
+    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
 
     render(
       <MemoryRouter initialEntries={['/details/1?page=1']}>
@@ -67,6 +65,23 @@ describe('Details component', () => {
     await waitFor(() =>
       expect(screen.getByText('Character 1')).toBeInTheDocument()
     );
+    // const mockNavigate = jest.fn();
+    // (fetchCharacter as jest.Mock).mockResolvedValueOnce(mockCharacter);
+    // jest
+    //   .spyOn(require('react-router'), 'useNavigate')
+    //   .mockReturnValue(mockNavigate);
+
+    // render(
+    //   <MemoryRouter initialEntries={['/details/1?page=1']}>
+    //     <Routes>
+    //       <Route path="/details/:id" element={<Details />} />
+    //     </Routes>
+    //   </MemoryRouter>
+    // );
+
+    // await waitFor(() =>
+    //   expect(screen.getByText('Character 1')).toBeInTheDocument()
+    // );
 
     fireEvent.click(screen.getByText('Close X'));
 

@@ -82,3 +82,7 @@ button:hover {
   font-weight: 900;
   color: var(--yellow-color);
 }
+
+.app.dark .wrapper {
+  background-color: var(--black-color);
+}

@@ -15,9 +15,9 @@ const Card: React.FC<CardProps> = ({ item }: CardProps) => {
   };
 
   return (
-    <div className="list-item" role="article" onClick={handleClick}>
-      <div className="list-item__description-container">
-        <div className="list-item__name">{item.name}</div>
+    <div className='list-item' role='article' onClick={handleClick}>
+      <div className='list-item__description-container'>
+        <div className='list-item__name'>{item.name}</div>
       </div>
     </div>
   );

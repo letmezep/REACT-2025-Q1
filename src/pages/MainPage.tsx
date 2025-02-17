@@ -13,13 +13,13 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <div className="main-page__wrapper">
-        <div className="left-panel">
+      <div className='main-page__wrapper wrapper'>
+        <div className='left-panel'>
           <Header onSearchChange={handleSearchUpdate} />
           <CardList />
         </div>
 
-        <div className="right-panel">
+        <div className='right-panel'>
           <Outlet />
         </div>
       </div>

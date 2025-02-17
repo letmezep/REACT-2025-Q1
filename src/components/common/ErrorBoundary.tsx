@@ -23,7 +23,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <>
-          <div className="error-boundary__container">
+          <div className='error-boundary__container'>
             <h2>Something went wrong!</h2>
             <button className="reset-button" onClick={this.resetError}>
               Reset Error

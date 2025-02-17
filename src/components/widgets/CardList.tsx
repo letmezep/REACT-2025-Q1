@@ -76,7 +76,7 @@ const CardList: React.FC = () => {
 
   return (
     <>
-      <div className="card-list">
+      <div className='card-list'>
         {paginatedData.length > 0 ? (
           paginatedData.map((item: Character) => (
             <Card key={item.url} item={item} />
@@ -86,11 +86,11 @@ const CardList: React.FC = () => {
         )}
       </div>
 
-      <div className="card-list__pagination">
+      <div className='card-list__pagination'>
         <BaseButton onClick={() => changePage(page - 1)} disabled={page <= 1}>
           Previous
         </BaseButton>
-        <div className="pagination__page-number">
+        <div className='pagination__page-number'>
           Page {page} of {totalPages}
         </div>
         <BaseButton

@@ -1,13 +1,14 @@
 import { Component, ErrorInfo } from 'react';
-import { ErrorBoundaryProps, ErrorBoundaryState } from '../services/interfaces';
+import { ErrorBoundaryProps, ErrorBoundaryState } from '../../types/interfaces';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = {
     hasError: false,
+    errorKey: 0,
   };
 
   static getDerivedStateFromError(): ErrorBoundaryState {
-    return { hasError: true };
+    return { hasError: true, errorKey: 0 };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {

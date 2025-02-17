@@ -1,44 +1,44 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
-import { useSearchParams } from 'react-router';
+import React, { useEffect, useState } from 'react';
 import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
+import ErrorButton from '../common/ErrorButton';
+import { SearchBarProps } from '../../types/interfaces';
+import { useSearchParams } from 'react-router';
+import { useSearchQuery } from '../../hooks/useSearchQuery';
 
-const SearchBar: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState('');
+const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
+  const { searchTerm, setSearchTerm } = useSearchQuery();
+  const [, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState(localStorage.getItem('searchTerm') || '');
+
   useEffect(() => {
-    const savedSearch = localStorage.getItem('search');
-    if (savedSearch) {
-      setInputValue(savedSearch); 
-    }
-  }, []);
+    onSearchChange(searchTerm);
+    setSearchParams({ search: searchTerm, page: '1' });
+  }, [searchTerm]);
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-  }
+  };
 
-  function handleSearch() {
-    localStorage.setItem('search', inputValue);
-    setSearchParams({ search: inputValue, page: '1' });
-  }
+  const handleSearchClick = () => {
+    setSearchTerm(inputValue);
+    localStorage.setItem('searchTerm', searchTerm);
+  };
 
   return (
-    <div className="search-field__container">
+    <div className='search-field__container'>
       <BaseInput
-        className="search-field__input"
-        type="text"
-        variant="primary"
-        placeholder="Input search term"
+        className='search-field__input'
+        type='text'
+        placeholder='Input search term'
         value={inputValue}
         onChange={handleInputChange}
       />
       <BaseButton
-        className="search-field__button"
-        variant="primary"
-        onClick={handleSearch}
-      >
-        Search
-      </BaseButton>
+        className='search-field__button'
+        variant='primary'
+        onClick={handleSearchClick}>Search</BaseButton>
+      <ErrorButton />
     </div>
   );
 };

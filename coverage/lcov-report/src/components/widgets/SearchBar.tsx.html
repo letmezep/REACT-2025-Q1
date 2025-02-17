@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -109,42 +109,34 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,51 +155,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, ChangeEvent, useEffect } from 'react';
-import { useSearchParams } from 'react-router';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useState } from 'react';
 import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
+import ErrorButton from '../common/ErrorButton';
+import { SearchBarProps } from '../../types/interfaces';
+import { useSearchParams } from 'react-router';
+import { useSearchQuery } from '../../hooks/useSearchQuery';
 &nbsp;
-const SearchBar: React.FC = () =&gt; {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState('');
-  // const [inputValue, setInputValue] = useState(
-  //   searchParams.get('search') || ''
-  // );
+const SearchBar: React.FC&lt;SearchBarProps&gt; = ({ onSearchChange }) =&gt; {
+  const { searchTerm, setSearchTerm } = useSearchQuery();
+  const [, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState(localStorage.getItem('searchTerm') || '');
+&nbsp;
   useEffect(() =&gt; {
-    const savedSearch = localStorage.getItem('search');
-    if (savedSearch) {
-      setInputValue(savedSearch); 
-    }
-  }, []);
+    onSearchChange(searchTerm);
+    setSearchParams({ search: searchTerm, page: '1' });
+  }, [searchTerm]);
 &nbsp;
-  function handleInputChange(event: ChangeEvent&lt;HTMLInputElement&gt;) {
+  const handleInputChange = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
     setInputValue(event.target.value);
-  }
+  };
 &nbsp;
-  function handleSearch() {
-    localStorage.setItem('search', inputValue);
-    setSearchParams({ search: inputValue, page: '1' });
-    // setSearchParams({ search: inputValue, page: '1' });
-  }
+  const handleSearchClick = () =&gt; {
+    setSearchTerm(inputValue);
+    localStorage.setItem('searchTerm', searchTerm);
+  };
 &nbsp;
   return (
-    &lt;div className="search-field__container"&gt;
+    &lt;div className='search-field__container'&gt;
       &lt;BaseInput
-        className="search-field__input"
-        type="text"
-        variant="primary"
-        placeholder="Input search term"
+        className='search-field__input'
+        type='text'
+        placeholder='Input search term'
         value={inputValue}
         onChange={handleInputChange}
       /&gt;
       &lt;BaseButton
-        className="search-field__button"
-        variant="primary"
-        onClick={handleSearch}
-      &gt;
-        Search
-      &lt;/BaseButton&gt;
+        className='search-field__button'
+        variant='primary'
+        onClick={handleSearchClick}&gt;Search&lt;/BaseButton&gt;
+      &lt;ErrorButton /&gt;
     &lt;/div&gt;
   );
 };
@@ -220,7 +208,7 @@ export default SearchBar;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-16T09:39:38.814Z
+                at 2025-02-17T02:42:36.234Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

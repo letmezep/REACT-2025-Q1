@@ -53,6 +53,7 @@ export interface ErrorBoundaryProps {
 
 export interface ErrorBoundaryState {
   hasError: boolean;
+  errorKey: number;
 }
 
 export interface HeaderProps {

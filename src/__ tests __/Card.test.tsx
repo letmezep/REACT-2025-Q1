@@ -11,86 +11,80 @@ import Card from '../components/widgets/Card';
 // import { fetchData } from '../services/api/fetchData';
 
 jest.mock('../services/api/fetchData', () => ({
-    fetchData: jest.fn(),
+  fetchData: jest.fn(),
 }));
 
 jest.mock('react-router', () => ({
-    ...jest.requireActual('react-router'),
-    useNavigate: jest.fn(),
+  ...jest.requireActual('react-router'),
+  useNavigate: jest.fn(),
 }));
 
 describe('Card component', () => {
-    const mockNavigate = jest.fn();
+  const mockNavigate = jest.fn();
 
-    beforeEach(() => {
-        (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-    });
+  beforeEach(() => {
+    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+  });
 
-    test('renders card data', () => {
-        render(
-            <MemoryRouter>
-                <Card item={mockItem} />
-            </MemoryRouter>
-        );
+  test('renders card data', () => {
+    render(
+      <MemoryRouter>
+        <Card item={mockItem} />
+      </MemoryRouter>
+    );
 
-        expect(screen.getByText('Character 1')).toBeInTheDocument();
-    });
+    expect(screen.getByText('Character 1')).toBeInTheDocument();
+  });
 
-    test('click to open details panel', () => {
-        render(
-            <MemoryRouter initialEntries={['/']}>
-                <Routes>
-                    <Route
-                        path="/details/:id"
-                        element={<div>Detail Component</div>}
-                    />
-                    <Route
-                        path="/"
-                        element={<Card item={mockItem} />}
-                    />
-                </Routes>
-            </MemoryRouter>
-        );
+  test('click to open details panel', () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/details/:id" element={<div>Detail Component</div>} />
+          <Route path="/" element={<Card item={mockItem} />} />
+        </Routes>
+      </MemoryRouter>
+    );
 
-        const card = screen.getByText('Character 1');
-        fireEvent.click(card);
+    const card = screen.getByText('Character 1');
+    fireEvent.click(card);
 
-        expect(mockNavigate).toHaveBeenCalledWith('/details/1?page=1');
-    });
+    expect(mockNavigate).toHaveBeenCalledWith('/details/1?page=1');
+  });
 
-    // test('clicking the card triggers an additional API call for details', async () => {
+  // test('clicking the card triggers an additional API call for details', async () => {
 
-    //     const mockItem: CardProps['item'] = {
-    //         url: '1',
-    //         name: 'Character 1',
-    //         height: '',
-    //         mass: '',
-    //         hair_color: '',
-    //         skin_color: '',
-    //         eye_color: '',
-    //         birth_year: '',
-    //         gender: '',
-    //         homeworld: '',
-    //         films: [''],
-    //         species: [''],
-    //         vehicles: [''],
-    //         starships: [''],
-    //         created: [''],
-    //         edited: ['']
-    //     };
+  //     const mockItem: CardProps['item'] = {
+  //         url: '1',
+  //         name: 'Character 1',
+  //         height: '',
+  //         mass: '',
+  //         hair_color: '',
+  //         skin_color: '',
+  //         eye_color: '',
+  //         birth_year: '',
+  //         gender: '',
+  //         homeworld: '',
+  //         films: [''],
+  //         species: [''],
+  //         vehicles: [''],
+  //         starships: [''],
+  //         created: [''],
+  //         edited: ['']
+  //     };
 
-    //     (fetchData as jest.Mock).mockResolvedValueOnce({
-    //         results: [{ name: 'Character 1 Details', description: 'Detailed info' }],
-    //     });
+  //     (fetchData as jest.Mock).mockResolvedValueOnce({
+  //         results: [{ name: 'Character 1 Details', description: 'Detailed info' }],
+  //     });
 
-    //     render(
-    //         <MemoryRouter>
-    //             <Card item={mockItem} />
-    //         </MemoryRouter>
-    //     );
+  //     render(
+  //         <MemoryRouter>
+  //             <Card item={mockItem} />
+  //         </MemoryRouter>
+  //     );
 
-    //     fireEvent.click(screen.getByText('Character 1'));
-    //     await waitFor(() => expect(fetchData).toHaveBeenCalledWith('https://api.example.com/details/1?page=1'));
+  //     fireEvent.click(screen.getByText('Character 1'));
+  //     await waitFor(() => expect(fetchData).toHaveBeenCalledWith('https://api.example.com/details/1?page=1'));
 
-    // });
+  // });
 });

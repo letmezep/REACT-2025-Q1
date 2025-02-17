@@ -85,6 +85,7 @@ const CardList: React.FC = () => {
           <p>No characters found</p>
         )}
       </div>
+
       <div className="card-list__pagination">
         <BaseButton onClick={() => changePage(page - 1)} disabled={page <= 1}>
           Previous

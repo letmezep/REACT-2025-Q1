@@ -9,7 +9,9 @@ import { useSearchQuery } from '../../hooks/useSearchQuery';
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   const { searchTerm, setSearchTerm } = useSearchQuery();
   const [, setSearchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState(localStorage.getItem('searchTerm') || '');
+  const [inputValue, setInputValue] = useState(
+    localStorage.getItem('searchTerm') || ''
+  );
 
   useEffect(() => {
     onSearchChange(searchTerm);
@@ -26,18 +28,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   };
 
   return (
-    <div className='search-field__container'>
+    <div className="search-field__container">
       <BaseInput
-        className='search-field__input'
-        type='text'
-        placeholder='Input search term'
+        className="search-field__input"
+        type="text"
+        placeholder="Input search term"
         value={inputValue}
         onChange={handleInputChange}
       />
       <BaseButton
-        className='search-field__button'
-        variant='primary'
-        onClick={handleSearchClick}>Search</BaseButton>
+        className="search-field__button"
+        variant="primary"
+        onClick={handleSearchClick}
+      >
+        Search
+      </BaseButton>
       <ErrorButton />
     </div>
   );

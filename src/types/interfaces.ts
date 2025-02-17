@@ -75,3 +75,7 @@ export interface State {
   loading: boolean;
   searchTerm: string | null;
 }
+
+export interface ThemeProviderProps {
+  children: ReactNode;
+}

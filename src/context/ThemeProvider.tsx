@@ -9,8 +9,11 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   };
 
   useEffect(() => {
-    document.body.style.backgroundColor = theme === 'light' ? '#FFF' : '#333';
-    document.body.style.color = theme === 'light' ? '#000' : '#FFF';
+    // const root = document.getElementsByClassName('wrapper');
+    const root = document.documentElement;
+    root.classList.toggle('dark-mode', theme === 'dark');
+    // document.body.style.backgroundColor = theme === 'light' ? '#FFF' : '#333';
+    // document.body.style.color = theme === 'light' ? '#000' : '#FFF';
   }, [theme]);
 
   return (

@@ -29,7 +29,6 @@
 
 .search-field__button {
   color: var(--red-color);
-  background-color: var(--light-grey-color);
 }
 
 .search-field__button:active {

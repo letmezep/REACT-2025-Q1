@@ -1,11 +1,19 @@
-// import BaseButton from "./BaseButton";
+import BaseButton from './BaseButton';
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 
 const ThemeChangeButton = () => {
   const { changeTheme } = useContext(ThemeContext);
 
-  return <button onClick={changeTheme}>Change Theme</button>;
+  return (
+    <BaseButton
+      className="theme-change__button"
+      variant="primary"
+      onClick={changeTheme}
+    >
+      Change theme
+    </BaseButton>
+  );
 };
 
 export default ThemeChangeButton;

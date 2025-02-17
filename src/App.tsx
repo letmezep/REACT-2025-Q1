@@ -4,6 +4,7 @@ import NotFound from './pages/NotFound';
 import Details from './components/layout/Details';
 import ThemeChangeButton from './components/ui/ThemeChangeButton';
 import { ThemeProvider } from './context/ThemeProvider';
+import './styles/index.css';
 
 const App: React.FC = () => {
   return (

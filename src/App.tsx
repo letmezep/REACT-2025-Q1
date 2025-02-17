@@ -8,19 +8,15 @@ import { ThemeProvider } from './context/ThemeContext';
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-    <Routes>
-      
-      <Route path='/' element={<MainPage />}>
-        <Route path='details/:id' element={<Details />} />
-      </Route>
+      <Routes>
+        <Route path="/" element={<MainPage />}>
+          <Route path="details/:id" element={<Details />} />
+        </Route>
 
-      <Route path='*' element={<NotFound />} />
-    
-      
-    </Routes>
-    <ThemeChangeButton />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <ThemeChangeButton />
     </ThemeProvider>
-    
   );
 };
 

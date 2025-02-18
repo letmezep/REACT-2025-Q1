@@ -3,8 +3,9 @@ import BaseButton from '../ui/BaseButton';
 import BaseInput from '../ui/BaseInput';
 import { useSearchQuery } from '../../hooks/useSearchQuery';
 import ErrorButton from '../common/ErrorButton';
-import { SearchBarProps } from '../../types/interfaces';
 import { useSearchParams } from 'react-router';
+
+import { SearchBarProps } from '../../types/interfaces';
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   const { searchTerm, setSearchTerm } = useSearchQuery();

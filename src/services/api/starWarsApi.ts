@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const starWarsApi = createApi({
   reducerPath: 'starWarsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
   endpoints: (builder) => ({
     getCharacterById: builder.query({
       query: (id: string) => `people/${id}`,
@@ -10,8 +10,14 @@ export const starWarsApi = createApi({
     searchCharacters: builder.query({
       query: (name: string) => `people/?search=${name}`,
     }),
+    getNextPage: builder.query({
+      query: (page: string) => `people/?page=${page}`,
+    }),
   }),
 });
 
-export const { useGetCharacterByIdQuery, useSearchCharactersQuery } =
-  starWarsApi;
+export const {
+  useGetCharacterByIdQuery,
+  useSearchCharactersQuery,
+  useGetNextPageQuery,
+} = starWarsApi;

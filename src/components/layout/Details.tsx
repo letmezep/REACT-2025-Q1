@@ -6,8 +6,10 @@ import BaseButton from '../ui/BaseButton';
 import '../../styles/details.css';
 
 const Details: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const { data, error, isLoading } = useGetCharacterByIdQuery(id!);
+  const { id } = useParams<{ id?: string }>();
+  const { data, error, isLoading } = useGetCharacterByIdQuery(id ?? '', {
+    skip: !id,
+  });
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
   const navigate = useNavigate();

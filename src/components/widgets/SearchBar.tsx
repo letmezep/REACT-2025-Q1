@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   useEffect(() => {
     onSearchChange(searchTerm);
     setSearchParams({ search: searchTerm, page: '1' });
-  }, [searchTerm, onSearchChange]);
+  }, [searchTerm, onSearchChange, setSearchParams]);
 
   const handleSearchClick = () => {
     setSearchTerm(inputValue);

@@ -10,7 +10,7 @@ export const starWarsApi = createApi({
     searchCharacters: builder.query({
       query: (name: string) => `people/?search=${name}`,
     }),
-    getNextPage: builder.query({
+    getPage: builder.query({
       query: (page: string) => `people/?page=${page}`,
     }),
   }),
@@ -19,5 +19,5 @@ export const starWarsApi = createApi({
 export const {
   useGetCharacterByIdQuery,
   useSearchCharactersQuery,
-  useGetNextPageQuery,
+  useGetPageQuery,
 } = starWarsApi;

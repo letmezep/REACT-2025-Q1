@@ -7,7 +7,7 @@ export const starWarsApi = createApi({
   endpoints: (builder) => ({
     getCharacters: builder.query<
       PageResponse,
-      { search?: string; page?: string; characterId?: string }
+      { search?: string; page?: string }
     >({
       query: ({ search, page }) => {
         let url = 'people/?';
@@ -20,7 +20,6 @@ export const starWarsApi = createApi({
         return url;
       },
     }),
-
     getCharacterById: builder.query<Character, string>({
       query: (id) => `people/${id}/`,
     }),

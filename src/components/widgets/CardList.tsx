@@ -20,7 +20,7 @@ const CardList: React.FC = () => {
   const totalPages = Math.ceil((data?.count || 0) / itemsPerPage);
 
   const changePage = (newPage: number) => {
-    setSearchParams({ search: searchTerm, page: newPage.toString() });
+    setSearchParams({ search: searchTerm, page: String(newPage) });
   };
 
   if (isLoading) return <Loader />;

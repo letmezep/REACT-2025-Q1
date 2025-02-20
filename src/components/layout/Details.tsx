@@ -1,15 +1,15 @@
 import React from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router';
-import { useGetCharacterByIdQuery } from '../../services/api/starWarsApi';
+import {useGetCharacterByIdQuery} from '../../services/api/starWarsApi';
 import BaseButton from '../ui/BaseButton';
 
 import '../../styles/details.css';
 
 const Details: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
-  const { data, error, isLoading } = useGetCharacterByIdQuery(id ?? '', {
-    skip: !id,
-  });
+  const {data, error, isLoading } = useGetCharacterByIdQuery(
+    id ?? '', { skip: !id }
+  );
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get('page')) || 1;
   const navigate = useNavigate();

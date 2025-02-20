@@ -1,78 +1,35 @@
-import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import Card from './Card';
-import Loader from '../ui/Loader';
-import BaseButton from '../ui/BaseButton';
-import { getFilteredData } from '../../services/filterData';
-import { useGetPageQuery } from '../../services/api/starWarsApi';
+import { useGetCharactersQuery } from '../../services/api/starWarsApi';
 import { Character } from '../../types/interfaces';
-import { itemsPerPage } from '../../constants';
-import { urlPage } from '../../constants';
-
-import '../../styles/card-list.css';
-import '../../styles/variables.css';
+import BaseButton from '../ui/BaseButton';
+import Loader from '../ui/Loader';
+import Card from './Card';
 
 const CardList: React.FC = () => {
-  const [allData, setAllData] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
-  const page = Number(searchParams.get('page')) || 1;
+  const pageParam = searchParams.get('page');
+  const page = Number(pageParam);
+  const itemsPerPage = 10;
 
-  const { isFetching } = useGetPageQuery(String(currentPage));
+  const { data, isLoading } = useGetCharactersQuery({
+    search: searchTerm || undefined,
+    page: String(page),
+  });
 
-  useEffect(() => {
-    const loadAllPages = async () => {
-      setLoading(true);
-      let results: Character[] = [];
-      let pageNum = 1;
-      let nextPage = true;
-
-      while (nextPage) {
-        const response = await fetch(`${urlPage}${pageNum}`).then((res) =>
-          res.json()
-        );
-        if (response?.results) {
-          results = [...results, ...response.results];
-        }
-        nextPage = response.next !== null;
-        pageNum++;
-      }
-
-      setAllData(results);
-      setLoading(false);
-    };
-
-    loadAllPages();
-  }, []);
-
-  const filteredData = searchTerm
-    ? getFilteredData(
-        { results: allData, previous: null, next: null },
-        searchTerm
-      )
-    : allData;
-
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const paginatedData = filteredData.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  );
+  const totalPages = Math.ceil((data?.count || 0) / itemsPerPage);
 
   const changePage = (newPage: number) => {
     setSearchParams({ search: searchTerm, page: newPage.toString() });
-    setCurrentPage(newPage);
   };
 
-  if (loading || isFetching) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <>
       <div className="card-list">
-        {paginatedData.length > 0 ? (
-          paginatedData.map((item: Character) => (
+        {data?.results && data?.results.length > 0 ? (
+          data?.results.map((item: Character) => (
             <Card key={item.url} item={item} />
           ))
         ) : (

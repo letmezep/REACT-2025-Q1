@@ -60,6 +60,11 @@ export interface HeaderProps {
   onSearchChange: (term: string) => void;
 }
 
+export interface PageResponse {
+  count: number;
+  results: Character[];
+}
+
 export interface SearchBarProps {
   onSearchChange: (term: string) => void;
 }

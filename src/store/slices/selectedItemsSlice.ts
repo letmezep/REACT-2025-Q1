@@ -1,3 +1,27 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface SelectedCharactersState {
+  selected: Record<string, boolean>;
+}
+
+const initialState: SelectedCharactersState = {
+  selected: {},
+};
+
+const selectedCharactersSlice = createSlice({
+  name: 'selectedCharacters',
+  initialState,
+  reducers: {
+    toggleSelection: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      state.selected[id] = !state.selected[id];
+    },
+  },
+});
+
+export const { toggleSelection } = selectedCharactersSlice.actions;
+export default selectedCharactersSlice.reducer;
+
 // import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { RootState } from '../store';
 // import { Character } from '../../types/interfaces';

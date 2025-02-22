@@ -1,27 +1,37 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { unselectAll } from '../../store/slices/selectedItemsSlice';
+import { useGetCharactersQuery } from '../../services/api/starWarsApi';
 import { RootState } from '../../store/store';
+import { unselectAll } from '../../store/slices/selectedItemsSlice';
+import { exportToCSV } from '../../utils/exportToCSV';
 import BaseButton from '../ui/BaseButton';
-
-import '../../styles/flyout.css';
 
 const Flyout: React.FC = () => {
   const dispatch = useDispatch();
   const selectedItems = useSelector(
     (state: RootState) => state.selectedCharacters.selected
   );
-  const selectedCount = Object.keys(selectedItems).length;
+  const selectedIds = Object.keys(selectedItems).filter(
+    (id) => selectedItems[id]
+  );
 
-  if (selectedCount === 0) return null;
+  const { data } = useGetCharactersQuery({});
+
+  const selectedList =
+    data?.results.filter((item) => {
+      const id = item.url.split('/').filter(Boolean).pop();
+      return selectedIds.includes(id || '');
+    }) || [];
+
+  if (selectedList.length === 0) return null;
 
   return (
     <div className="flyout">
-      <span>{selectedCount} items are selected</span>
+      <span>{selectedList.length} items are selected</span>
       <BaseButton onClick={() => dispatch(unselectAll())}>
         Unselect all
       </BaseButton>
-      <BaseButton onClick={() => console.log('Downloading...')}>
+      <BaseButton onClick={() => exportToCSV(selectedList)}>
         Download
       </BaseButton>
     </div>

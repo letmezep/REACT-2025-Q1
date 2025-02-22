@@ -4,6 +4,7 @@ import { Character } from '../../types/interfaces';
 import BaseButton from '../ui/BaseButton';
 import Loader from '../ui/Loader';
 import Card from './Card';
+import Flyout from './Flyout';
 
 const CardList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,6 +52,8 @@ const CardList: React.FC = () => {
           Next
         </BaseButton>
       </div>
+
+      <Flyout />
     </>
   );
 };

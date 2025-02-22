@@ -16,40 +16,11 @@ const selectedCharactersSlice = createSlice({
       const id = action.payload;
       state.selected[id] = !state.selected[id];
     },
+    unselectAll: (state) => {
+      state.selected = {};
+    },
   },
 });
 
-export const { toggleSelection } = selectedCharactersSlice.actions;
+export const { toggleSelection, unselectAll } = selectedCharactersSlice.actions;
 export default selectedCharactersSlice.reducer;
-
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { RootState } from '../store';
-// import { Character } from '../../types/interfaces';
-
-// interface SelectedItemsState {
-//   selectedItems: Record<string, Character>;
-// }
-
-// const initialState: SelectedItemsState = {
-//   selectedItems: {},
-// };
-
-// const selectedItemsSlice = createSlice({
-//   name: 'selectedItems',
-//   initialState,
-//   reducers: {
-//     toggleItemSelection: (state, action: PayloadAction<Character>) => {
-//       const { url } = action.payload;
-//       if (state.selectedItems[url]) {
-//         delete state.selectedItems[url];
-//       } else {
-//         state.selectedItems[url] = action.payload;
-//       }
-//     },
-//   },
-// });
-
-// export const { toggleItemSelection } = selectedItemsSlice.actions;
-// export const selectSelectedItems = (state: RootState) =>
-//   state.selectedItems.selectedItems;
-// export default selectedItemsSlice.reducer;

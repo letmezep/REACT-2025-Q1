@@ -9,6 +9,7 @@ import './styles/index.css';
 const App: React.FC = () => {
   return (
     <ThemeProvider>
+      <ThemeChangeButton />
       <Routes>
         <Route path="/" element={<MainPage />}>
           <Route path="details/:id" element={<Details />} />
@@ -16,7 +17,7 @@ const App: React.FC = () => {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ThemeChangeButton />
+      
     </ThemeProvider>
   );
 };

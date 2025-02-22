@@ -9,6 +9,12 @@
   background-color: var(--dark-grey-color);
 }
 
+.search-field__buttons__box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .search-field__input,
 .search-field__button {
   padding: 5px 10px;

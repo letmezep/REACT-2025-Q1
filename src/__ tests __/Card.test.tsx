@@ -31,7 +31,16 @@ describe('Card component', () => {
     (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
   });
 
-  const renderWithProviders = (ui: string | number | boolean | Iterable<ReactNode> | JSX.Element | null | undefined) => {
+  const renderWithProviders = (
+    ui:
+      | string
+      | number
+      | boolean
+      | Iterable<ReactNode>
+      | JSX.Element
+      | null
+      | undefined
+  ) => {
     return render(
       <Provider store={store}>
         <MemoryRouter>{ui}</MemoryRouter>
@@ -47,8 +56,8 @@ describe('Card component', () => {
   test('click to open details panel', () => {
     renderWithProviders(
       <Routes>
-        <Route path='/details/:id' element={<div>Detail Component</div>} />
-        <Route path='/' element={<Card item={mockItem} />} />
+        <Route path="/details/:id" element={<div>Detail Component</div>} />
+        <Route path="/" element={<Card item={mockItem} />} />
       </Routes>
     );
 

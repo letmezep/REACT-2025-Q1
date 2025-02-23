@@ -80,4 +80,3 @@ describe('Component CardList', () => {
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 });
-

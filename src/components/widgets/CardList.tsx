@@ -5,8 +5,6 @@ import BaseButton from '../ui/BaseButton';
 import Loader from '../ui/Loader';
 import Card from './Card';
 import Flyout from './Flyout';
-// import { RootState } from '../../store/store';
-// import { useSelector } from 'react-redux';
 
 const CardList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,10 +17,6 @@ const CardList: React.FC = () => {
     search: searchTerm || undefined,
     page: String(page),
   });
-
-  // const selectedCharacters = useSelector(
-  //   (state: RootState) => state.selectedCharacters.selected
-  // );
 
   const totalPages = Math.ceil((data?.count || 0) / itemsPerPage);
 

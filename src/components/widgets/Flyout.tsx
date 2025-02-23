@@ -5,6 +5,7 @@ import { RootState } from '../../store/store';
 import { unselectAll } from '../../store/slices/selectedItemsSlice';
 import { exportToCSV } from '../../utils/exportToCSV';
 import BaseButton from '../ui/BaseButton';
+import '../../styles/flyout.css';
 
 const Flyout: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,12 +29,14 @@ const Flyout: React.FC = () => {
   return (
     <div className="flyout">
       <span>{selectedList.length} items are selected</span>
-      <BaseButton onClick={() => dispatch(unselectAll())}>
-        Unselect all
-      </BaseButton>
-      <BaseButton onClick={() => exportToCSV(selectedList)}>
-        Download
-      </BaseButton>
+      <div className="flyout__button-box">
+        <BaseButton onClick={() => dispatch(unselectAll())}>
+          Unselect all
+        </BaseButton>
+        <BaseButton onClick={() => exportToCSV(selectedList)}>
+          Download
+        </BaseButton>
+      </div>
     </div>
   );
 };

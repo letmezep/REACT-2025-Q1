@@ -1,4 +1,4 @@
-import { Character } from "../types/interfaces";
+import { Character } from '../types/interfaces';
 
 export const exportToCSV = (selectedItems: Character[]) => {
   if (selectedItems.length === 0) return;
@@ -29,7 +29,6 @@ export const exportToCSV = (selectedItems: Character[]) => {
 
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 };
-
 
 // import { Character } from '../types/interfaces';
 

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { useNavigate } from 'react-router';
 import '@testing-library/jest-dom';
-
 import { mockItem } from './mocks/cardPropsMock';
 import Card from '../components/widgets/Card';
 import { toggleSelection } from '../store/slices/selectedItemsSlice';

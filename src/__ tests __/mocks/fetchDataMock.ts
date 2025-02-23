@@ -22,9 +22,4 @@ export const mockCharacterData = {
     name: `Character ${i + 1}`,
     url: `https://swapi.dev/api/people/${i + 1}/`,
   })),
-  // count: 20,
-  // results: Array(10).fill({
-  //   name: 'Character 1',
-  //   url: 'https://swapi.dev/api/people/1/',
-  // }),
 };

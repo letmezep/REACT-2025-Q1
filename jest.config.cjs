@@ -20,6 +20,6 @@ module.exports = {
     '!src/**/*.test.tsx',
     '!src/App.tsx',
   ],
-  coverageDirectory: "coverage",
-  coveragePathIgnorePatterns: ["/node_modules/", "/coverage/"],
+  coverageDirectory: 'coverage',
+  coveragePathIgnorePatterns: ['/node_modules/', '/coverage/'],
 };

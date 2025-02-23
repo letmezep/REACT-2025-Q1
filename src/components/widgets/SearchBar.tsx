@@ -36,14 +36,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
         value={inputValue}
         onChange={handleInputChange}
       />
-      <BaseButton
-        className="search-field__button"
-        variant="primary"
-        onClick={handleSearchClick}
-      >
-        Search
-      </BaseButton>
-      <ErrorButton />
+
+      <div className="search-field__buttons__box">
+        <ErrorButton />
+        <BaseButton
+          className="search-field__button"
+          variant="primary"
+          onClick={handleSearchClick}
+        >
+          Search
+        </BaseButton>
+      </div>
     </div>
   );
 };

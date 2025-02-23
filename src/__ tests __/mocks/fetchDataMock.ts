@@ -15,3 +15,11 @@ export const mockData = [
   { url: '14', name: 'Character 14' },
   { url: '15', name: 'Character 15' },
 ];
+
+export const mockCharacterData = {
+  count: 20,
+  results: Array.from({ length: 10 }, (_, i) => ({
+    name: `Character ${i + 1}`,
+    url: `https://swapi.dev/api/people/${i + 1}/`,
+  })),
+};

@@ -1,12 +1,14 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { useParams } from 'react-router';
 import '@testing-library/jest-dom';
 import Details from '../components/layout/Details';
-import { fetchCharacter } from '../services/api/fetchCharacter';
-import { mockCharacter } from './mocks/fetchCharacterMock';
+import { useGetCharacterByIdQuery } from '../services/api/starWarsApi';
 
-jest.mock('../services/api/fetchCharacter');
+jest.mock('../services/api/starWarsApi', () => ({
+  useGetCharacterByIdQuery: jest.fn(),
+}));
+
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
   useParams: jest.fn(),
@@ -19,7 +21,11 @@ describe('Details component', () => {
   });
 
   test('displays loading indicator while fetching data', async () => {
-    (fetchCharacter as jest.Mock).mockResolvedValueOnce(null);
+    (useGetCharacterByIdQuery as jest.Mock).mockReturnValue({
+      data: undefined,
+      isLoading: true,
+      error: undefined,
+    });
 
     render(
       <MemoryRouter>
@@ -31,7 +37,17 @@ describe('Details component', () => {
   });
 
   test('renders detailed character data', async () => {
-    (fetchCharacter as jest.Mock).mockResolvedValueOnce(mockCharacter);
+    (useGetCharacterByIdQuery as jest.Mock).mockReturnValue({
+      data: {
+        name: 'Character 1',
+        height: '180',
+        mass: '75',
+        skin_color: 'fair',
+        birth_year: '1990',
+      },
+      isLoading: false,
+      error: undefined,
+    });
 
     render(
       <MemoryRouter>
@@ -39,37 +55,58 @@ describe('Details component', () => {
       </MemoryRouter>
     );
 
-    await waitFor(() =>
-      expect(screen.getByText('Character 1')).toBeInTheDocument()
-    );
-
-    expect(screen.getByText('height: 180')).toBeInTheDocument();
-    expect(screen.getByText('mass: 75')).toBeInTheDocument();
-    expect(screen.getByText('skin color: fair')).toBeInTheDocument();
-    expect(screen.getByText('birth year: 1990')).toBeInTheDocument();
+    expect(await screen.findByText('Character 1')).toBeInTheDocument();
+    expect(screen.getByText('Height: 180')).toBeInTheDocument();
+    expect(screen.getByText('Mass: 75')).toBeInTheDocument();
+    expect(screen.getByText('Skin Color: fair')).toBeInTheDocument();
+    expect(screen.getByText('Birth Year: 1990')).toBeInTheDocument();
   });
 
-  test('clicking close button hides the component', async () => {
-    const mockNavigate = jest.fn();
-    (fetchCharacter as jest.Mock).mockResolvedValueOnce(mockCharacter);
-    jest
-      .spyOn(require('react-router'), 'useNavigate')
-      .mockReturnValue(mockNavigate);
+  test('shows error message when API request fails', async () => {
+    (useGetCharacterByIdQuery as jest.Mock).mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      error: true,
+    });
 
     render(
-      <MemoryRouter initialEntries={['/details/1?page=1']}>
+      <MemoryRouter>
+        <Details />
+      </MemoryRouter>
+    );
+
+    expect(
+      screen.getByText('Error fetching character data.')
+    ).toBeInTheDocument();
+  });
+
+  test('clicking close button navigates back to main page', async () => {
+    const mockNavigate = jest.fn();
+    (useGetCharacterByIdQuery as jest.Mock).mockReturnValue({
+      data: {
+        name: 'Character 1',
+        height: '180',
+        mass: '75',
+        skin_color: 'fair',
+        birth_year: '1990',
+      },
+      isLoading: false,
+      error: undefined,
+    });
+    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+
+    render(
+      <MemoryRouter initialEntries={['/details/1?page=2']}>
         <Routes>
           <Route path="/details/:id" element={<Details />} />
         </Routes>
       </MemoryRouter>
     );
 
-    await waitFor(() =>
-      expect(screen.getByText('Character 1')).toBeInTheDocument()
-    );
+    expect(await screen.findByText('Character 1')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Close X'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('/?page=1');
+    expect(mockNavigate).toHaveBeenCalledWith('/?page=2');
   });
 });

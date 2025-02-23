@@ -13,7 +13,7 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <div className="main-page__wrapper">
+      <div className="main-page__wrapper wrapper">
         <div className="left-panel">
           <Header onSearchChange={handleSearchUpdate} />
           <CardList />

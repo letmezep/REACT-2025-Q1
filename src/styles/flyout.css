@@ -1,0 +1,13 @@
+.flyout {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.flyout__button-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}

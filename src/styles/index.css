@@ -13,6 +13,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
   letter-spacing: 1px;
+  color: var(--black-color);
+  background-color: var(--light-grey-color-color);
 }
 
 .main-page__wrapper {
@@ -33,6 +35,8 @@ body {
 
 button {
   padding: 10px;
+  border: 1px solid var(--light-grey-color);
+  border-radius: 5px;
 }
 
 button:hover {
@@ -81,4 +85,31 @@ button:hover {
 .logo-name {
   font-weight: 900;
   color: var(--yellow-color);
+}
+
+.dark-mode body,
+.dark-mode .search-field__input {
+  color: var(--light-grey-color);
+  background-color: var(--black-color);
+}
+
+.dark-mode button {
+  color: var(--red-color);
+  background-color: var(--black-color);
+}
+
+.dark-mode .list-item:hover {
+  cursor: pointer;
+  background: linear-gradient(135deg, #0d4629, #41d88c);
+  box-shadow: 15px 0 30px var(--red-color);
+  color: var(--red-color);
+}
+
+.dark-mode .details-panel {
+  color: var(--black-color);
+  background-color: var(--light-grey-color);
+}
+
+.dark-mode .list-item {
+  background: linear-gradient(135deg, #000000, #298a59);
 }

@@ -1,37 +1,43 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import CardList from '../components/widgets/CardList';
-import { fetchData } from '../services/api/fetchData';
-import { getFilteredData } from '../services/filterData';
 import { MemoryRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import '@testing-library/jest-dom';
-import { mockData } from './mocks/fetchDataMock';
+import CardList from '../components/widgets/CardList';
+import { useGetCharactersQuery } from '../services/api/starWarsApi';
+import { mockCharacterData } from './mocks/fetchDataMock';
+import { Store, UnknownAction } from '@reduxjs/toolkit';
 
-jest.mock('../services/api/fetchData', () => ({
-  fetchData: jest.fn(),
+jest.mock('../services/api/starWarsApi', () => ({
+  useGetCharactersQuery: jest.fn(),
 }));
 
-jest.mock('../services/filterData');
+const mockStore = configureStore([]);
 
 describe('Component CardList', () => {
-  beforeEach(() => {
-    (fetchData as jest.Mock).mockResolvedValue({
-      results: mockData,
-      next: null,
-      previous: null,
-    });
+  let store: Store<unknown, UnknownAction, unknown>;
 
-    (getFilteredData as jest.Mock).mockReturnValue(mockData);
+  beforeEach(() => {
+    store = mockStore({
+      selectedCharacters: { selected: {} },
+    });
   });
 
-  test('verify cards number', async () => {
+  test('renders list of characters and handles pagination', async () => {
+    (useGetCharactersQuery as jest.Mock).mockReturnValue({
+      data: mockCharacterData,
+      isLoading: false,
+    });
+
     render(
-      <MemoryRouter>
-        <CardList />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardList />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => screen.getByText('Page 1 of 2'));
-
     const cards = screen.getAllByRole('article');
     expect(cards).toHaveLength(10);
 
@@ -39,22 +45,38 @@ describe('Component CardList', () => {
     await waitFor(() => screen.getByText('Page 2 of 2'));
   });
 
-  test('display no characters found', async () => {
-    (fetchData as jest.Mock).mockResolvedValue({
-      results: [],
-      next: null,
-      previous: null,
+  test('displays no characters found when data is empty', async () => {
+    (useGetCharactersQuery as jest.Mock).mockReturnValue({
+      data: { count: 0, results: [] },
+      isLoading: false,
     });
 
-    (getFilteredData as jest.Mock).mockReturnValue(null);
-
     render(
-      <MemoryRouter>
-        <CardList />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardList />
+        </MemoryRouter>
+      </Provider>
     );
 
     await waitFor(() => screen.getByText('No characters found'));
     expect(screen.getByText('No characters found')).toBeInTheDocument();
+  });
+
+  test('shows loader while loading', async () => {
+    (useGetCharactersQuery as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: true,
+    });
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <CardList />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 });

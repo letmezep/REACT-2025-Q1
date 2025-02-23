@@ -1,84 +1,36 @@
-import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import Card from './Card';
-import Loader from '../ui/Loader';
+import { useGetCharactersQuery } from '../../services/api/starWarsApi';
+import { Character } from '../../types/interfaces';
 import BaseButton from '../ui/BaseButton';
-import { getFilteredData } from '../../services/filterData';
-import { fetchData } from '../../services/api/fetchData';
-import { Character, Data } from '../../types/interfaces';
-import { itemsPerPage, urlPage } from '../../constants';
-
-import '../../styles/card-list.css';
-import '../../styles/variables.css';
+import Loader from '../ui/Loader';
+import Card from './Card';
+import Flyout from './Flyout';
 
 const CardList: React.FC = () => {
-  const [allData, setAllData] = useState<Character[]>([]);
-  const [filteredData, setFilteredData] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
-  const page = Number(searchParams.get('page')) || 1;
+  const pageParam = searchParams.get('page');
+  const page = Number(pageParam) || 1;
+  const itemsPerPage = 10;
 
-  useEffect(() => {
-    const loadAllData = async () => {
-      setLoading(true);
-      let results: Character[] = [];
-      let pageNum = 1;
-      let nextPage = `${urlPage}${pageNum}`;
+  const { data, isLoading } = useGetCharactersQuery({
+    search: searchTerm || undefined,
+    page: String(page),
+  });
 
-      try {
-        while (nextPage) {
-          const response: Data | null = await fetchData(nextPage);
-          if (response) {
-            results = [...results, ...response.results];
-            nextPage = response.next ?? '';
-            pageNum++;
-          }
-        }
-        setAllData(results);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadAllData();
-  }, []);
-
-  useEffect(() => {
-    if (searchTerm) {
-      setFilteredData(
-        getFilteredData(
-          {
-            results: allData,
-            previous: null,
-            next: null,
-          },
-          searchTerm
-        )
-      );
-    } else {
-      setFilteredData(allData);
-    }
-  }, [allData, searchTerm]);
-
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const paginatedData = filteredData.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
-  );
+  const totalPages = Math.ceil((data?.count || 0) / itemsPerPage);
 
   const changePage = (newPage: number) => {
-    setSearchParams({ search: searchTerm, page: newPage.toString() });
+    setSearchParams({ search: searchTerm, page: String(newPage) });
   };
 
-  if (loading) return <Loader />;
+  if (isLoading) return <Loader />;
 
   return (
     <>
       <div className="card-list">
-        {paginatedData.length > 0 ? (
-          paginatedData.map((item: Character) => (
+        {data?.results && data?.results.length > 0 ? (
+          data?.results.map((item: Character) => (
             <Card key={item.url} item={item} />
           ))
         ) : (
@@ -100,6 +52,8 @@ const CardList: React.FC = () => {
           Next
         </BaseButton>
       </div>
+
+      <Flyout />
     </>
   );
 };

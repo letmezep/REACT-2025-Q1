@@ -10,7 +10,7 @@ const CardList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
   const pageParam = searchParams.get('page');
-  const page = Number(pageParam);
+  const page = Number(pageParam) || 1;
   const itemsPerPage = 10;
 
   const { data, isLoading } = useGetCharactersQuery({
@@ -28,7 +28,7 @@ const CardList: React.FC = () => {
 
   return (
     <>
-      <div className="card-list">
+      <div className='card-list'>
         {data?.results && data?.results.length > 0 ? (
           data?.results.map((item: Character) => (
             <Card key={item.url} item={item} />
@@ -38,11 +38,11 @@ const CardList: React.FC = () => {
         )}
       </div>
 
-      <div className="card-list__pagination">
+      <div className='card-list__pagination'>
         <BaseButton onClick={() => changePage(page - 1)} disabled={page <= 1}>
           Previous
         </BaseButton>
-        <div className="pagination__page-number">
+        <div className='pagination__page-number'>
           Page {page} of {totalPages}
         </div>
         <BaseButton

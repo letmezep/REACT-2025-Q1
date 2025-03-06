@@ -1,3 +1,15 @@
+:root {
+  --red-color: #ff666680;
+  --light-grey-color: #b4b4b4;
+  --dark-grey-color: #8080808f;
+  --black-color: #000000;
+  --yellow-color: #fcff35;
+  --blue-color: #3bd1ff;
+  --dark-green-color: #0d4629;
+  --light-green-color: #41d88c;
+}
+
+
 * {
     box-sizing: border-box;
   }
@@ -112,5 +124,90 @@
   
   .dark-mode .list-item {
     background: linear-gradient(135deg, #000000, #298a59);
+  }
+  
+
+  /* search field*/
+  .search-field__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 5px;
+    background-color: var(--dark-grey-color);
+  }
+  
+  .search-field__buttons__box {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .search-field__input,
+  .search-field__button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  
+  .search-field__input {
+    color: var(--blue-color);
+  }
+  
+  .search-field__input:focus {
+    border-color: var(--blue-color);
+    outline: none;
+    box-shadow: 5px 2px 15px var(--blue-color);
+  }
+  
+  .search-field__button {
+    color: var(--red-color);
+  }
+  
+  .search-field__button:active {
+    border-color: var(--red-color);
+    outline: none;
+    box-shadow: 5px 2px 15px var(--red-color);
+  }
+  
+
+  /* card list pagination*/
+  .list-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #0d4629, #41d88c);
+  }
+  
+  .list-item:hover {
+    cursor: pointer;
+    background: linear-gradient(135deg, #000000, #298a59);
+    box-shadow: 15px 0 30px var(--yellow-color);
+    color: var(--yellow-color);
+  }
+  
+  .list-item__name {
+    font-weight: 900;
+    color: var(--light-grey-color-color);
+  }
+  
+  .card-list__pagination {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--dark-grey-color);
+  }
+  
+  .list-item__description-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
   

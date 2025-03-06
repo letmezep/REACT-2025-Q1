@@ -12,11 +12,8 @@ const Index = () => {
 
   return (
     <>
-    <div>
-      <h1>Index</h1>
-    </div>
-    <SearchBar onSearchChange={handleSearchUpdate}/>
-  <CardList />
+      <SearchBar onSearchChange={handleSearchUpdate} />
+      <CardList />
     </>
   );
 };

@@ -1,12 +1,22 @@
-import Main from '../components/main';
+import SearchBar from "../components/SearchBar";
+import CardList from '../components/CardList'
+import { useSearchQuery } from '../components/hooks/useSearchQuery';
 
 const Index = () => {
+  const { searchTerm, setSearchTerm } = useSearchQuery();
+
+  const handleSearchUpdate = (newSearchTerm: string) => {
+    setSearchTerm(newSearchTerm);
+    localStorage.setItem('searchTerm', searchTerm);
+  };
+
   return (
     <>
     <div>
       <h1>Index</h1>
     </div>
-    <Main />
+    <SearchBar onSearchChange={handleSearchUpdate}/>
+  <CardList />
     </>
   );
 };

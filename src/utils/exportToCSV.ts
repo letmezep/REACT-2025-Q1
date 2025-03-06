@@ -1,4 +1,4 @@
-import { Character } from '../types/interfaces';
+import { Character } from '../../components/types/interfaces';
 
 export const exportToCSV = (selectedItems: Character[]) => {
   if (selectedItems.length === 0) return;

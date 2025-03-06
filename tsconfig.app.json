@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "pages/index.tsx", "pages/index.tsx"]
+  "include": ["src", "pages/index.tsx", "pages/index.tsx", "pages/ErrorBoundary.tsx", "components/types/interfaces.ts", "components/common", "components/hooks/constants", "components/ErrorButton.tsx", "components/store", "components/services"]
 }

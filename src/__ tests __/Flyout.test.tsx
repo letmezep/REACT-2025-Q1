@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import '@testing-library/jest-dom';
 import Flyout from '../components/widgets/Flyout';
-import { unselectAll } from '../store/slices/selectedItemsSlice';
+import { unselectAll } from '../../components/store/slices/selectedItemsSlice';
 import { exportToCSV } from '../utils/exportToCSV';
-import { useGetCharactersQuery } from '../services/api/starWarsApi';
+import { useGetCharactersQuery } from '../../components/services/api/starWarsApi';
 
 jest.mock('../services/api/starWarsApi', () => ({
   useGetCharactersQuery: jest.fn(),

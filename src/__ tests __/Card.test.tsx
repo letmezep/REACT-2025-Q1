@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import '@testing-library/jest-dom';
 import { mockItem } from './mocks/cardPropsMock';
 import Card from '../components/widgets/Card';
-import { toggleSelection } from '../store/slices/selectedItemsSlice';
+import { toggleSelection } from '../../components/store/slices/selectedItemsSlice';
 import { Store, UnknownAction } from '@reduxjs/toolkit';
 import { ReactNode } from 'react';
 import { JSX } from 'react/jsx-runtime';

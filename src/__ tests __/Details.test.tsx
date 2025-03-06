@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { useParams } from 'react-router';
 import '@testing-library/jest-dom';
 import Details from '../components/layout/Details';
-import { useGetCharacterByIdQuery } from '../services/api/starWarsApi';
+import { useGetCharacterByIdQuery } from '../../components/services/api/starWarsApi';
 
 jest.mock('../services/api/starWarsApi', () => ({
   useGetCharacterByIdQuery: jest.fn(),

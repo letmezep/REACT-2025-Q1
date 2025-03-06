@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import '@testing-library/jest-dom';
 import CardList from '../components/widgets/CardList';
-import { useGetCharactersQuery } from '../services/api/starWarsApi';
+import { useGetCharactersQuery } from '../../components/services/api/starWarsApi';
 import { mockCharacterData } from './mocks/fetchDataMock';
 import { Store, UnknownAction } from '@reduxjs/toolkit';
 

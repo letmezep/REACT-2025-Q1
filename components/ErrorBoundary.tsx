@@ -8,7 +8,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   };
 
   static getDerivedStateFromError(): ErrorBoundaryState {
-    return { hasError: true, errorKey: Date.now() }; // Изменяем key при ошибке
+    return { hasError: true, errorKey: Date.now() }; 
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -16,7 +16,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   resetError = () => {
-    this.setState({ hasError: false, errorKey: Date.now() }); // Изменяем key при сбросе
+    this.setState({ hasError: false, errorKey: Date.now() }); 
   };
 
   render() {
@@ -30,7 +30,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         </div>
       );
     }
-    return <div key={this.state.errorKey}>{this.props.children}</div>; // Изменяем key
+    return <div key={this.state.errorKey}>{this.props.children}</div>; 
   }
 }
 

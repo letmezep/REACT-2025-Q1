@@ -1,18 +1,40 @@
 
 import { Provider } from 'react-redux';
 import { store } from '../components/store/store';
-// import { ThemeProvider } from '../src/context/ThemeProvider';
-
-import '../styles/global.css'
+import ErrorBoundary from '../components/ErrorBoundary';
+import '../styles/global.css';
 
 const MyApp = ({ Component, pageProps }) => {
     return (
-        // <ThemeProvider>
         <Provider store={store}>
-            <Component {...pageProps} />
+            <ErrorBoundary key={pageProps.errorKey}>
+                <Component {...pageProps} />
+            </ErrorBoundary>
         </Provider>
-        // </ThemeProvider>
     );
 };
 
 export default MyApp;
+
+
+// import { Provider } from 'react-redux';
+// import { store } from '../components/store/store';
+// import ErrorBoundary from '../components/ErrorBoundary';
+
+
+// import '../styles/global.css'
+
+// const MyApp = ({ Component, pageProps }) => {
+//     return (
+
+        
+//             <Provider store={store}>
+//                 <ErrorBoundary>
+//                 <Component {...pageProps} />
+//                 </ErrorBoundary>
+//             </Provider>
+        
+//     );
+// };
+
+// export default MyApp;

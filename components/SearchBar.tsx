@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import BaseButton from './ui/BaseButton';
 import BaseInput from './ui/BaseInput';
-import ErrorButton from './common/ErrorButton';
+import ErrorButton from './ErrorButton';
 import { SearchBarProps } from './types/interfaces';
 import { useSearchQuery } from './hooks/useSearchQuery';
+import ErrorBoundary from './ErrorBoundary';
+
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   const { searchTerm, setSearchTerm } = useSearchQuery();
@@ -41,7 +43,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
       />
 
       <div className="search-field__buttons__box">
+      {/* <ErrorBoundary key={pageProps.errorKey}> */}
         <ErrorButton />
+        {/* </ErrorBoundary> */}
         <BaseButton
           className="search-field__button"
           variant="primary"

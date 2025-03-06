@@ -14,10 +14,10 @@ const Index = () => {
 
   return (
     <>
-         <ThemeProvider>
-           <ThemeChangeButton />
-      <SearchBar onSearchChange={handleSearchUpdate} />
-      <CardList />
+      <ThemeProvider>
+        <ThemeChangeButton />
+        <SearchBar onSearchChange={handleSearchUpdate} />
+        <CardList />
       </ThemeProvider>
     </>
   );

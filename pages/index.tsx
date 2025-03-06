@@ -1,5 +1,7 @@
 import SearchBar from "../components/SearchBar";
 import CardList from '../components/CardList'
+import ThemeChangeButton from '../components/ui/ThemeChangeButton';
+import { ThemeProvider } from '../components/context/ThemeProvider';
 import { useSearchQuery } from '../components/hooks/useSearchQuery';
 
 const Index = () => {
@@ -12,8 +14,11 @@ const Index = () => {
 
   return (
     <>
+         <ThemeProvider>
+           <ThemeChangeButton />
       <SearchBar onSearchChange={handleSearchUpdate} />
       <CardList />
+      </ThemeProvider>
     </>
   );
 };

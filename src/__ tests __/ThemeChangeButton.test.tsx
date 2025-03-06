@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import ThemeChangeButton from '../components/ui/ThemeChangeButton';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext } from '../../components/context/ThemeContext';
 
 describe('ThemeChangeButton', () => {
   test('calls changeTheme function on click', () => {

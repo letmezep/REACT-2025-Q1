@@ -5,14 +5,15 @@ import BaseInput from './ui/BaseInput';
 import ErrorButton from './ErrorButton';
 import { SearchBarProps } from './types/interfaces';
 import { useSearchQuery } from './hooks/useSearchQuery';
-import ErrorBoundary from './ErrorBoundary';
-
+import ErrorBoundary from '../pages/ErrorBoundary';
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
   const { searchTerm, setSearchTerm } = useSearchQuery();
   const router = useRouter();
   const [inputValue, setInputValue] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('searchTerm') || '' : ''
+    typeof window !== 'undefined'
+      ? localStorage.getItem('searchTerm') || ''
+      : ''
   );
 
   useEffect(() => {
@@ -43,9 +44,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
       />
 
       <div className="search-field__buttons__box">
-      {/* <ErrorBoundary key={pageProps.errorKey}> */}
-        <ErrorButton />
-        {/* </ErrorBoundary> */}
+        <ErrorBoundary>
+          <ErrorButton />
+        </ErrorBoundary>
         <BaseButton
           className="search-field__button"
           variant="primary"
@@ -59,110 +60,3 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
 };
 
 export default SearchBar;
-// import { useEffect, useState } from 'react';
-// import BaseButton from './ui/BaseButton';
-// import BaseInput from './ui/BaseInput';
-// import { useSearchQuery } from 'src/hooks/useSearchQuery';
-// import ErrorButton from 'src/components/common/ErrorButton';
-// import { useSearchParams } from 'react-router';
-
-// const SearchBar = ({onSearchChange}) => {
-//   const { searchTerm, setSearchTerm } = useSearchQuery();
-//       const [, setSearchParams] = useSearchParams();
-//   const [inputValue, setInputValue] = useState(
-//     localStorage.getItem('searchTerm') || ''
-//   );
-
-//     useEffect(() => {
-//     onSearchChange(searchTerm);
-//     setSearchParams({ search: searchTerm, page: '1' });
-//   }, [searchTerm]);
-
-//   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//     setInputValue(event.target.value);
-//   };
-
-//   const handleSearchClick = () => {
-//     setSearchTerm(inputValue);
-//     localStorage.setItem('searchTerm', searchTerm);
-//   };
-
-//   return (
-//     <div className="search-field__container">
-//       <BaseInput
-//         className="search-field__input"
-//         type="text"
-//         placeholder="Input search term"
-//         value={inputValue}
-//         onChange={handleInputChange}
-//       />
-
-//       <div className="search-field__buttons__box">
-//         <ErrorButton />
-//         <BaseButton
-//           className="search-field__button"
-//           variant="primary"
-//           onClick={handleSearchClick}
-//         >
-//           Search
-//         </BaseButton>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SearchBar;
-// // import React, { useEffect, useState } from 'react';
-// // import BaseButton from './ui/BaseButton';
-// // import BaseInput from './ui/BaseInput';
-// // import ErrorButton from '../common/ErrorButton';
-// // import { SearchBarProps } from '../../types/interfaces';
-// // import { useSearchParams } from 'react-router';
-// // import { useSearchQuery } from '../../hooks/useSearchQuery';
-
-// // const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
-// //   const { searchTerm, setSearchTerm } = useSearchQuery();
-// //   const [, setSearchParams] = useSearchParams();
-// //   const [inputValue, setInputValue] = useState(
-// //     localStorage.getItem('searchTerm') || ''
-// //   );
-
-// //   useEffect(() => {
-// //     onSearchChange(searchTerm);
-// //     setSearchParams({ search: searchTerm, page: '1' });
-// //   }, [searchTerm]);
-
-// //   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-// //     setInputValue(event.target.value);
-// //   };
-
-// //   const handleSearchClick = () => {
-// //     setSearchTerm(inputValue);
-// //     localStorage.setItem('searchTerm', searchTerm);
-// //   };
-
-// //   return (
-// //     <div className="search-field__container">
-// //       <BaseInput
-// //         className="search-field__input"
-// //         type="text"
-// //         placeholder="Input search term"
-// //         value={inputValue}
-// //         onChange={handleInputChange}
-// //       />
-
-// //       <div className="search-field__buttons__box">
-// //         <ErrorButton />
-// //         <BaseButton
-// //           className="search-field__button"
-// //           variant="primary"
-// //           onClick={handleSearchClick}
-// //         >
-// //           Search
-// //         </BaseButton>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default SearchBar;

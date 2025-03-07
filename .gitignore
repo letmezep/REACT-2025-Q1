@@ -31,3 +31,6 @@ coverage/
 .DS_Store
 .npm/
 .cache/
+
+/.env
+/.next

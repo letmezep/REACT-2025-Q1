@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import ErrorBoundary from '../../components/ErrorBoundary';
+import ErrorBoundary from '../../pages/ErrorBoundary';
 import { useState } from 'react';
 
 const ProblematicComponent = () => {

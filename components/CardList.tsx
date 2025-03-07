@@ -9,7 +9,7 @@ import Card from './Card';
 const CardList: React.FC = () => {
   const router = useRouter();
   const searchTerm = (router.query.search as string) || '';
-  const page = Number(router.query.page)  || 1;
+  const page = Number(router.query.page) || 1;
   const itemsPerPage = 10;
 
   const { data, isLoading } = useGetCharactersQuery({

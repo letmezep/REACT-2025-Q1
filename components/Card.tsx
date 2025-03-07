@@ -1,30 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
-import { toggleSelection } from './store/slices/selectedItemsSlice';
-import { CardProps } from "components/types/interfaces";
-import { useRouter } from "next/router";
-
+// import { useDispatch, useSelector } from 'react-redux';
+// import { toggleSelection } from './store/slices/selectedItemsSlice';
+import { CardProps } from 'components/types/interfaces';
+import { useRouter } from 'next/router';
 
 const Card = ({ item }: CardProps) => {
   // const thisID = item.url?.split('/').filter(Boolean).pop() || '';
   // const navigate = useNavigate();
-  // const [searchParams] = useSye rfgtearchParams();
+  // const [searchParams] = useSearchParams();
   // const dispatch = useDispatch();
   // const isSelected = useSelector(
   //   (state: RootState) => state.selectedCharacters.selected[thisID]
   // );
-const router = useRouter();
-const thisID = item.url?.split('/').filter(Boolean).pop() || '';
+  const router = useRouter();
+  const thisID = item.url?.split('/').filter(Boolean).pop() || '';
 
 
   const handleClick = () => {
-    router.push(`/details/${thisID}?page=${router.query.page || 1}`);
+    router.push({ 
+      pathname: router.pathname, 
+      // query: { ...router.query, id: item.id } 
+      query: { ...router.query, id: thisID } 
+    }, undefined, { shallow: true });
   };
 
-  const handleSelect = () => {
-    dispatch(toggleSelection(thisID));
-  };
+  // const handleSelect = () => {
+  //   dispatch(toggleSelection(thisID));
+  // };
 
-    return (
+  return (
     <div className="list-item" role="article" onClick={handleClick}>
       <div className="list-item__description-container">
         {/* <input type="checkbox" checked={isSelected} onChange={handleSelect} /> */}
@@ -32,14 +35,18 @@ const thisID = item.url?.split('/').filter(Boolean).pop() || '';
       </div>
     </div>
   );
-}
+};
 
 export default Card;
 
+// function dispatch(arg0: {
+//   payload: string;
+//   type: 'selectedCharacters/toggleSelection';
+// }) {
+//   throw new Error('Function not implemented.');
+// }
 
-function dispatch(arg0: { payload: string; type: "selectedCharacters/toggleSelection"; }) {
-  throw new Error("Function not implemented.");
-}
+
 // import React from 'react';
 // import { useNavigate, useSearchParams } from 'react-router';
 // import { useDispatch, useSelector } from 'react-redux';

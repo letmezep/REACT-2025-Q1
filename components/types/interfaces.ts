@@ -15,7 +15,7 @@ export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface CardProps {
-  item: Character;
+  character: Character;
 }
 
 export interface CardListProps {

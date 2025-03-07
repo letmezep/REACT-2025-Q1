@@ -28,6 +28,10 @@ body {
   background-color: var(--light-grey-color-color);
 }
 
+body>div {
+display: flex;
+}
+
 .main-page__wrapper {
   display: flex;
 }
@@ -37,7 +41,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .right-panel {
@@ -125,7 +129,6 @@ button:hover {
   background: linear-gradient(135deg, #000000, #298a59);
 }
 
-
 /* search field*/
 .search-field__container {
   display: flex;
@@ -171,7 +174,6 @@ button:hover {
   outline: none;
   box-shadow: 5px 2px 15px var(--red-color);
 }
-
 
 /* card list pagination*/
 .list-item {

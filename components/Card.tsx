@@ -14,13 +14,16 @@ const Card = ({ item }: CardProps) => {
   const router = useRouter();
   const thisID = item.url?.split('/').filter(Boolean).pop() || '';
 
-
   const handleClick = () => {
-    router.push({ 
-      pathname: router.pathname, 
-      // query: { ...router.query, id: item.id } 
-      query: { ...router.query, id: thisID } 
-    }, undefined, { shallow: true });
+    router.push(
+      {
+        pathname: router.pathname,
+        // query: { ...router.query, id: item.id }
+        query: { ...router.query, id: thisID },
+      },
+      undefined,
+      { shallow: true }
+    );
   };
 
   // const handleSelect = () => {
@@ -45,7 +48,6 @@ export default Card;
 // }) {
 //   throw new Error('Function not implemented.');
 // }
-
 
 // import React from 'react';
 // import { useNavigate, useSearchParams } from 'react-router';

@@ -1,14 +1,7 @@
 import { useRouter } from 'next/router';
-// import { useGetCharacterByIdQuery } from '@/api/starWarsApi';
-// import BaseButton from '@/components/ui/BaseButton';
 import BaseButton from '../ui/BaseButton';
 import { useGetCharacterByIdQuery } from '../api/starWarsApi';
-
-// import '@/styles/details.css';
-
-interface DetailsProps {
-  characterId: string;
-}
+import { DetailsProps } from 'components/types/interfaces';
 
 const Details: React.FC<DetailsProps> = ({ characterId }) => {
   const router = useRouter();
@@ -39,7 +32,6 @@ const Details: React.FC<DetailsProps> = ({ characterId }) => {
 };
 
 export default Details;
-
 
 // import { useRouter } from 'next/router';
 // import { GetServerSideProps } from 'next';
@@ -85,7 +77,6 @@ export default Details;
 
 // export default Details;
 
-
 // // import { useParams, useNavigate, useSearchParams } from 'react-router';
 // // import { useGetCharacterByIdQuery } from '../api/starWarsApi';
 // // import BaseButton from '../ui/BaseButton';
@@ -128,7 +119,6 @@ export default Details;
 // // };
 
 // // export default Details;
-
 
 // // // import React from 'react';
 // // // import { useParams, useNavigate, useSearchParams } from 'react-router';

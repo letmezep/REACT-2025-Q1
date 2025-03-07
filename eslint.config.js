@@ -19,7 +19,7 @@ export default [
       globals: globals.browser,
     },
     plugins: {
-      '@next/next': next, 
+      '@next/next': next,
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
@@ -45,11 +45,10 @@ export default [
       },
     },
   },
-  eslintPluginPrettier.configs.recommended, 
+  eslintPluginPrettier.configs.recommended,
   next.configs.recommended,
   next.configs['core-web-vitals'],
 ];
-
 
 // import js from '@eslint/js';
 // import globals from 'globals';

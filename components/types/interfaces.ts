@@ -15,7 +15,7 @@ export interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface CardProps {
-  character: Character;
+  item: Character;
 }
 
 export interface CardListProps {
@@ -45,6 +45,10 @@ export interface Data {
   previous: string | null;
   next: string | null;
   results: Character[];
+}
+
+interface DetailsProps {
+  characterId: string;
 }
 
 export interface ErrorBoundaryProps {

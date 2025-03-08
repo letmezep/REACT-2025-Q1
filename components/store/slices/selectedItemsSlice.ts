@@ -24,3 +24,4 @@ const selectedCharactersSlice = createSlice({
 
 export const { toggleSelection, unselectAll } = selectedCharactersSlice.actions;
 export default selectedCharactersSlice.reducer;
+export type { SelectedCharactersState };

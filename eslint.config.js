@@ -6,7 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
   {
@@ -16,18 +16,20 @@ export default [
       'node_modules',
       '.next',
       '.husky',
-      ',netlify',
+      '.netlify',
       'src',
     ],
   },
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
-      parser: tsparser,
-      parserOptions: {
-        project: './tsconfig.json',
-        sourceType: 'module',
-      },
+      parser: tsParser,
+      // parser: tseslint.parser,
+      // parserOptions: {
+      //   project: './tsconfig.json',
+      //   // project: './tsconfig.eslint.json',
+      //   sourceType: 'module',
+      // },
       ecmaVersion: 2020,
       globals: globals.browser,
     },

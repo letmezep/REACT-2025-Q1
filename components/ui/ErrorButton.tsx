@@ -1,4 +1,4 @@
-import BaseButton from './ui/BaseButton';
+import BaseButton from './BaseButton';
 import { useState } from 'react';
 
 const ErrorButton = () => {

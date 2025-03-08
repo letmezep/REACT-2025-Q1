@@ -42,11 +42,6 @@
     ],
     "strictNullChecks": true
   },
-  // "compilerOptions": {
-  //   "jsx": "react-jsx",
-  //   "esModuleInterop": true,
-  //   "allowSyntheticDefaultImports": true
-  // }
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
@@ -55,7 +50,6 @@
     "components",
     "pages/_app.js",
   ],
-  // "extends": "./tsconfig.json",
   "exclude": [
     "node_modules"
   ]

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import BaseButton from '../ui/BaseButton';
 import { useGetCharacterByIdQuery } from '../api/starWarsApi';
-import { DetailsProps } from 'components/types/interfaces';
+import { DetailsProps } from '../types/interfaces';
 
 const Details: React.FC<DetailsProps> = ({ characterId }) => {
   const router = useRouter();

@@ -47,9 +47,12 @@ export interface Data {
   results: Character[];
 }
 
-interface DetailsProps {
+export interface DetailsProps {
   characterId: string;
 }
+// export interface DetailsProps {
+//   characterId: string;
+// }
 
 export interface ErrorBoundaryProps {
   children: ReactNode;

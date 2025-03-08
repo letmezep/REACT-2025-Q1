@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Character, PageResponse } from '../../../components/types/interfaces';
+import { Character, PageResponse } from '../types/interfaces';
 
 export const starWarsApi = createApi({
   reducerPath: 'starWarsApi',

@@ -2,12 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSelection } from './store/slices/selectedItemsSlice';
 import { CardProps } from 'components/types/interfaces';
 import { useRouter } from 'next/router';
-import { RootState } from '../components/store/store';
+// import { RootState } from '../components/store/store';
+import { RootState } from './store/store';
 
 const Card = ({ item }: CardProps) => {
-  // const thisID = item.url?.split('/').filter(Boolean).pop() || '';
-  // const navigate = useNavigate();
-  // const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const thisID = item.url?.split('/').filter(Boolean).pop() || '';
   const isSelected = useSelector(

@@ -40,10 +40,11 @@
   //   "allowSyntheticDefaultImports": true
   // }
   "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
+    // "next-env.d.ts",
+    // ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
+    "components",
     "pages/_app.js"
   ],
   "exclude": ["node_modules"]

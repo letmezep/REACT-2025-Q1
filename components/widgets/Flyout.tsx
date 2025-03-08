@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetCharactersQuery } from '../api/starWarsApi';
+import { useGetCharactersQuery } from '../services/api/starWarsApi';
 import { RootState } from '../store/store';
 import { unselectAll } from '../store/slices/selectedItemsSlice';
 import { exportToCSV } from '../utils/exportToCSV';

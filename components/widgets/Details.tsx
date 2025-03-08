@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import BaseButton from '../ui/BaseButton';
-import { useGetCharacterByIdQuery } from '../api/starWarsApi';
+import { useGetCharacterByIdQuery } from '../services/api/starWarsApi';
 import { DetailsProps } from '../types/interfaces';
 import React from 'react';
 

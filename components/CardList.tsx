@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useGetCharactersQuery } from './api/starWarsApi';
+import { useGetCharactersQuery } from './services/api/starWarsApi';
 import { Character } from './types/interfaces';
 import BaseButton from './ui/BaseButton';
 import Loader from './ui/Loader';

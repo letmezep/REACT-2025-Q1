@@ -3,7 +3,7 @@ import CardList from '../components/CardList';
 import ThemeChangeButton from '../components/ui/ThemeChangeButton';
 import { ThemeProvider } from '../components/context/ThemeProvider';
 import { useSearchQuery } from '../components/hooks/useSearchQuery';
-import Details from '../components/details/Details';
+import Details from '../components/widgets/Details';
 import { useRouter } from 'next/router';
 
 const Index = () => {

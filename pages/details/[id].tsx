@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Details from '../../components/details/Details';
+import Details from '../../components/widgets/Details';
 
 const DetailsPage = () => {
   const router = useRouter();

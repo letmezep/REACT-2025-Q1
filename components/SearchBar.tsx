@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import BaseButton from './ui/BaseButton';
 import BaseInput from './ui/BaseInput';
-import ErrorButton from './ErrorButton';
+import ErrorButton from './ui/ErrorButton';
 import { SearchBarProps } from './types/interfaces';
 import { useSearchQuery } from './hooks/useSearchQuery';
 import ErrorBoundary from '../pages/ErrorBoundary';

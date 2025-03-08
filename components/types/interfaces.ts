@@ -50,9 +50,6 @@ export interface Data {
 export interface DetailsProps {
   characterId: string;
 }
-// export interface DetailsProps {
-//   characterId: string;
-// }
 
 export interface ErrorBoundaryProps {
   children: ReactNode;

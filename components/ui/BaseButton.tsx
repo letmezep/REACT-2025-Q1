@@ -1,5 +1,4 @@
 import { FC } from 'react';
-// import { BaseButtonProps } from '../../types/interfaces';
 import { BaseButtonProps } from '../types/interfaces';
 
 const BaseButton: FC<BaseButtonProps> = ({

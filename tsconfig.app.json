@@ -3,17 +3,19 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     "composite": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -22,17 +24,12 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src",
-    "pages/index.tsx",
-    "pages/index.tsx",
-    "pages/ErrorBoundary.tsx",
-    "components/types/interfaces.ts",
-    "components/common",
-    "components/hooks/constants",
-    "components/ErrorButton.tsx",
-    "components/store",
-    "components/services",
-    "components/context"
+    "components",
+    "pages",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ],
   "composite": true
 }

@@ -12,7 +12,6 @@ const Card = ({ item }: CardProps) => {
     (state: RootState) => state.selectedCharacters.selected[thisID]
   );
   const router = useRouter();
-  
 
   const handleClick = () => {
     router.push(
@@ -40,7 +39,6 @@ const Card = ({ item }: CardProps) => {
 };
 
 export default Card;
-
 
 // function dispatch(arg0: any) {
 //   throw new Error('Function not implemented.');

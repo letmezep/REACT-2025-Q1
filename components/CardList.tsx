@@ -4,7 +4,7 @@ import { Character } from './types/interfaces';
 import BaseButton from './ui/BaseButton';
 import Loader from './ui/Loader';
 import Card from './Card';
-// import Flyout from './widgets/Flyout';
+import Flyout from './widgets/Flyout';
 
 const CardList: React.FC = () => {
   const router = useRouter();
@@ -55,7 +55,7 @@ const CardList: React.FC = () => {
         </BaseButton>
       </div>
 
-      {/* <Flyout /> */}
+      <Flyout />
     </>
   );
 };

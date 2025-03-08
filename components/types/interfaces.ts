@@ -79,6 +79,10 @@ export interface SearchFieldProps {
   onSearch: () => void;
 }
 
+export interface SelectedCharactersState {
+  selected: Record<string, boolean>;
+}
+
 export interface State {
   data: Data | null;
   loading: boolean;

@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface SelectedCharactersState {
-  selected: Record<string, boolean>;
-}
+import { SelectedCharactersState } from '../../types/interfaces';
 
 const initialState: SelectedCharactersState = {
   selected: {},

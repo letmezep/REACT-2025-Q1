@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSelection } from './store/slices/selectedItemsSlice';
-import { CardProps } from 'components/types/interfaces';
+import { CardProps } from './types/interfaces';
 import { useRouter } from 'next/router';
 import { RootState } from './store/store';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetCharactersQuery } from '../services/api/starWarsApi';
 import { RootState } from '../store/store';
@@ -16,7 +15,7 @@ const Flyout: React.FC = () => {
   const { data } = useGetCharactersQuery({});
 
   const selectedList =
-    data?.results.filter((item) => {
+    data?.results.filter((item: { url: string; }) => {
       const id = item.url.split('/').filter(Boolean).pop() || '';
       return Boolean(id) && selectedItems[id];
     }) || [];

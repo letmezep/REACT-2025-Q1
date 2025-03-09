@@ -1,4 +1,4 @@
-import { CardProps } from '../../../components/types/interfaces';
+import { CardProps } from '../../components/types/interfaces';
 
 export const mockItem: CardProps['item'] = {
   url: 'https://api.example.com/character/1',
@@ -15,6 +15,6 @@ export const mockItem: CardProps['item'] = {
   species: [''],
   vehicles: [''],
   starships: [''],
-  created: [''],
-  edited: [''],
+  created: '',
+  edited: '',
 };

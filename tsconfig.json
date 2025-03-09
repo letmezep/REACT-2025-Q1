@@ -9,6 +9,7 @@
     }
   ],
   "compilerOptions": {
+    "types": ["jest", "node"],
     "baseUrl": ".",
     "paths": {
       "@components/": [
@@ -49,6 +50,7 @@
     "**/*.tsx",
     "components",
     "pages/_app.js",
+    "jest.setup.ts",
   ],
   "exclude": [
     "node_modules"

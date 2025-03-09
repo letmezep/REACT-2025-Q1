@@ -1,77 +1,87 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { useNavigate } from 'react-router';
+import { useRouter } from 'next/router';
+import { toggleSelection } from '../components/store/slices/selectedItemsSlice';
+import Card from '../components/Card';
 import '@testing-library/jest-dom';
-import { mockItem } from './mocks/cardPropsMock';
-import Card from '../components/widgets/Card';
-import { toggleSelection } from '../../components/store/slices/selectedItemsSlice';
-import { Store, UnknownAction } from '@reduxjs/toolkit';
-import { ReactNode } from 'react';
-import { JSX } from 'react/jsx-runtime';
 
-jest.mock('react-router', () => ({
-  ...jest.requireActual('react-router'),
-  useNavigate: jest.fn(),
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
 }));
 
 const mockStore = configureStore([]);
 
-describe('Card component', () => {
-  let store: Store<unknown, UnknownAction, unknown>;
-  const mockNavigate = jest.fn();
+describe('Card Component', () => {
+  let store: ReturnType<typeof mockStore>;
+  const mockPush = jest.fn();
 
   beforeEach(() => {
     store = mockStore({
-      selectedCharacters: { selected: {} },
+      starWarsApi: { queries: {}, mutations: {} }, 
+      selectedCharacters: { selected: { '1': false } },
     });
     store.dispatch = jest.fn();
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+
+    (useRouter as jest.Mock).mockReturnValue({
+      pathname: '/characters',
+      query: {},
+      push: mockPush,
+    });
   });
 
-  const renderWithProviders = (
-    ui:
-      | string
-      | number
-      | boolean
-      | Iterable<ReactNode>
-      | JSX.Element
-      | null
-      | undefined
-  ) => {
-    return render(
-      <Provider store={store}>
-        <MemoryRouter>{ui}</MemoryRouter>
-      </Provider>
-    );
+  const renderWithProviders = (component: JSX.Element) => {
+    return render(<Provider store={store}>{component}</Provider>);
   };
 
-  test('renders card data', () => {
+  const mockItem = {
+    name: 'Luke Skywalker',
+    url: 'https://swapi.dev/api/people/1/',
+    height: '172',
+    mass: '77',
+    hair_color: 'blond',
+    skin_color: 'fair',
+    eye_color: 'blue',
+    birth_year: '19BBY',
+    gender: 'male',
+    homeworld: 'https://swapi.dev/api/planets/1/',
+    films: [
+      "https://swapi.dev/api/films/1/"
+  ],
+    species: [],
+    vehicles: [
+      "https://swapi.dev/api/vehicles/14/", 
+      "https://swapi.dev/api/vehicles/30/"
+  ],
+  starships: [
+        "https://swapi.dev/api/starships/12/", 
+        "https://swapi.dev/api/starships/22/"
+    ], 
+    created: "2014-12-09T13:50:51.644000Z", 
+    edited: "2014-12-20T21:17:56.891000Z",
+  };
+
+  test('renders character name', () => {
     renderWithProviders(<Card item={mockItem} />);
-    expect(screen.getByText('Character 1')).toBeInTheDocument();
+    expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
   });
 
-  test('click to open details panel', () => {
-    renderWithProviders(
-      <Routes>
-        <Route path="/details/:id" element={<div>Detail Component</div>} />
-        <Route path="/" element={<Card item={mockItem} />} />
-      </Routes>
+  test('navigates on card click', () => {
+    renderWithProviders(<Card item={mockItem} />);
+    fireEvent.click(screen.getByRole('article'));
+    expect(mockPush).toHaveBeenCalledWith(
+      {
+        pathname: '/characters',
+        query: { id: '1' },
+      },
+      undefined,
+      { shallow: true }
     );
-
-    const card = screen.getByText('Character 1');
-    fireEvent.click(card);
-
-    expect(mockNavigate).toHaveBeenCalledWith('/details/1?page=1');
   });
 
-  test('toggle selection on checkbox click', () => {
+  test('toggles selection on checkbox click', () => {
     renderWithProviders(<Card item={mockItem} />);
-
-    const checkbox = screen.getByRole('checkbox');
-    fireEvent.click(checkbox);
-
+    fireEvent.click(screen.getByRole('checkbox'));
     expect(store.dispatch).toHaveBeenCalledWith(toggleSelection('1'));
   });
 });

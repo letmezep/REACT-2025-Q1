@@ -1,4 +1,3 @@
-
 // import { defaults } from 'jest-config';
 
 // export default {
@@ -18,13 +17,12 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy', 
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest', 
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
 };
-
 
 // // const nextJest = require('next/jest');
 // // require('@testing-library/jest-dom');
@@ -107,11 +105,11 @@ module.exports = {
 // // //     "!vite.config.ts",
 // // //     "!vite-env.d.ts",
 // // //     "!**/node_modules/**",
-// // //     "!**/*.test.tsx", 
-// // //     "!**/index.ts", 
+// // //     "!**/*.test.tsx",
+// // //     "!**/index.ts",
 // // //   ],
-// // //   coverageDirectory: "coverage", 
-// // //   coverageReporters: ["text", "lcov"], 
+// // //   coverageDirectory: "coverage",
+// // //   coverageReporters: ["text", "lcov"],
 // // //   testEnvironment: "jsdom",
 // // // };
 

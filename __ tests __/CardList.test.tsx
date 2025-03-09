@@ -20,7 +20,7 @@ const mockStore = configureStore([]);
 
 describe('CardList Component', () => {
   let store: Store<unknown, UnknownAction, unknown>;
-  const pushMock = jest.fn(); 
+  const pushMock = jest.fn();
 
   beforeEach(() => {
     store = mockStore({
@@ -98,9 +98,11 @@ describe('CardList Component', () => {
     const nextButton = screen.getByText('Next');
     expect(previousButton).toBeDisabled();
     fireEvent.click(nextButton);
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith({
-      pathname: '/characters',
-      query: { page: '2' },
-    }));
+    await waitFor(() =>
+      expect(pushMock).toHaveBeenCalledWith({
+        pathname: '/characters',
+        query: { page: '2' },
+      })
+    );
   });
 });

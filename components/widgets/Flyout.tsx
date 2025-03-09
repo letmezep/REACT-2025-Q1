@@ -15,7 +15,7 @@ const Flyout: React.FC = () => {
   const { data } = useGetCharactersQuery({});
 
   const selectedList =
-    data?.results.filter((item: { url: string; }) => {
+    data?.results.filter((item: { url: string }) => {
       const id = item.url.split('/').filter(Boolean).pop() || '';
       return Boolean(id) && selectedItems[id];
     }) || [];

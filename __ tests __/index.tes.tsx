@@ -11,14 +11,13 @@
 // //   },
 // // }));
 
-
 // jest.mock('../components/services/api/starWarsApi', () => ({
 //   starWarsApi: {
 //     reducerPath: 'starWarsApi',
 //     reducer: (state = {}) => state,
 //     middleware: () => (next: (arg0: any) => any) => (action: any) => next(action),
-//     useGetCharactersQuery: jest.fn(() => ({ data: [], isLoading: false })), 
-//     useGetCharacterByIdQuery: jest.fn(() => ({ data: null, isLoading: false })), 
+//     useGetCharactersQuery: jest.fn(() => ({ data: [], isLoading: false })),
+//     useGetCharacterByIdQuery: jest.fn(() => ({ data: null, isLoading: false })),
 //   },
 // }));
 
@@ -61,7 +60,7 @@
 // //   starWarsApi: {
 // //     reducerPath: 'starWarsApi',
 // //     reducer: jest.fn(),
-// //     middleware: jest.fn(), 
+// //     middleware: jest.fn(),
 // //     endpoints: {
 // //       getCharacters: {
 // //         useQuery: jest.fn(() => ({ data: [], isLoading: false })),
@@ -69,7 +68,6 @@
 // //     },
 // //   },
 // // }));
-
 
 // describe('Index Page', () => {
 // beforeAll(() => {

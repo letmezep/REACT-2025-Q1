@@ -18,7 +18,7 @@ describe('Card Component', () => {
 
   beforeEach(() => {
     store = mockStore({
-      starWarsApi: { queries: {}, mutations: {} }, 
+      starWarsApi: { queries: {}, mutations: {} },
       selectedCharacters: { selected: { '1': false } },
     });
     store.dispatch = jest.fn();
@@ -45,20 +45,18 @@ describe('Card Component', () => {
     birth_year: '19BBY',
     gender: 'male',
     homeworld: 'https://swapi.dev/api/planets/1/',
-    films: [
-      "https://swapi.dev/api/films/1/"
-  ],
+    films: ['https://swapi.dev/api/films/1/'],
     species: [],
     vehicles: [
-      "https://swapi.dev/api/vehicles/14/", 
-      "https://swapi.dev/api/vehicles/30/"
-  ],
-  starships: [
-        "https://swapi.dev/api/starships/12/", 
-        "https://swapi.dev/api/starships/22/"
-    ], 
-    created: "2014-12-09T13:50:51.644000Z", 
-    edited: "2014-12-20T21:17:56.891000Z",
+      'https://swapi.dev/api/vehicles/14/',
+      'https://swapi.dev/api/vehicles/30/',
+    ],
+    starships: [
+      'https://swapi.dev/api/starships/12/',
+      'https://swapi.dev/api/starships/22/',
+    ],
+    created: '2014-12-09T13:50:51.644000Z',
+    edited: '2014-12-20T21:17:56.891000Z',
   };
 
   test('renders character name', () => {

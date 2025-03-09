@@ -18,7 +18,9 @@ jest.mock('next/router', () => ({
 const mockStore = configureStore([]);
 
 describe('Details component', () => {
-  let store: MockStoreEnhanced<unknown, {}> | Store<unknown, UnknownAction, unknown>;
+  let store:
+    | MockStoreEnhanced<unknown, {}>
+    | Store<unknown, UnknownAction, unknown>;
   const pushMock = jest.fn();
 
   beforeEach(() => {

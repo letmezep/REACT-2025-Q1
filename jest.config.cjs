@@ -10,7 +10,7 @@ module.exports = {
   },
   coveragePathIgnorePatterns: [
     '/node_modules/',
-    '/components/utils/', 
-    '/components/store/', 
+    '/components/utils/',
+    '/components/store/',
   ],
 };

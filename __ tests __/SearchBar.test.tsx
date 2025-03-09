@@ -59,7 +59,9 @@ describe('SearchBar component', () => {
 
     render(<SearchBar onSearchChange={mockOnSearchChange} />);
 
-    const input = screen.getByPlaceholderText('Input search term') as HTMLInputElement;
+    const input = screen.getByPlaceholderText(
+      'Input search term'
+    ) as HTMLInputElement;
     expect(input.value).toBe('Vader');
   });
 

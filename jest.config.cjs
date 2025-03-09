@@ -1,25 +1,16 @@
 module.exports = {
-  preset: 'ts-jest',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-    '^.+\\.css$': 'jest-transform-stub',
-  },
   moduleNameMapper: {
-    '\\.(css|less)$': 'jest-transform-stub',
+    '^@/(.*)$': '<rootDir>/$1',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
-  collectCoverage: true,
-  collectCoverageFrom: [
-    // 'src/**/*.{ts, tsx}',
-    '**/*.tsx',
-    '!vite.config.ts',
-    '!vite-env.d.ts',
-    '!**/node_modules/**',
-    '!src/**/*.test.ts',
-    '!src/**/*.test.tsx',
-    '!src/App.tsx',
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  },
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/components/utils/',
+    '/components/store/',
   ],
-  coverageDirectory: 'coverage',
-  coveragePathIgnorePatterns: ['/node_modules/', '/coverage/'],
 };

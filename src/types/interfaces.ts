@@ -1,6 +1,8 @@
 export interface FormState {
   name: string;
-  age: string;
+  age: number;
+  email: string;
+  password: string;
 }
 
 export interface CollectionForm {

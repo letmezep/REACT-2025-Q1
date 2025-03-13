@@ -3,6 +3,7 @@ export interface FormState {
   age: number;
   email: string;
   password: string;
+  gender: string;
 }
 
 export interface CollectionForm {

@@ -2,9 +2,12 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
+import * as yup from 'yup';
+import schema from '../utils/schema';
 
 const FormUncontrolComp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
@@ -14,42 +17,33 @@ const FormUncontrolComp = () => {
   const genderRef = useRef<HTMLSelectElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
 
-  const dispatch = useDispatch();
-
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const password = passwordRef.current?.value ?? '';
-    const confirmPassword = confirmPasswordRef.current?.value ?? '';
+    const formData = {
+      name: nameRef.current?.value ?? '',
+      age: ageRef.current?.value ? Number(ageRef.current.value) : 0,
+      email: emailRef.current?.value ?? '',
+      password: passwordRef.current?.value ?? '',
+      confirmPassword: confirmPasswordRef.current?.value ?? '',
+      gender: genderRef.current?.value ?? '',
+      terms: termsRef.current?.checked ?? false,
+    };
 
-    const acceptedTerms = termsRef.current?.checked ?? false;
+    try {
+      await schema.validate(formData, { abortEarly: false });
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match!');
-      return;
+      dispatch(submitForm(formData));
+      console.log('Form Data:', formData);
+      setError(null);
+      navigate('/');
+    } catch (validationErrors) {
+      if (validationErrors instanceof yup.ValidationError) {
+        setError(validationErrors.errors.join('\n'));
+      }
     }
-
-    if (!acceptedTerms) {
-      setError('You must accept T&C!');
-      return;
-    }
-
-    dispatch(
-      submitForm({
-        name: nameRef.current?.value ?? '',
-        age: ageRef.current?.value ? Number(ageRef.current.value) : 0,
-        email: emailRef.current?.value ?? '',
-        password,
-        gender: genderRef.current?.value ?? '',
-      })
-    );
-
-    console.log('gender', genderRef.current?.value);
-
-    setError(null);
-    navigate('/');
   };
 
   return (
@@ -74,8 +68,8 @@ const FormUncontrolComp = () => {
           <option value="female">Female</option>
         </select>
 
-        <input type="upload" ref={passwordRef} placeholder="upload" />
-        <input type="country" ref={passwordRef} placeholder="country" />
+        {/* <input type="upload" ref={passwordRef} placeholder="upload" /> */}
+        {/* <input type="country" ref={passwordRef} placeholder="country" /> */}
 
         <label>
           <input type="checkbox" ref={termsRef} />

@@ -12,6 +12,7 @@ const FormUncontrolComp = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
+  const termsRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
 
@@ -23,8 +24,15 @@ const FormUncontrolComp = () => {
     const password = passwordRef.current?.value ?? '';
     const confirmPassword = confirmPasswordRef.current?.value ?? '';
 
+    const acceptedTerms = termsRef.current?.checked ?? false;
+
     if (password !== confirmPassword) {
       setError('Passwords do not match!');
+      return;
+    }
+
+    if (!acceptedTerms) {
+      setError('You must accept T&C!');
       return;
     }
 
@@ -68,6 +76,11 @@ const FormUncontrolComp = () => {
 
         <input type="upload" ref={passwordRef} placeholder="upload" />
         <input type="country" ref={passwordRef} placeholder="country" />
+
+        <label>
+          <input type="checkbox" ref={termsRef} />
+          Accept Terms and Conditions
+        </label>
 
         <button type="submit">Submit</button>
       </form>

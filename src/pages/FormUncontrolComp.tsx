@@ -18,6 +18,7 @@ const FormUncontrolComp = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
+  const countryRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
 
@@ -49,6 +50,7 @@ const FormUncontrolComp = () => {
       password: passwordRef.current?.value ?? '',
       confirmPassword: confirmPasswordRef.current?.value ?? '',
       gender: genderRef.current?.value ?? '',
+      country: countryRef.current?.value ?? '',
       terms: termsRef.current?.checked ?? false,
       file: fileBase64 ?? '',
     };
@@ -132,7 +134,25 @@ const FormUncontrolComp = () => {
             style={{ width: 100, height: 100, marginTop: 10 }}
           />
         )}
-        {/* <input type="country" ref={passwordRef} placeholder="country" /> */}
+        <input
+          type="text"
+          list="country"
+          ref={countryRef}
+          placeholder="country"
+        />
+        <datalist id="country">
+          <option value="Poland"></option>
+          <option value="France"></option>
+          <option value="Germany"></option>
+          <option value="Spain"></option>
+          <option value="Portugal"></option>
+          <option value="Albania"></option>
+          <option value="Estonia"></option>
+          <option value="Russia"></option>
+          <option value="Australia"></option>
+          <option value="Finland"></option>
+          <option value="Canada"></option>
+        </datalist>
 
         <label>
           <input type="checkbox" ref={termsRef} />

@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import { FormState } from '../types/interfaces';
@@ -16,6 +17,10 @@ const FormHook = () => {
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+
+  const countries = useSelector(
+    (state: RootState) => state.createCountriesSlice
+  );
 
   const {
     register,
@@ -105,6 +110,21 @@ const FormHook = () => {
             alt="Preview"
             style={{ width: 100, height: 100, marginTop: 10 }}
           />
+        )}
+
+        <h3>Country</h3>
+        <input
+          {...register('country')}
+          list="countries"
+          placeholder="Select country"
+        />
+        <datalist id="countries">
+          {countries.map((country) => (
+            <option key={country} value={country} />
+          ))}
+        </datalist>
+        {errors.country && (
+          <p style={{ color: 'red' }}>{errors.country.message}</p>
         )}
 
         <button type="submit" disabled={isValid}>

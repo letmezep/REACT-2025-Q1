@@ -5,19 +5,57 @@ import { submitForm } from '../store/slices/formSlice';
 import { FormState } from '../types/interfaces';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../utils/schema';
+import { useState } from 'react';
+
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
+const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
 
 const FormHook = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setValue,
   } = useForm<FormState>({
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  const dispatch = useDispatch();
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setFileError('Only PNG and JPEG images are allowed.');
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      setFileError('File size should be less than 2MB.');
+      return;
+    }
+
+    setFileError(null);
+    const base64 = await convertToBase64(file);
+    setImagePreview(base64);
+    setValue('file', base64);
+  };
+
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   const onSubmit = (data: FormState) => {
     dispatch(submitForm({ ...data }));
@@ -53,6 +91,21 @@ const FormHook = () => {
           Accept Terms and Conditions
         </label>
         {errors.terms && <p style={{ color: 'red' }}>{errors.terms.message}</p>}
+
+        <h3>Upload Image</h3>
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={handleFileChange}
+        />
+        {fileError && <p style={{ color: 'red' }}>{fileError}</p>}
+        {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Preview"
+            style={{ width: 100, height: 100, marginTop: 10 }}
+          />
+        )}
 
         <button type="submit" disabled={isValid}>
           Submit

@@ -4,6 +4,7 @@ export interface FormState {
   email: string;
   password: string;
   gender: string;
+  terms?: string;
 }
 
 export interface CollectionForm {

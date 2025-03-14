@@ -26,13 +26,6 @@ const schema = yup.object({
       'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character'
     )
     .required('Password is required'),
-  // ),
-  // password: yup.string().required('Password is required').min(4, 'Password must be at least 4 characters').test(
-  //     'validate for password strength',
-  //     'password strength: 1 number, 1 uppercased letter, 1 lowercased letter, 1 special character',
-  //     (value) => /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&#]).+$/.test(value || '')
-
-  // ),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], 'Passwords must match')

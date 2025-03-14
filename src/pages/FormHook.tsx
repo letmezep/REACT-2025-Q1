@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import { FormState } from '../types/interfaces';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from '../utils/schema';
 
 const FormHook = () => {
   const navigate = useNavigate();
@@ -10,8 +12,11 @@ const FormHook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormState>();
+    formState: { errors, isValid },
+  } = useForm<FormState>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const dispatch = useDispatch();
 
   const onSubmit = (data: FormState) => {
@@ -49,7 +54,9 @@ const FormHook = () => {
         </label>
         {errors.terms && <p style={{ color: 'red' }}>{errors.terms.message}</p>}
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isValid}>
+          Submit
+        </button>
       </form>
     </>
   );

@@ -5,6 +5,9 @@ import { submitForm } from '../store/slices/formSlice';
 import * as yup from 'yup';
 import schema from '../utils/schema';
 
+const MAX_FILE_SIZE = 2 * 1024 * 1024;
+const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
+
 const FormUncontrolComp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,12 +18,29 @@ const FormUncontrolComp = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
 
   const [error, setError] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const file = fileRef.current?.files?.[0];
+
+    if (file) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        setError('Only PNG and JPEG images are allowed.');
+        return;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        setError('File size should be less than 2MB.');
+        return;
+      }
+    }
+
+    const fileBase64 = file ? await convertToBase64(file) : null;
 
     const formData = {
       name: nameRef.current?.value ?? '',
@@ -30,13 +50,16 @@ const FormUncontrolComp = () => {
       confirmPassword: confirmPasswordRef.current?.value ?? '',
       gender: genderRef.current?.value ?? '',
       terms: termsRef.current?.checked ?? false,
+      file: fileBase64 ?? '',
     };
 
     try {
       await schema.validate(formData, { abortEarly: false });
 
       dispatch(submitForm(formData));
-      console.log('Form Data:', formData);
+
+      console.log('Form Data:', formData); // remove it
+
       setError(null);
       navigate('/');
     } catch (validationErrors) {
@@ -44,6 +67,33 @@ const FormUncontrolComp = () => {
         setError(validationErrors.errors.join('\n'));
       }
     }
+  };
+
+  const handleFileChange = async () => {
+    const file = fileRef.current?.files?.[0];
+
+    if (file) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        setError('Only PNG and JPEG images are allowed.');
+        return;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        setError('File size should be less than 2MB.');
+        return;
+      }
+
+      const base64 = await convertToBase64(file);
+      setImagePreview(base64);
+    }
+  };
+
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
   };
 
   return (
@@ -68,7 +118,20 @@ const FormUncontrolComp = () => {
           <option value="female">Female</option>
         </select>
 
-        {/* <input type="upload" ref={passwordRef} placeholder="upload" /> */}
+        <input
+          type="file"
+          ref={fileRef}
+          accept="image/png, image/jpeg"
+          onChange={handleFileChange}
+          placeholder="upload image"
+        />
+        {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Preview"
+            style={{ width: 100, height: 100, marginTop: 10 }}
+          />
+        )}
         {/* <input type="country" ref={passwordRef} placeholder="country" /> */}
 
         <label>

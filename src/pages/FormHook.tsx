@@ -69,26 +69,58 @@ const FormHook = () => {
     navigate('/');
   };
 
-  console.log('Erroros: ', errors);
-  console.log('Form valid:', Object.keys(errors).length === 0);
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>React Hook Form</h1>
-        <input {...register('name')} placeholder="name" />
+        <input {...register('name')} placeholder="Name" />
         {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
 
-        <input {...register('age')} placeholder="age" />
+        <input {...register('age')} placeholder="Age" />
         {errors.age && <p style={{ color: 'red' }}>{errors.age.message}</p>}
+
+        <div className="gender-box">
+          <label>
+            <input
+              {...register('gender', { required: 'Gender is required' })}
+              type="radio"
+              value="Male"
+            />
+            Male
+          </label>
+          <label>
+            <input
+              {...register('gender', { required: 'Gender is required' })}
+              type="radio"
+              value="Female"
+            />
+            Female
+          </label>
+        </div>
+        {errors.gender && (
+          <p style={{ color: 'red' }}>{errors.gender.message}</p>
+        )}
 
         <input {...register('email')} placeholder="e-mail" />
         {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
 
         <input
+          {...register('country')}
+          list="countries"
+          placeholder="Select country"
+        />
+        <datalist id="countries">
+          {countries.map((country) => (
+            <option key={country} value={country} />
+          ))}
+        </datalist>
+        {errors.country && (
+          <p style={{ color: 'red' }}>{errors.country.message}</p>
+        )}
+
+        <input
           type="password"
           {...register('password')}
-          placeholder="password"
+          placeholder="Password"
         />
         {errors.password && (
           <p style={{ color: 'red' }}>{errors.password.message}</p>
@@ -97,24 +129,12 @@ const FormHook = () => {
         <input
           type="password"
           {...register('confirmPassword')}
-          placeholder="confirm password"
+          placeholder="Confirm password"
         />
         {errors.confirmPassword && (
           <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>
         )}
 
-        <label>
-          <input
-            {...register('terms', {
-              required: 'You must accept Terms & Conditions',
-            })}
-            type="checkbox"
-          />
-          Accept Terms and Conditions
-        </label>
-        {errors.terms && <p style={{ color: 'red' }}>{errors.terms.message}</p>}
-
-        <h3>Upload Image</h3>
         <input
           type="file"
           accept="image/png, image/jpeg"
@@ -130,47 +150,20 @@ const FormHook = () => {
           />
         )}
 
-        <h3>Country</h3>
-        <input
-          {...register('country')}
-          list="countries"
-          placeholder="Select country"
-        />
-        <datalist id="countries">
-          {countries.map((country) => (
-            <option key={country} value={country} />
-          ))}
-        </datalist>
-        {errors.country && (
-          <p style={{ color: 'red' }}>{errors.country.message}</p>
-        )}
-
-        <h3>Gender</h3>
         <label>
           <input
-            {...register('gender', { required: 'Gender is required' })}
-            type="radio"
-            value="Male"
+            {...register('terms', {
+              required: 'You must accept Terms & Conditions',
+            })}
+            type="checkbox"
           />
-          Male
+          Accept Terms and Conditions
         </label>
-        <label>
-          <input
-            {...register('gender', { required: 'Gender is required' })}
-            type="radio"
-            value="Female"
-          />
-          Female
-        </label>
-
-        {errors.gender && (
-          <p style={{ color: 'red' }}>{errors.gender.message}</p>
-        )}
+        {errors.terms && <p style={{ color: 'red' }}>{errors.terms.message}</p>}
 
         <button type="submit" disabled={!isValid}>
           Submit
         </button>
-        {/* <button type="submit">Submit</button> */}
       </form>
     </>
   );

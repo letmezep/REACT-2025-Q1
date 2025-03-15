@@ -29,7 +29,6 @@ const FormUncontrolComp = () => {
 
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  // const [isValid, setIsValid] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,8 +64,6 @@ const FormUncontrolComp = () => {
       await schema.validate(formData, { abortEarly: false });
 
       dispatch(submitForm(formData));
-
-      console.log('Form Data:', formData); // remove it
 
       setError(null);
       navigate('/');
@@ -107,31 +104,44 @@ const FormUncontrolComp = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1>Form created using uncontrolled components approach</h1>
-        <input type="text" ref={nameRef} placeholder="name" />
-        <input type="number" ref={ageRef} placeholder="age" />
-        <input type="email" ref={emailRef} placeholder="e-mail" />
-        <input type="password" ref={passwordRef} placeholder="password" />
-        <input
-          type="password"
-          ref={confirmPasswordRef}
-          placeholder="confirm password"
-        />
+        <input type="text" ref={nameRef} placeholder="Name" />
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input type="number" ref={ageRef} placeholder="Age" />
 
-        <h3>Gender</h3>
         <select ref={genderRef}>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
+
+        <input type="email" ref={emailRef} placeholder="e-mail" />
+
+        <input
+          type="text"
+          list="countries"
+          ref={countryRef}
+          placeholder="Country"
+        />
+        <datalist id="countries">
+          {countries.map((country) => (
+            <option key={country} value={country} />
+          ))}
+        </datalist>
+
+        <input type="password" ref={passwordRef} placeholder="Password" />
+
+        <input
+          type="password"
+          ref={confirmPasswordRef}
+          placeholder="Confirm password"
+        />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <input
           type="file"
           ref={fileRef}
           accept="image/png, image/jpeg"
           onChange={handleFileChange}
-          placeholder="upload image"
+          placeholder="Upload image"
         />
         {imagePreview && (
           <img
@@ -140,19 +150,6 @@ const FormUncontrolComp = () => {
             style={{ width: 100, height: 100, marginTop: 10 }}
           />
         )}
-
-        <input
-          type="text"
-          list="countries"
-          ref={countryRef}
-          placeholder="country"
-        />
-
-        <datalist id="countries">
-          {countries.map((country) => (
-            <option key={country} value={country} />
-          ))}
-        </datalist>
 
         <label>
           <input type="checkbox" ref={termsRef} />

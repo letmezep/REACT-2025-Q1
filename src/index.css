@@ -89,10 +89,24 @@ button:focus-visible {
   max-width: 780px;
   margin: 0 auto;
   padding: 2rem;
+
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
 .active {
   color: white;
   text-decoration: underline;
+}
+
+form {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.gender-box {
+  display: flex;
 }

@@ -25,8 +25,8 @@ const FormHook = () => {
   const {
     register,
     handleSubmit,
-    // formState: { errors, isValid },
-    formState: { errors },
+    formState: { errors, isValid },
+    // formState: { errors },
     setValue,
   } = useForm<FormState>({
     resolver: yupResolver(schema),
@@ -64,10 +64,14 @@ const FormHook = () => {
   };
 
   const onSubmit = (data: FormState) => {
+    console.log('Submitted Data:', data);
     dispatch(submitForm({ ...data }));
     console.log('Registration Data: ', data);
     navigate('/');
   };
+
+  console.log('Erroros: ', errors);
+  console.log('Form valid:', Object.keys(errors).length === 0);
 
   return (
     <>
@@ -142,8 +146,32 @@ const FormHook = () => {
           <p style={{ color: 'red' }}>{errors.country.message}</p>
         )}
 
-        {/* <button type="submit" disabled={!isValid}> */}
-        <button type="submit">Submit</button>
+        <h3>Gender</h3>
+        <label>
+          <input
+            {...register('gender', { required: 'Gender is required' })}
+            type="radio"
+            value="Male"
+          />
+          Male
+        </label>
+        <label>
+          <input
+            {...register('gender', { required: 'Gender is required' })}
+            type="radio"
+            value="Female"
+          />
+          Female
+        </label>
+
+        {errors.gender && (
+          <p style={{ color: 'red' }}>{errors.gender.message}</p>
+        )}
+
+        <button type="submit" disabled={!isValid}>
+          Submit
+        </button>
+        {/* <button type="submit">Submit</button> */}
       </form>
     </>
   );

@@ -1,26 +1,22 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
 import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import { FormState } from '../types/interfaces';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../utils/schema';
 import { useState } from 'react';
-
-const MAX_FILE_SIZE = 2 * 1024 * 1024;
-const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
+import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
+import { selectCountries } from '../store/selectors';
 
 const FormHook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const countries = useSelector(selectCountries);
+
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
-
-  const countries = useSelector(
-    (state: RootState) => state.createCountriesSlice || []
-  );
 
   const {
     register,
@@ -63,9 +59,7 @@ const FormHook = () => {
   };
 
   const onSubmit = (data: FormState) => {
-    console.log('Submitted Data:', data);
     dispatch(submitForm({ ...data }));
-    console.log('Registration Data: ', data);
     navigate('/');
   };
 

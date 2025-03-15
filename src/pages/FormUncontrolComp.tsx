@@ -4,18 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import * as yup from 'yup';
 import schema from '../utils/schema';
-import { RootState } from '../store/store';
-
-const MAX_FILE_SIZE = 2 * 1024 * 1024;
-const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
+import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
+import convertToBase64 from '../utils/convertToBase64';
+import { selectCountries } from '../store/selectors';
 
 const FormUncontrolComp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const countries = useSelector(
-    (state: RootState) => state.createCountriesSlice || []
-  );
+  const countries = useSelector(selectCountries);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
@@ -90,15 +87,6 @@ const FormUncontrolComp = () => {
       const base64 = await convertToBase64(file);
       setImagePreview(base64);
     }
-  };
-
-  const convertToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
   };
 
   return (

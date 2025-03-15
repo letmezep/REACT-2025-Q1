@@ -5,6 +5,7 @@ export interface FormState {
   password: string;
   confirmPassword: string;
   gender: string;
+  country: string;
   terms?: boolean;
   file?: string;
 }

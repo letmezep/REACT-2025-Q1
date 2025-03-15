@@ -25,7 +25,8 @@ const FormHook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    // formState: { errors, isValid },
+    formState: { errors },
     setValue,
   } = useForm<FormState>({
     resolver: yupResolver(schema),
@@ -81,9 +82,22 @@ const FormHook = () => {
         <input {...register('email')} placeholder="e-mail" />
         {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
 
-        <input {...register('password')} placeholder="password" />
+        <input
+          type="password"
+          {...register('password')}
+          placeholder="password"
+        />
         {errors.password && (
           <p style={{ color: 'red' }}>{errors.password.message}</p>
+        )}
+
+        <input
+          type="password"
+          {...register('confirmPassword')}
+          placeholder="confirm password"
+        />
+        {errors.confirmPassword && (
+          <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>
         )}
 
         <label>
@@ -103,6 +117,7 @@ const FormHook = () => {
           accept="image/png, image/jpeg"
           onChange={handleFileChange}
         />
+
         {fileError && <p style={{ color: 'red' }}>{fileError}</p>}
         {imagePreview && (
           <img
@@ -127,9 +142,8 @@ const FormHook = () => {
           <p style={{ color: 'red' }}>{errors.country.message}</p>
         )}
 
-        <button type="submit" disabled={isValid}>
-          Submit
-        </button>
+        {/* <button type="submit" disabled={!isValid}> */}
+        <button type="submit">Submit</button>
       </form>
     </>
   );

@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
 import { selectCountries } from '../store/selectors';
 
-const FormHook = () => {
+const ReactHookForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -163,4 +163,4 @@ const FormHook = () => {
   );
 };
 
-export default FormHook;
+export default ReactHookForm;

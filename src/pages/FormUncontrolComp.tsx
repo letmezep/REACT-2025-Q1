@@ -8,7 +8,7 @@ import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
 import convertToBase64 from '../utils/convertToBase64';
 import { selectCountries } from '../store/selectors';
 
-const FormUncontrolComp = () => {
+const UnctrlCompForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -150,4 +150,4 @@ const FormUncontrolComp = () => {
   );
 };
 
-export default FormUncontrolComp;
+export default UnctrlCompForm;

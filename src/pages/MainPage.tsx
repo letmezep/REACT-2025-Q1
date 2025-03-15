@@ -10,7 +10,7 @@ const MainPage: React.FC = () => {
   return (
     <>
       <div className="main-container">
-        {formData?.file ? (
+        {formData?.file && (
           <div>
             <h3>Uploaded Image:</h3>
             <img
@@ -19,8 +19,6 @@ const MainPage: React.FC = () => {
               style={{ width: 150, height: 150, borderRadius: '10px' }}
             />
           </div>
-        ) : (
-          <p>No image uploaded</p>
         )}
       </div>
     </>

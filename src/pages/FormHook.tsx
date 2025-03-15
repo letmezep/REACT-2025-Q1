@@ -19,7 +19,7 @@ const FormHook = () => {
   const [fileError, setFileError] = useState<string | null>(null);
 
   const countries = useSelector(
-    (state: RootState) => state.createCountriesSlice
+    (state: RootState) => state.createCountriesSlice || []
   );
 
   const {

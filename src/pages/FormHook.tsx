@@ -26,7 +26,6 @@ const FormHook = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    // formState: { errors },
     setValue,
   } = useForm<FormState>({
     resolver: yupResolver(schema),

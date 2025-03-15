@@ -9,18 +9,20 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      {formData?.file ? (
-        <div>
-          <h3>Uploaded Image:</h3>
-          <img
-            src={formData.file}
-            alt="Uploaded"
-            style={{ width: 150, height: 150, borderRadius: '10px' }}
-          />
-        </div>
-      ) : (
-        <p>No image uploaded</p>
-      )}
+      <div className="main-container">
+        {formData?.file ? (
+          <div>
+            <h3>Uploaded Image:</h3>
+            <img
+              src={formData.file}
+              alt="Uploaded"
+              style={{ width: 150, height: 150, borderRadius: '10px' }}
+            />
+          </div>
+        ) : (
+          <p>No image uploaded</p>
+        )}
+      </div>
     </>
   );
 };

@@ -33,6 +33,7 @@ const schema = yup.object({
   gender: yup.string().required('Gender is required'),
   terms: yup.boolean().oneOf([true], 'You must accept Terms & Conditions'),
   country: yup.string().required('Country is required'),
+  file: yup.string().required('File upload is required'),
 });
 
 export default schema;

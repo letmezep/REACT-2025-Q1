@@ -7,7 +7,7 @@ export interface FormState {
   gender: string;
   country: string;
   terms?: boolean;
-  file?: string;
+  file: string;
 }
 
 export interface CollectionForm {

@@ -123,6 +123,7 @@ const ReactHookForm = () => {
         </div>
 
         <div className="error-field">
+          {!isValid && <span>Country is required</span>}
           {errors.gender && (
             <span style={{ color: 'red' }}>{errors.gender.message}</span>
           )}
@@ -150,6 +151,7 @@ const ReactHookForm = () => {
             ))}
           </datalist>
           <div className="error-field">
+            {!isValid && <span>Country is required</span>}
             {errors.country && (
               <span style={{ color: 'red' }}>{errors.country.message}</span>
             )}

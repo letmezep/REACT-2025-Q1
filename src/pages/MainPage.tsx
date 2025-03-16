@@ -3,9 +3,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 
 const MainPage: React.FC = () => {
-  // const formData = useSelector(
-  //   (state: RootState) => state.createFormSlice.forms.slice(-1)[0]
-  // );
   const forms = useSelector((state: RootState) => state.createFormSlice.forms);
 
   return (
@@ -38,6 +35,7 @@ const MainPage: React.FC = () => {
               <p>
                 <strong>Confirm Password:</strong> {form.confirmPassword}
               </p>
+
               {form.file?.startsWith('data:image') && (
                 <img
                   src={form.file}

@@ -84,11 +84,21 @@ const ReactHookForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('name')} placeholder="Name" />
-        {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+        <div className="form-item">
+          <input {...register('name')} placeholder="Name" />
+          <div className="error-field">
+            {errors.name && (
+              <p style={{ color: 'red' }}>{errors.name.message}</p>
+            )}
+          </div>
+        </div>
 
-        <input {...register('age')} placeholder="Age" />
-        {errors.age && <p style={{ color: 'red' }}>{errors.age.message}</p>}
+        <div className="form-item">
+          <input {...register('age')} placeholder="Age" />
+          <div className="error-field">
+            {errors.age && <p style={{ color: 'red' }}>{errors.age.message}</p>}
+          </div>
+        </div>
 
         <div className="gender-box">
           <label>
@@ -112,8 +122,14 @@ const ReactHookForm = () => {
           <p style={{ color: 'red' }}>{errors.gender.message}</p>
         )}
 
-        <input {...register('email')} placeholder="e-mail" />
-        {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+        <div className="form-item">
+          <input {...register('email')} placeholder="e-mail" />
+          <div className="error-field">
+            {errors.email && (
+              <p style={{ color: 'red' }}>{errors.email.message}</p>
+            )}
+          </div>
+        </div>
 
         <input
           {...register('country')}

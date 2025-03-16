@@ -109,78 +109,102 @@ const UnctrlCompForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" ref={nameRef} placeholder="Name" />
+        <div className="form-item">
+          <input type="text" ref={nameRef} placeholder="Name" />
+        </div>
 
-        <input type="number" ref={ageRef} placeholder="Age" />
+        <div className="form-item">
+          <input type="number" ref={ageRef} placeholder="Age" />
+        </div>
 
-        <select ref={genderRef}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+        <div className="form-item">
+          <select ref={genderRef}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
 
-        <input type="email" ref={emailRef} placeholder="e-mail" />
+        <div className="form-item">
+          <input type="email" ref={emailRef} placeholder="e-mail" />
+        </div>
 
-        <input
-          type="text"
-          list="countries"
-          ref={countryRef}
-          placeholder="Country"
-        />
-        <datalist id="countries">
-          {countries.map((country) => (
-            <option key={country} value={country} />
-          ))}
-        </datalist>
-
-        <input
-          type="password"
-          ref={passwordRef}
-          placeholder="Password"
-          onChange={handlePasswordChange}
-        />
-        {passwordStrength && (
-          <p
-            style={{
-              color:
-                passwordStrength === 'Weak'
-                  ? 'red'
-                  : passwordStrength === 'Strong'
-                    ? 'orange'
-                    : 'green',
-            }}
-          >
-            Password strength: {passwordStrength}
-          </p>
-        )}
-
-        <input
-          type="password"
-          ref={confirmPasswordRef}
-          placeholder="Confirm password"
-        />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-
-        <input
-          type="file"
-          ref={fileRef}
-          accept="image/png, image/jpeg"
-          onChange={handleFileChange}
-          placeholder="Upload image"
-        />
-        {imagePreview && (
-          <img
-            src={imagePreview}
-            alt="Preview"
-            style={{ width: 100, height: 100, marginTop: 10 }}
+        <div className="form-item">
+          <input
+            type="text"
+            list="countries"
+            ref={countryRef}
+            placeholder="Country"
           />
-        )}
+          <datalist id="countries">
+            {countries.map((country) => (
+              <option key={country} value={country} />
+            ))}
+          </datalist>
+        </div>
 
-        <label>
-          <input type="checkbox" ref={termsRef} />
-          Accept Terms and Conditions
-        </label>
+        <div className="form-item">
+          <input
+            type="password"
+            ref={passwordRef}
+            placeholder="Password"
+            onChange={handlePasswordChange}
+          />
+
+          <div className="error-field">
+            {passwordStrength && (
+              <span
+                style={{
+                  color:
+                    passwordStrength === 'Weak'
+                      ? 'red'
+                      : passwordStrength === 'Strong'
+                        ? 'orange'
+                        : 'green',
+                }}
+              >
+                Password strength: {passwordStrength}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="form-item">
+          <input
+            type="password"
+            ref={confirmPasswordRef}
+            placeholder="Confirm password"
+          />
+        </div>
+
+        <div className="form-item">
+          <input
+            type="file"
+            ref={fileRef}
+            accept="image/png, image/jpeg"
+            onChange={handleFileChange}
+            placeholder="Upload image"
+          />
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              style={{ width: 100, height: 100, marginTop: 10 }}
+            />
+          )}
+        </div>
+
+        <div className="form-item">
+          <label>
+            <input type="checkbox" ref={termsRef} />
+            Accept Terms and Conditions
+          </label>
+        </div>
 
         <button type="submit">Submit</button>
+
+        <div className="error-field">
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+        </div>
       </form>
     </>
   );

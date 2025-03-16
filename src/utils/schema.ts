@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { RegExpName, RegExpPassword } from '../constants/index';
 
 const schema = yup.object({
   name: yup
@@ -8,7 +9,7 @@ const schema = yup.object({
     .test(
       'validate for first uppercased letter',
       'Name must start with an uppercase letter',
-      (value) => /^[A-Z]/.test(value || '')
+      (value) => RegExpName.test(value || '')
     ),
   age: yup
     .number()
@@ -22,7 +23,7 @@ const schema = yup.object({
   password: yup
     .string()
     .matches(
-      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[@$!%*?&#]).+$/,
+      RegExpPassword,
       'Password must contain at least 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character'
     )
     .required('Password is required'),

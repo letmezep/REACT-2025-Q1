@@ -83,9 +83,7 @@ const ReactHookForm = () => {
 
           <div className="error-field">
             {errors.name && (
-              <span className="error-field" style={{ color: 'red' }}>
-                {errors.name.message}
-              </span>
+              <span className="error-field">{errors.name.message}</span>
             )}
           </div>
         </div>
@@ -95,7 +93,7 @@ const ReactHookForm = () => {
 
           <div className="error-field">
             {errors.age && (
-              <span style={{ color: 'red' }}>
+              <span className="error-message">
                 {errors.age.message && 'Age must be a positive number'}
               </span>
             )}
@@ -122,9 +120,10 @@ const ReactHookForm = () => {
         </div>
 
         <div className="error-field">
-          {!isValid && <span>Gender is required</span>}
-          {errors.gender && (
-            <span style={{ color: 'red' }}>{errors.gender.message}</span>
+          {errors.gender ? (
+            <span className="error-message">{errors.gender.message}</span>
+          ) : (
+            <span className="warning-message">Select gender</span>
           )}
         </div>
 
@@ -133,7 +132,7 @@ const ReactHookForm = () => {
 
           <div className="error-field">
             {errors.email && (
-              <span style={{ color: 'red' }}>{errors.email.message}</span>
+              <span className="error-message">{errors.email.message}</span>
             )}
           </div>
         </div>
@@ -150,9 +149,12 @@ const ReactHookForm = () => {
             ))}
           </datalist>
           <div className="error-field">
-            {!isValid && <span>Country is required</span>}
-            {errors.country && (
-              <span style={{ color: 'red' }}>{errors.country.message}</span>
+            {errors.country ? (
+              <span className="error-message">{errors.country.message}</span>
+            ) : (
+              <span className="warning-message">
+                Select country from the list
+              </span>
             )}
           </div>
         </div>
@@ -169,7 +171,7 @@ const ReactHookForm = () => {
 
           <div className="error-field">
             {errors.password && (
-              <span style={{ color: 'red' }}>{errors.password.message}</span>
+              <span className="error-message">{errors.password.message}</span>
             )}
             <div className="error-field">
               {passwordStrength && (
@@ -200,7 +202,7 @@ const ReactHookForm = () => {
             />
             <div className="error-field">
               {errors.confirmPassword && (
-                <span style={{ color: 'red' }}>
+                <span className="error-message">
                   {errors.confirmPassword.message}
                 </span>
               )}
@@ -216,7 +218,7 @@ const ReactHookForm = () => {
           />
 
           <div className="error-field">
-            {fileError && <span style={{ color: 'red' }}>{fileError}</span>}
+            {fileError && <span className="error-message">{fileError}</span>}
           </div>
         </div>
 
@@ -232,9 +234,10 @@ const ReactHookForm = () => {
           </label>
 
           <div className="error-field">
-            {!isValid && <span>Country is required</span>}
-            {errors.terms && (
-              <span style={{ color: 'red' }}>{errors.terms.message}</span>
+            {errors.terms ? (
+              <span className="error-message">{errors.terms.message}</span>
+            ) : (
+              <span className="warning-message">Accept terms is required</span>
             )}
           </div>
         </div>

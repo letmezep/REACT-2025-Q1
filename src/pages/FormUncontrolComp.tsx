@@ -132,15 +132,12 @@ const UnctrlCompForm = () => {
           ))}
         </datalist>
 
-        <input type="password" ref={passwordRef} placeholder="Password" />
-
         <input
           type="password"
-          ref={confirmPasswordRef}
-          placeholder="Confirm password"
+          ref={passwordRef}
+          placeholder="Password"
           onChange={handlePasswordChange}
         />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
         {passwordStrength && (
           <p
             style={{
@@ -155,6 +152,13 @@ const UnctrlCompForm = () => {
             Password strength: {passwordStrength}
           </p>
         )}
+
+        <input
+          type="password"
+          ref={confirmPasswordRef}
+          placeholder="Confirm password"
+        />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
         <input
           type="file"

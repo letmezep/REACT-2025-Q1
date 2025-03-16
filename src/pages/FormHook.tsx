@@ -8,6 +8,7 @@ import schema from '../utils/schema';
 import { useState } from 'react';
 import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
 import { selectCountries } from '../store/selectors';
+import zxcvbn from 'zxcvbn';
 
 const ReactHookForm = () => {
   const navigate = useNavigate();
@@ -17,6 +18,23 @@ const ReactHookForm = () => {
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const result = zxcvbn(value);
+    let strength: string;
+
+    if (result.score <= 1) {
+      strength = 'Weak';
+    } else if (result.score <= 3) {
+      strength = 'Strong';
+    } else {
+      strength = 'Very Strong';
+    }
+
+    setPasswordStrength(strength);
+  };
 
   const {
     register,
@@ -115,9 +133,29 @@ const ReactHookForm = () => {
           type="password"
           {...register('password')}
           placeholder="Password"
+          onChange={(e) => {
+            handlePasswordChange(e);
+          }}
         />
         {errors.password && (
           <p style={{ color: 'red' }}>{errors.password.message}</p>
+        )}
+        {passwordStrength && (
+          <p>
+            Password strength:{' '}
+            <span
+              style={{
+                color:
+                  passwordStrength === 'Weak'
+                    ? 'red'
+                    : passwordStrength === 'Strong'
+                      ? 'orange'
+                      : 'green',
+              }}
+            >
+              {passwordStrength}
+            </span>
+          </p>
         )}
 
         <input

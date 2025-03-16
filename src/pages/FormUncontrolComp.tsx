@@ -26,7 +26,6 @@ const UnctrlCompForm = () => {
   const termsRef = useRef<HTMLInputElement>(null);
 
   const [error, setError] = useState<string | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [passwordStrength, setPasswordStrength] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -85,9 +84,6 @@ const UnctrlCompForm = () => {
         setError('File size should be less than 2MB.');
         return;
       }
-
-      const base64 = await convertToBase64(file);
-      setImagePreview(base64);
     }
   };
 
@@ -142,38 +138,40 @@ const UnctrlCompForm = () => {
           </datalist>
         </div>
 
-        <div className="form-item">
-          <input
-            type="password"
-            ref={passwordRef}
-            placeholder="Password"
-            onChange={handlePasswordChange}
-          />
+        <div className="password-box">
+          <div className="form-item">
+            <input
+              type="password"
+              ref={passwordRef}
+              placeholder="Password"
+              onChange={handlePasswordChange}
+            />
 
-          <div className="error-field">
-            {passwordStrength && (
-              <span
-                style={{
-                  color:
-                    passwordStrength === 'Weak'
-                      ? 'red'
-                      : passwordStrength === 'Strong'
-                        ? 'orange'
-                        : 'green',
-                }}
-              >
-                Password strength: {passwordStrength}
-              </span>
-            )}
+            <div className="error-field">
+              {passwordStrength && (
+                <span
+                  style={{
+                    color:
+                      passwordStrength === 'Weak'
+                        ? 'red'
+                        : passwordStrength === 'Strong'
+                          ? 'orange'
+                          : 'green',
+                  }}
+                >
+                  Password strength: {passwordStrength}
+                </span>
+              )}
+            </div>
           </div>
-        </div>
 
-        <div className="form-item">
-          <input
-            type="password"
-            ref={confirmPasswordRef}
-            placeholder="Confirm password"
-          />
+          <div className="form-item">
+            <input
+              type="password"
+              ref={confirmPasswordRef}
+              placeholder="Confirm password"
+            />
+          </div>
         </div>
 
         <div className="form-item">
@@ -184,13 +182,6 @@ const UnctrlCompForm = () => {
             onChange={handleFileChange}
             placeholder="Upload image"
           />
-          {imagePreview && (
-            <img
-              src={imagePreview}
-              alt="Preview"
-              style={{ width: 100, height: 100, marginTop: 10 }}
-            />
-          )}
         </div>
 
         <div className="form-item">

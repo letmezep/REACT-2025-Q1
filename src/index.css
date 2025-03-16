@@ -109,8 +109,19 @@ form {
   gap: 15px;
 }
 
+.form-item {
+  width: 100%;
+}
+
 .gender-box {
   display: flex;
+}
+
+.error-field {
+  min-height: 2em;
+  font-size: 0.8em;
+  color: red;
+  margin-top: 4px;
 }
 
 .card {
@@ -125,11 +136,4 @@ form {
 
 .card.highlight {
   border: 4px solid #4caf50;
-}
-
-.error-field {
-  min-height: 2em;
-  font-size: 0.8em;
-  color: red;
-  margin-top: 4px;
 }

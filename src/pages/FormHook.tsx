@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import { FormState } from '../types/interfaces';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import schema from '../utils/schema';
 import { useState } from 'react';
 import { MAX_FILE_SIZE } from '../constants';
 import { selectCountries } from '../store/selectors';

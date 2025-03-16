@@ -109,10 +109,6 @@ form {
   gap: 15px;
 }
 
-.form-item {
-  width: 100%;
-}
-
 .gender-box {
   display: flex;
 }

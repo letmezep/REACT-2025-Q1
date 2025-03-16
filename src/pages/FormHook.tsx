@@ -15,8 +15,6 @@ const ReactHookForm = () => {
   const dispatch = useDispatch();
 
   const countries = useSelector(selectCountries);
-
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
 
@@ -63,7 +61,6 @@ const ReactHookForm = () => {
 
     setFileError(null);
     const base64 = await convertToBase64(file);
-    setImagePreview(base64);
     setValue('file', base64);
   };
 
@@ -145,69 +142,84 @@ const ReactHookForm = () => {
           <p style={{ color: 'red' }}>{errors.country.message}</p>
         )}
 
-        <input
-          type="password"
-          {...register('password')}
-          placeholder="Password"
-          onChange={(e) => {
-            handlePasswordChange(e);
-          }}
-        />
-        {errors.password && (
-          <p style={{ color: 'red' }}>{errors.password.message}</p>
-        )}
-        {passwordStrength && (
-          <p>
-            Password strength:{' '}
-            <span
-              style={{
-                color:
-                  passwordStrength === 'Weak'
-                    ? 'red'
-                    : passwordStrength === 'Strong'
-                      ? 'orange'
-                      : 'green',
+        <div className="password-box">
+          <div className="form-item">
+            <input
+              type="password"
+              {...register('password')}
+              placeholder="Password"
+              onChange={(e) => {
+                handlePasswordChange(e);
               }}
-            >
-              {passwordStrength}
-            </span>
-          </p>
-        )}
+            />
+            <div className="error-field">
+              {errors.password && (
+                <p style={{ color: 'red' }}>{errors.password.message}</p>
+              )}
+              <div className="error-field">
+                {passwordStrength && (
+                  <p>
+                    Password strength:{' '}
+                    <span
+                      style={{
+                        color:
+                          passwordStrength === 'Weak'
+                            ? 'red'
+                            : passwordStrength === 'Strong'
+                              ? 'orange'
+                              : 'green',
+                      }}
+                    >
+                      {passwordStrength}
+                    </span>
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
 
-        <input
-          type="password"
-          {...register('confirmPassword')}
-          placeholder="Confirm password"
-        />
-        {errors.confirmPassword && (
-          <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>
-        )}
+          <div className="form-item">
+            <input
+              type="password"
+              {...register('confirmPassword')}
+              placeholder="Confirm password"
+            />
+            <div className="error-field">
+              {errors.confirmPassword && (
+                <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>
+              )}
+            </div>
+          </div>
+        </div>
 
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={handleFileChange}
-        />
-
-        {fileError && <p style={{ color: 'red' }}>{fileError}</p>}
-        {imagePreview && (
-          <img
-            src={imagePreview}
-            alt="Preview"
-            style={{ width: 100, height: 100, marginTop: 10 }}
-          />
-        )}
-
-        <label>
+        <div className="form-item">
           <input
-            {...register('terms', {
-              required: 'You must accept Terms & Conditions',
-            })}
-            type="checkbox"
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={handleFileChange}
           />
-          Accept Terms and Conditions
-        </label>
-        {errors.terms && <p style={{ color: 'red' }}>{errors.terms.message}</p>}
+
+          <div className="error-field">
+            {fileError && <p style={{ color: 'red' }}>{fileError}</p>}
+          </div>
+        </div>
+
+        <div className="form-item">
+          <label>
+            <input
+              {...register('terms', {
+                required: 'You must accept Terms & Conditions',
+              })}
+              type="checkbox"
+            />
+            Accept Terms and Conditions
+          </label>
+          <div className="error-field">
+            {errors.terms && (
+              <p style={{ color: 'red' }}>{errors.terms.message}</p>
+            )}
+          </div>
+        </div>
 
         <button type="submit" disabled={!isValid}>
           Submit

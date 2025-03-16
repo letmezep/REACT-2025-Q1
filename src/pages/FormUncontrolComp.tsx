@@ -7,6 +7,7 @@ import schema from '../utils/schema';
 import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
 import convertToBase64 from '../utils/convertToBase64';
 import { selectCountries } from '../store/selectors';
+import zxcvbn from 'zxcvbn';
 
 const UnctrlCompForm = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const UnctrlCompForm = () => {
 
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [passwordStrength, setPasswordStrength] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +91,21 @@ const UnctrlCompForm = () => {
     }
   };
 
+  const handlePasswordChange = () => {
+    const password = passwordRef.current?.value ?? '';
+    const result = zxcvbn(password);
+
+    let strengthLabel = 'Weak';
+
+    if (result.score >= 3 && result.score < 4) {
+      strengthLabel = 'Strong';
+    } else if (result.score === 4) {
+      strengthLabel = 'Very Strong';
+    }
+
+    setPasswordStrength(strengthLabel);
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -121,8 +138,23 @@ const UnctrlCompForm = () => {
           type="password"
           ref={confirmPasswordRef}
           placeholder="Confirm password"
+          onChange={handlePasswordChange}
         />
         {error && <p style={{ color: 'red' }}>{error}</p>}
+        {passwordStrength && (
+          <p
+            style={{
+              color:
+                passwordStrength === 'Weak'
+                  ? 'red'
+                  : passwordStrength === 'Strong'
+                    ? 'orange'
+                    : 'green',
+            }}
+          >
+            Password strength: {passwordStrength}
+          </p>
+        )}
 
         <input
           type="file"

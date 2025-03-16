@@ -87,12 +87,14 @@ button:focus-visible {
 
 .main-container {
   max-width: 780px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 2rem;
-
   display: flex;
   justify-content: center;
   text-align: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .active {
@@ -109,4 +111,18 @@ form {
 
 .gender-box {
   display: flex;
+}
+
+.card {
+  width: 250px;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: black;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease-in-out;
+}
+
+.card.highlight {
+  border: 4px solid #4caf50;
 }

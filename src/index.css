@@ -106,18 +106,21 @@ form {
   width: 320px;
   display: flex;
   flex-direction: column;
+}
+
+.unctrl-comp-form {
   gap: 15px;
 }
 
-.gender-box {
-  display: flex;
+.react-hook-form {
+  gap: 0;
 }
 
 .error-field {
   min-height: 2em;
-  font-size: 0.8em;
+  font-size: 0.8rem;
   color: red;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .card {

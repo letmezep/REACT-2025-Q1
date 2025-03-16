@@ -4,17 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import { FormState } from '../types/interfaces';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../utils/schema';
+// import schema from '../utils/schema';
 import { useState } from 'react';
-import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
+import { MAX_FILE_SIZE } from '../constants';
 import { selectCountries } from '../store/selectors';
 import zxcvbn from 'zxcvbn';
+import getSchema from '../utils/getSchema';
 
 const ReactHookForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const countries = useSelector(selectCountries);
+
+  const schema = getSchema(countries);
   const [fileError, setFileError] = useState<string | null>(null);
   const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
 
@@ -49,11 +52,6 @@ const ReactHookForm = () => {
 
     if (!file) return;
 
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      setFileError('Only PNG and JPEG images are allowed.');
-      return;
-    }
-
     if (file.size > MAX_FILE_SIZE) {
       setFileError('File size should be less than 2MB.');
       return;
@@ -80,24 +78,32 @@ const ReactHookForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="react-hook-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-item">
           <input {...register('name')} placeholder="Name" />
+
           <div className="error-field">
             {errors.name && (
-              <p style={{ color: 'red' }}>{errors.name.message}</p>
+              <span className="error-field" style={{ color: 'red' }}>
+                {errors.name.message}
+              </span>
             )}
           </div>
         </div>
 
         <div className="form-item">
           <input {...register('age')} placeholder="Age" />
+
           <div className="error-field">
-            {errors.age && <p style={{ color: 'red' }}>{errors.age.message}</p>}
+            {errors.age && (
+              <span style={{ color: 'red' }}>
+                {errors.age.message && 'Age must be a positive number'}
+              </span>
+            )}
           </div>
         </div>
 
-        <div className="gender-box">
+        <div className="form-item">
           <label>
             <input
               {...register('gender', { required: 'Gender is required' })}
@@ -115,66 +121,73 @@ const ReactHookForm = () => {
             Female
           </label>
         </div>
-        {errors.gender && (
-          <p style={{ color: 'red' }}>{errors.gender.message}</p>
-        )}
+
+        <div className="error-field">
+          {errors.gender && (
+            <span style={{ color: 'red' }}>{errors.gender.message}</span>
+          )}
+        </div>
 
         <div className="form-item">
           <input {...register('email')} placeholder="e-mail" />
+
           <div className="error-field">
             {errors.email && (
-              <p style={{ color: 'red' }}>{errors.email.message}</p>
+              <span style={{ color: 'red' }}>{errors.email.message}</span>
             )}
           </div>
         </div>
 
-        <input
-          {...register('country')}
-          list="countries"
-          placeholder="Select country"
-        />
-        <datalist id="countries">
-          {countries.map((country) => (
-            <option key={country} value={country} />
-          ))}
-        </datalist>
-        {errors.country && (
-          <p style={{ color: 'red' }}>{errors.country.message}</p>
-        )}
+        <div className="form-item">
+          <input
+            {...register('country')}
+            list="countries"
+            placeholder="Select country"
+          />
+          <datalist id="countries">
+            {countries.map((country) => (
+              <option key={country} value={country} />
+            ))}
+          </datalist>
+          <div className="error-field">
+            {errors.country && (
+              <span style={{ color: 'red' }}>{errors.country.message}</span>
+            )}
+          </div>
+        </div>
 
-        <div className="password-box">
-          <div className="form-item">
-            <input
-              type="password"
-              {...register('password')}
-              placeholder="Password"
-              onChange={(e) => {
-                handlePasswordChange(e);
-              }}
-            />
+        <div className="form-item">
+          <input
+            type="password"
+            {...register('password')}
+            placeholder="Password"
+            onChange={(e) => {
+              handlePasswordChange(e);
+            }}
+          />
+
+          <div className="error-field">
+            {errors.password && (
+              <span style={{ color: 'red' }}>{errors.password.message}</span>
+            )}
             <div className="error-field">
-              {errors.password && (
-                <p style={{ color: 'red' }}>{errors.password.message}</p>
+              {passwordStrength && (
+                <span>
+                  Password strength:{' '}
+                  <span
+                    style={{
+                      color:
+                        passwordStrength === 'Weak'
+                          ? 'red'
+                          : passwordStrength === 'Strong'
+                            ? 'orange'
+                            : 'green',
+                    }}
+                  >
+                    {passwordStrength}
+                  </span>
+                </span>
               )}
-              <div className="error-field">
-                {passwordStrength && (
-                  <p>
-                    Password strength:{' '}
-                    <span
-                      style={{
-                        color:
-                          passwordStrength === 'Weak'
-                            ? 'red'
-                            : passwordStrength === 'Strong'
-                              ? 'orange'
-                              : 'green',
-                      }}
-                    >
-                      {passwordStrength}
-                    </span>
-                  </p>
-                )}
-              </div>
             </div>
           </div>
 
@@ -186,7 +199,9 @@ const ReactHookForm = () => {
             />
             <div className="error-field">
               {errors.confirmPassword && (
-                <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>
+                <span style={{ color: 'red' }}>
+                  {errors.confirmPassword.message}
+                </span>
               )}
             </div>
           </div>
@@ -200,7 +215,7 @@ const ReactHookForm = () => {
           />
 
           <div className="error-field">
-            {fileError && <p style={{ color: 'red' }}>{fileError}</p>}
+            {fileError && <span style={{ color: 'red' }}>{fileError}</span>}
           </div>
         </div>
 
@@ -214,9 +229,10 @@ const ReactHookForm = () => {
             />
             Accept Terms and Conditions
           </label>
+
           <div className="error-field">
             {errors.terms && (
-              <p style={{ color: 'red' }}>{errors.terms.message}</p>
+              <span style={{ color: 'red' }}>{errors.terms.message}</span>
             )}
           </div>
         </div>

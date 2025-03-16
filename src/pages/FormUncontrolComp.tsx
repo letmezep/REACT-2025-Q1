@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { submitForm } from '../store/slices/formSlice';
 import * as yup from 'yup';
 import schema from '../utils/schema';
-import { ALLOWED_TYPES, MAX_FILE_SIZE } from '../constants';
+import { MAX_FILE_SIZE } from '../constants';
 import convertToBase64 from '../utils/convertToBase64';
 import { selectCountries } from '../store/selectors';
 import zxcvbn from 'zxcvbn';
@@ -34,10 +34,6 @@ const UnctrlCompForm = () => {
     const file = fileRef.current?.files?.[0];
 
     if (file) {
-      if (!ALLOWED_TYPES.includes(file.type)) {
-        setError('Only PNG and JPEG images are allowed.');
-        return;
-      }
       if (file.size > MAX_FILE_SIZE) {
         setError('File size should be less than 2MB.');
         return;
@@ -72,21 +68,6 @@ const UnctrlCompForm = () => {
     }
   };
 
-  const handleFileChange = async () => {
-    const file = fileRef.current?.files?.[0];
-
-    if (file) {
-      if (!ALLOWED_TYPES.includes(file.type)) {
-        setError('Only PNG and JPEG images are allowed.');
-        return;
-      }
-      if (file.size > MAX_FILE_SIZE) {
-        setError('File size should be less than 2MB.');
-        return;
-      }
-    }
-  };
-
   const handlePasswordChange = () => {
     const password = passwordRef.current?.value ?? '';
     const result = zxcvbn(password);
@@ -104,7 +85,7 @@ const UnctrlCompForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="unctrl-comp-form" onSubmit={handleSubmit}>
         <div className="form-item">
           <input type="text" ref={nameRef} placeholder="Name" />
         </div>
@@ -179,7 +160,6 @@ const UnctrlCompForm = () => {
             type="file"
             ref={fileRef}
             accept="image/png, image/jpeg"
-            onChange={handleFileChange}
             placeholder="Upload image"
           />
         </div>

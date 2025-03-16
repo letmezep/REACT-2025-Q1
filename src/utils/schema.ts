@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { RegExpName, RegExpPassword } from '../constants/index';
+import { RegExpName, RegExpPassword, RegExpMail } from '../constants/index';
 
 const schema = yup.object({
   name: yup
@@ -18,8 +18,8 @@ const schema = yup.object({
     .required('Age is required'),
   email: yup
     .string()
-    .email('Invalid email format')
-    .required('Email is required'),
+    .required('Email is required')
+    .matches(RegExpMail, 'Invalid email format'),
   password: yup
     .string()
     .matches(

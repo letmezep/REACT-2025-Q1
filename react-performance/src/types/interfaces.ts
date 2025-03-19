@@ -20,6 +20,6 @@ export interface Country {
   name: CountryName;
   population: number;
   region: string;
-  cca3: string;
+  ccn3: string;
   flags: Flags;
 }

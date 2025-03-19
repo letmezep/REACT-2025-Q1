@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +42,47 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.card-item {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  background-color: wheat;
+}
+
+.card-item img {
+  width: 100px;
+  height: 50px;
+}
+
+.country-name {
+  font-weight: bold;
+}
+
+.country-description-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+
+  background-color: tomato;
+}
+
+.description-item__box {
+  display: flex;
+  gap: 10px;
+}
+
+.description-item {
+  display: flex;
+
+  background-color: yellowgreen;
+}
+
+.description-item___data {
+  font-weight: bold;
 }

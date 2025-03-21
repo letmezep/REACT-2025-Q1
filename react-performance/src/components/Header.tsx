@@ -1,8 +1,11 @@
-const Header: React.FC = () => {
+import { HeaderProps } from '../types/interfaces';
+import SearchBar from './widgets/SearchBar';
+
+const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
   return (
     <>
       <div>
-        <h1>Header S</h1>
+        <SearchBar onSearchChange={onSearchChange} />
       </div>
     </>
   );

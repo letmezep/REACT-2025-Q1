@@ -4,7 +4,7 @@ import Header from '../Header';
 const Layout = () => {
   return (
     <>
-      <Header />
+      <Header onSearchChange={onSearchChange} />
       <div className="main-container">
         <Outlet />
       </div>

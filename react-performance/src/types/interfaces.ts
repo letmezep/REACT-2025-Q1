@@ -1,9 +1,17 @@
 export interface Data {
-  countries: [];
+  countries: Country[];
 }
 
 export interface CardProps {
   item: Country;
+}
+
+export interface Country {
+  name: CountryName;
+  population: number;
+  region: string;
+  ccn3: string;
+  flags: Flags;
 }
 
 export interface CountryName {
@@ -16,10 +24,10 @@ export interface Flags {
   svg: string;
 }
 
-export interface Country {
-  name: CountryName;
-  population: number;
-  region: string;
-  ccn3: string;
-  flags: Flags;
+export interface HeaderProps {
+  onSearchChange: (term: string) => void;
+}
+
+export interface SearchBarProps {
+  onSearchChange: (term: string) => void;
 }

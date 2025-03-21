@@ -14,6 +14,8 @@ const CardList: React.FC = () => {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
 
+  const sortBy = searchParams.get('sortBy') || '';
+  const sortOrder = searchParams.get('sortOrder') || 'asc';
   const selectedRegion = searchParams.get('region') || '';
 
   useEffect(() => {
@@ -40,28 +42,21 @@ const CardList: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = getFilteredData({ countries }, searchTerm, selectedRegion);
+    const filtered = getFilteredData(
+      { countries },
+      searchTerm,
+      selectedRegion,
+      sortBy,
+      sortOrder
+    );
     setFilteredData(filtered);
-  }, [countries, searchTerm, selectedRegion]);
-
-  // const handleRegionChange = (region: string) => {
-  //   setSearchParams((prev) => {
-  //     const newParams = new URLSearchParams(prev);
-  //     if (region) newParams.set('region', region);
-  //     else newParams.delete('region');
-  //     return newParams;
-  //   });
-  // };
+  }, [countries, searchTerm, selectedRegion, sortBy, sortOrder]);
 
   if (loading) return <p>Loading countries</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <>
-      {/* <RegionFilterMenu
-        selectedRegion={selectedRegion}
-        onRegionChange={handleRegionChange}
-      /> */}
       <div className="country-list">
         {filteredData.map((item: Country) => (
           <Card key={item.ccn3} item={item} />

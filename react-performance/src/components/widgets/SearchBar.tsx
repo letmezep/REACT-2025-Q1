@@ -4,7 +4,6 @@ import { useSearchQuery } from '../../hooks/useSearchQuery';
 import { useSearchParams } from 'react-router-dom';
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
-  //   const [inputValue, setInputValue] = useState<string>('');
   const [inputValue, setInputValue] = useState(
     localStorage.getItem('searchTerm') || ''
   );

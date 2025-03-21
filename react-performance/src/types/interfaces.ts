@@ -28,6 +28,11 @@ export interface HeaderProps {
   onSearchChange: (term: string) => void;
 }
 
+export interface RegionFilterProps {
+  selectedRegion: string;
+  onRegionChange: (region: string) => void;
+}
+
 export interface SearchBarProps {
   onSearchChange: (term: string) => void;
 }

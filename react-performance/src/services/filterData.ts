@@ -2,19 +2,22 @@ import { Country, Data } from '../types/interfaces';
 
 export function getFilteredData(
   data: Data | null,
-  searchTerm: string | null
+  searchTerm: string | null,
+  region: string | null
 ): Country[] {
   if (!data) return [];
 
-  if (!searchTerm) return data.countries;
+  let filtered = data.countries;
 
-  return data.countries.filter((item: Country) =>
-    item.name.common.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-  );
-  //   if (!searchTerm) return data;
-  //   if (!searchTerm) return data?.results;
+  if (searchTerm) {
+    filtered = filtered.filter((item: Country) =>
+      item.name.common.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
+  }
 
-  //   return data.results.filter((item: Country) =>
-  //     item.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-  //   );
+  if (region) {
+    filtered = filtered.filter((item: Country) => item.region === region);
+  }
+
+  return filtered;
 }

@@ -5,6 +5,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
   return (
     <>
       <div>
+        {/* <FilterMenu /> */}
         <SearchBar onSearchChange={onSearchChange} />
       </div>
     </>

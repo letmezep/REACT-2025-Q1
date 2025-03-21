@@ -4,7 +4,6 @@ import { Country } from '../../types/interfaces';
 import { urlApi } from '../../constants/constants';
 import { useSearchParams } from 'react-router-dom';
 import { getFilteredData } from '../../services/filterData';
-import RegionFilterMenu from './RegionFilter';
 
 const CardList: React.FC = () => {
   const [countries, setCountries] = useState<Country[]>([]);
@@ -12,8 +11,7 @@ const CardList: React.FC = () => {
   const [error, setError] = useState<string>('');
 
   const [filteredData, setFilteredData] = useState<Country[]>([]);
-  // const [searchParams] = useSearchParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
 
   const selectedRegion = searchParams.get('region') || '';
@@ -46,24 +44,24 @@ const CardList: React.FC = () => {
     setFilteredData(filtered);
   }, [countries, searchTerm, selectedRegion]);
 
-  const handleRegionChange = (region: string) => {
-    setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev);
-      if (region) newParams.set('region', region);
-      else newParams.delete('region');
-      return newParams;
-    });
-  };
+  // const handleRegionChange = (region: string) => {
+  //   setSearchParams((prev) => {
+  //     const newParams = new URLSearchParams(prev);
+  //     if (region) newParams.set('region', region);
+  //     else newParams.delete('region');
+  //     return newParams;
+  //   });
+  // };
 
   if (loading) return <p>Loading countries</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <>
-      <RegionFilterMenu
+      {/* <RegionFilterMenu
         selectedRegion={selectedRegion}
         onRegionChange={handleRegionChange}
-      />
+      /> */}
       <div className="country-list">
         {filteredData.map((item: Country) => (
           <Card key={item.ccn3} item={item} />

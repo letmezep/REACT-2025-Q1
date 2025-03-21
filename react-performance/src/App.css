@@ -86,3 +86,20 @@
 .description-item___data {
   font-weight: bold;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

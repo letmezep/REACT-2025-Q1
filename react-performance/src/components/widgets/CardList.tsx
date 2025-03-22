@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Card from './Card';
 import { Country } from '../../types/interfaces';
 import { urlApi } from '../../constants/constants';
 import { useSearchParams } from 'react-router-dom';
 import { getFilteredData } from '../../services/filterData';
+import { sortData } from '../../services/SortingData';
 
 const CardList: React.FC = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
-  const [filteredData, setFilteredData] = useState<Country[]>([]);
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
 
@@ -41,16 +41,13 @@ const CardList: React.FC = () => {
     fetchCountries();
   }, []);
 
-  useEffect(() => {
-    const filtered = getFilteredData(
-      { countries },
-      searchTerm,
-      selectedRegion,
-      sortBy,
-      sortOrder
-    );
-    setFilteredData(filtered);
-  }, [countries, searchTerm, selectedRegion, sortBy, sortOrder]);
+  const filteredData = useMemo(() => {
+    return getFilteredData({ countries }, searchTerm, selectedRegion);
+  }, [countries, searchTerm, selectedRegion]);
+
+  const sortedData = useMemo(() => {
+    return sortData(filteredData, sortBy, sortOrder);
+  }, [filteredData, sortBy, sortOrder]);
 
   if (loading) return <p>Loading countries</p>;
   if (error) return <p>Error: {error}</p>;
@@ -58,7 +55,7 @@ const CardList: React.FC = () => {
   return (
     <>
       <div className="country-list">
-        {filteredData.map((item: Country) => (
+        {sortedData.map((item: Country) => (
           <Card key={item.ccn3} item={item} />
         ))}
       </div>

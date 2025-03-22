@@ -1,7 +1,7 @@
 import React from 'react';
 import { SortMenuProps } from '../../types/interfaces';
 
-const PopulationSortMenu: React.FC<SortMenuProps> = ({
+const SortMenu: React.FC<SortMenuProps> = ({
   sortBy,
   sortOrder,
   onSortChange,
@@ -28,4 +28,4 @@ const PopulationSortMenu: React.FC<SortMenuProps> = ({
   );
 };
 
-export default React.memo(PopulationSortMenu);
+export default React.memo(SortMenu);

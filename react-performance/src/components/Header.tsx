@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { HeaderProps } from '../types/interfaces';
 import SearchBar from './widgets/SearchBar';
 import RegionFilterMenu from './widgets/RegionFilter';
-import PopulationSortMenu from './widgets/PopulationSort';
+import SortMenu from './widgets/Sorting';
 
 const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
         />
         <SearchBar onSearchChange={onSearchChange} />
 
-        <PopulationSortMenu
+        <SortMenu
           sortBy={sortBy}
           sortOrder={sortOrder}
           onSortChange={handleSortChange}

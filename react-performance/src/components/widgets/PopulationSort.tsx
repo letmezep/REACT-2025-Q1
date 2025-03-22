@@ -1,3 +1,4 @@
+import React from 'react';
 import { SortMenuProps } from '../../types/interfaces';
 
 const PopulationSortMenu: React.FC<SortMenuProps> = ({
@@ -27,4 +28,4 @@ const PopulationSortMenu: React.FC<SortMenuProps> = ({
   );
 };
 
-export default PopulationSortMenu;
+export default React.memo(PopulationSortMenu);

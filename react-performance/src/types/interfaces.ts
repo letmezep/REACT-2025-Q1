@@ -36,3 +36,9 @@ export interface RegionFilterProps {
 export interface SearchBarProps {
   onSearchChange: (term: string) => void;
 }
+
+export interface SortMenuProps {
+  sortBy: string;
+  sortOrder: string;
+  onSortChange: (sortBy: string, sortOrder: string) => void;
+}

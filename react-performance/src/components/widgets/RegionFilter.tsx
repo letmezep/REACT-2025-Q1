@@ -1,3 +1,4 @@
+import React from 'react';
 import { RegionFilterProps } from '../../types/interfaces';
 
 const RegionFilterMenu: React.FC<RegionFilterProps> = ({
@@ -24,4 +25,4 @@ const RegionFilterMenu: React.FC<RegionFilterProps> = ({
   );
 };
 
-export default RegionFilterMenu;
+export default React.memo(RegionFilterMenu);

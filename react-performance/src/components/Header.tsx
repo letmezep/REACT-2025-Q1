@@ -1,37 +1,43 @@
 import { useSearchParams } from 'react-router-dom';
-import { HeaderProps } from '../types/interfaces';
 import SearchBar from './widgets/SearchBar';
 import RegionFilterMenu from './widgets/RegionFilter';
 import SortMenu from './widgets/Sorting';
+import { useCallback } from 'react';
 
-const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
+const Header: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedRegion = searchParams.get('region') || '';
 
   const sortBy = searchParams.get('sortBy') || '';
   const sortOrder = searchParams.get('sortOrder') || 'asc';
 
-  const handleRegionChange = (region: string) => {
-    setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev);
-      if (region) newParams.set('region', region);
-      else newParams.delete('region');
-      return newParams;
-    });
-  };
+  const handleRegionChange = useCallback(
+    (region: string) => {
+      setSearchParams((prev) => {
+        const newParams = new URLSearchParams(prev);
+        if (region) newParams.set('region', region);
+        else newParams.delete('region');
+        return newParams;
+      });
+    },
+    [setSearchParams]
+  );
 
-  const handleSortChange = (newSortBy: string, newSortOrder: string) => {
-    setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev);
-      if (newSortBy) newParams.set('sortBy', newSortBy);
-      else newParams.delete('sortBy');
+  const handleSortChange = useCallback(
+    (newSortBy: string, newSortOrder: string) => {
+      setSearchParams((prev) => {
+        const newParams = new URLSearchParams(prev);
+        if (newSortBy) newParams.set('sortBy', newSortBy);
+        else newParams.delete('sortBy');
 
-      if (newSortOrder) newParams.set('sortOrder', newSortOrder);
-      else newParams.delete('sortOrder');
+        if (newSortOrder) newParams.set('sortOrder', newSortOrder);
+        else newParams.delete('sortOrder');
 
-      return newParams;
-    });
-  };
+        return newParams;
+      });
+    },
+    [setSearchParams]
+  );
 
   return (
     <>
@@ -40,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchChange }) => {
           selectedRegion={selectedRegion}
           onRegionChange={handleRegionChange}
         />
-        <SearchBar onSearchChange={onSearchChange} />
+        <SearchBar />
 
         <SortMenu
           sortBy={sortBy}

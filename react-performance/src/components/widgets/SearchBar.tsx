@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { SearchBarProps } from '../../types/interfaces';
+import { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
+const SearchBar: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialValue = searchParams.get('search') || '';
   const [inputValue, setInputValue] = useState(initialValue);
@@ -11,10 +10,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchChange }) => {
     setInputValue(e.target.value);
   };
 
-  const handleSearchClick = () => {
-    setSearchParams({ search: inputValue });
-    onSearchChange(inputValue);
-  };
+  const handleSearchClick = useCallback(() => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      if (inputValue) {
+        newParams.set('search', inputValue);
+      } else {
+        newParams.delete('search');
+      }
+      return newParams;
+    });
+  }, [inputValue, setSearchParams]);
 
   return (
     <div className="search-box">

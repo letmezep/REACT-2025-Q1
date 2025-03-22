@@ -11,6 +11,8 @@ const CardList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
+  const [visitedCountries, setVisitedCountries] = useState<string[]>([]);
+
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
 
@@ -41,6 +43,12 @@ const CardList: React.FC = () => {
     fetchCountries();
   }, []);
 
+  const toggleCountryVisited = (ccn3: string) => {
+    setVisitedCountries((prev) =>
+      prev.includes(ccn3) ? prev.filter((id) => id !== ccn3) : [...prev, ccn3]
+    );
+  };
+
   const filteredData = useMemo(() => {
     return getFilteredData({ countries }, searchTerm, selectedRegion);
   }, [countries, searchTerm, selectedRegion]);
@@ -56,7 +64,12 @@ const CardList: React.FC = () => {
     <>
       <div className="country-list">
         {sortedData.map((item: Country) => (
-          <Card key={item.ccn3} item={item} />
+          <Card
+            key={item.ccn3}
+            item={item}
+            isVisited={visitedCountries.includes(item.ccn3)}
+            onToggleVisited={toggleCountryVisited}
+          />
         ))}
       </div>
     </>

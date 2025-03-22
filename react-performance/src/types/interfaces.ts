@@ -4,6 +4,8 @@ export interface Data {
 
 export interface CardProps {
   item: Country;
+  isVisited: boolean;
+  onToggleVisited: (ccn3: string) => void;
 }
 
 export interface Country {

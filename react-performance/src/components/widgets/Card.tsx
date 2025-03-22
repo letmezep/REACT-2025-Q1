@@ -1,10 +1,17 @@
 import React from 'react';
 import { CardProps } from '../../types/interfaces';
 
-const Card: React.FC<CardProps> = ({ item }: CardProps) => {
+const Card: React.FC<CardProps> = ({
+  item,
+  isVisited,
+  onToggleVisited,
+}: CardProps) => {
+  const handleClick = () => {
+    onToggleVisited(item.ccn3);
+  };
   return (
-    <div className="country-card__box">
-      <div className="card-item">
+    <div className="country-card__box" onClick={handleClick}>
+      <div className={`card-item ${isVisited ? 'visited' : ''}`}>
         <img src={item.flags.png} alt="Country flag" />
 
         <div className="country-description-box">

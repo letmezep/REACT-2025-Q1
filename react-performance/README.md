@@ -1,6 +1,6 @@
-##An application that displays a list of countries from the `REST Countries API`.
+## An application that displays a list of countries from the `REST Countries API`.
 
-###Implemented features:
+### Implemented features:
 
 - **Search** for a country by name
 - **Sorting** by name and population (ascending/descending)
@@ -21,8 +21,8 @@ Sorting by population (ascending) — used to trigger component updates and meas
 
 |                                   | **Before**                                                                                          | **After (useMemo, useCallback, React.memo)**                                          |
 | :-------------------------------- | :-------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ |
-| ranked graph (population sorting) | ![before ranked commit duration](./src/assets/00%20not-memo-ranked-commit-information.png)          | ![after ranked commit duration](./src/assets/00%20memo-ranked-commit-information.png) |
-| flame graph (population sorting)  | ![before flame commit duration](./src/assets/11%20not-memo-flame-commit-information%201.png)        | ![after flame commit duration](./src/assets/11%20memo-flame-commit-information.png)   |
+| Ranked graph (population sorting) | ![before ranked commit duration](./src/assets/00%20not-memo-ranked-commit-information.png)          | ![after ranked commit duration](./src/assets/00%20memo-ranked-commit-information.png) |
+| Flame graph (population sorting)  | ![before flame commit duration](./src/assets/11%20not-memo-flame-commit-information%201.png)        | ![after flame commit duration](./src/assets/11%20memo-flame-commit-information.png)   |
 | `CardList` ranked chart           | ![before ranked CardList](./src/assets/44%20not-memo-ranked-card-list.png)                          | ![after](./src/assets/44%20memo-ranked-card-list.png)                                 |
 | Total render time                 | Render: 34.4ms                                                                                      | Render: 30.6ms                                                                        |
 | Components                        | `CardList (4.2ms)` The entire list of cards is re-rendered, each Card triggers a separate re-render | `CardList (2.5ms)` Only one card is re-rendered (Card key="831" — 4.3ms)              |

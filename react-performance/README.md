@@ -9,8 +9,8 @@
 ### Performance Analysis Before and After Optimization
 
 ||**before**|**after**|
-|ranked graph (population sorting)|[before ranked commit duration](./src/assets/00%20not-memo-ranked-commit-information.png)|[after ranked commit duration](./src/assets/00%20memo-ranked-commit-information.png)|
-|flame graph (population sorting)|[before flame commit duration](./src/assets/11%20not-memo-flame-commit-information%201.png)|[after flame commit duration](./src/assets/11%20memo-flame-commit-information.png)|
+|ranked graph (population sorting)|![before ranked commit duration](./src/assets/00%20not-memo-ranked-commit-information.png)|[after ranked commit duration](./src/assets/00%20memo-ranked-commit-information.png)|
+|flame graph (population sorting)|![before flame commit duration](./src/assets/11%20not-memo-flame-commit-information%201.png)|[after flame commit duration](./src/assets/11%20memo-flame-commit-information.png)|
 
 
 #### Screenshot 1 — Before Optimization (without useMemo, useCallback):
@@ -39,3 +39,11 @@ Update trigger: *BrowserRouter*
 The optimization worked correctly — the number of re-renders decreased, and the load on *CardList* was reduced.
 
 The increase in commit duration is due to the overhead of memoization, but this is offset by eliminating unnecessary re-renders.
+
+[before ranked commit duration](./src/assets/00%20not-memo-ranked-commit-information.png)
+
+[after ranked commit duration](./src/assets/00%20memo-ranked-commit-information.png)
+
+[Image alt](https://github.com/letmezep/REACT-2025-Q1/blob/performance/react-performance/src/assets/00%20not-memo-ranked-commit-information.png)
+
+![Image alt](https://github.com/letmezep/REACT-2025-Q1/blob/performance/react-performance/src/assets/00%20not-memo-ranked-commit-information.png)

@@ -33,7 +33,7 @@ Update trigger: `BrowserRouter`
 
 #### After:
 
-Only one card is re-rendered 
+Only one card is re-rendered. 
 Update trigger: `BrowserRouter`
 
 ## Conclusion:

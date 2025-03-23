@@ -1,54 +1,41 @@
-<!-- # React + TypeScript + Vite
+## After optimization:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### **optimize the App for Performance:**
+*React.memo* for Card, CardList, RegionFilter, Sorting, SearchBar
+*useMemo* to memoize the filtered, searched and sorted list of countries
+*useCallback* to memoize event handler functions for filtering, searching and sorting
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Performance Analysis Before and After Optimization
 
-## Expanding the ESLint configuration
+||**before**|**after**|
+|ranked graph (population sorting)|[before ranked commit duration](./src/assets/00%20not-memo-ranked-commit-information.png)|[after ranked commit duration](./src/assets/00%20memo-ranked-commit-information.png)|
+|flame graph (population sorting)|[before flame commit duration](./src/assets/11%20not-memo-flame-commit-information%201.png)|[after flame commit duration](./src/assets/11%20memo-flame-commit-information.png)|
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+#### Screenshot 1 — Before Optimization (without useMemo, useCallback):
+Total render time: Render: 34.4ms
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### Components:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+##### CardList (4.2ms)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-``` -->
+The entire list of cards is re-rendered, each *Card* triggers a separate re-render.
+
+Update trigger: *BrowserRouter*
+
+#### Screenshot 2 — After Optimization (useMemo, useCallback, React.memo):
+Total render time: Render: 30.6ms
+
+#### Components:
+
+Only one card is re-rendered (Card key="831" — 4.3ms)
+
+*CardList* (2.5ms) — render time for the list decreased.
+
+Update trigger: *BrowserRouter*
+
+## Conclusion:
+The optimization worked correctly — the number of re-renders decreased, and the load on *CardList* was reduced.
+
+The increase in commit duration is due to the overhead of memoization, but this is offset by eliminating unnecessary re-renders.

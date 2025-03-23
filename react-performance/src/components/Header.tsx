@@ -3,6 +3,7 @@ import SearchBar from './widgets/SearchBar';
 import RegionFilterMenu from './widgets/RegionFilter';
 import SortMenu from './widgets/Sorting';
 import { useCallback } from 'react';
+import React from 'react';
 
 const Header: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,4 +59,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

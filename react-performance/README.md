@@ -1,8 +1,18 @@
+##An application that displays a list of countries from the `REST Countries API`.
+
+###Implemented features:
+
+- **Search** for a country by name
+- **Sorting** by name and population (ascending/descending)
+- **Filtering** the list of countries by region
+- **Highlighting** countries marked by the user
+
+
 ## **Optimize the App for Performance:**
 
-`React.memo` for `Card`, `CardList`, `RegionFilter`, `Sorting`, `SearchBar`
-`useMemo` to memoize the filtered, searched and sorted list of countries
-`useCallback` to memoize event handler functions for filtering, searching and sorting
+- `React.memo` for `Card`, `CardList`, `RegionFilter`, `Sorting`, `SearchBar`
+- `useMemo` to memoize the filtered, searched and sorted list of countries
+- `useCallback` to memoize event handler functions for filtering, searching and sorting
 
 ### Performance Analysis Before and After Optimization
 

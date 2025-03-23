@@ -1,0 +1,46 @@
+export interface Data {
+  countries: Country[];
+}
+
+export interface CardProps {
+  item: Country;
+  isVisited: boolean;
+  onToggleVisited: (ccn3: string) => void;
+}
+
+export interface Country {
+  name: CountryName;
+  population: number;
+  region: string;
+  ccn3: string;
+  flags: Flags;
+}
+
+export interface CountryName {
+  common: string;
+  official: string;
+}
+
+export interface Flags {
+  png: string;
+  svg: string;
+}
+
+export interface HeaderProps {
+  onSearchChange: (term: string) => void;
+}
+
+export interface RegionFilterProps {
+  selectedRegion: string;
+  onRegionChange: (region: string) => void;
+}
+
+export interface SearchBarProps {
+  onSearchChange: (term: string) => void;
+}
+
+export interface SortMenuProps {
+  sortBy: string;
+  sortOrder: string;
+  onSortChange: (sortBy: string, sortOrder: string) => void;
+}
